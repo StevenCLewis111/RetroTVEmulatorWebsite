@@ -1,59 +1,41 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import { site } from '@/lib/site'
+import { getHomeImage } from '@/lib/home-image'
 
 // Force this page to compile as a 100% static file for GitHub Pages
 export const dynamic = 'force-static'
 
-const defaultImage = {
-  src: '/images/default.png', // Points straight to your main default artwork file
-  alt: 'Retro TV Emulator scene with a glowing vintage CRT television, classic game boxes, and a retro game console',
-}
+const description = 'Retro TV Emulator — Free, open-source Retro TV Emulator for Windows.'
 
-const halloweenImage = {
-  src: '/images/halloween.png',
-  alt: 'Halloween Retro TV Emulator scene with a glowing vintage CRT television, pumpkins, cobwebs, candles, a skull, and Halloween posters',
-}
+// Link-preview (Facebook, X, Discord, etc.) image follows the same holiday rules as the page.
+// Page-level openGraph/twitter replace the layout's objects entirely, so shared fields are repeated.
+export function generateMetadata(): Metadata {
+  const image = getHomeImage()
 
-const thanksgivingImage = {
-  src: '/images/thanksgiving.png',
-  alt: 'Thanksgiving Retro TV Emulator scene with a glowing vintage CRT television, autumn leaves, pumpkins, candles, and a turkey sign',
-}
-
-const christmasImage = {
-  src: '/images/christmas.png',
-  alt: 'Christmas Retro TV Emulator scene with a glowing vintage CRT television, holiday lights, Santa, snowmen, and gifts',
-}
-
-function getFourthThursday(year: number) {
-  const firstDay = new Date(Date.UTC(year, 10, 1)).getUTCDay()
-  const firstThursday = 1 + ((4 - firstDay + 7) % 7)
-  return firstThursday + 21
-}
-
-function getHomeImage() {
-  const now = new Date()
-  const year = now.getUTCFullYear()
-  const currentTime = now.getTime()
-  const halloweenModeEnabled = true
-  const halloweenStart = Date.UTC(year, 9, 29)
-  const halloweenEnd = Date.UTC(year, 10, 1)
-  const thanksgivingDay = getFourthThursday(year)
-  const thanksgivingStart = Date.UTC(year, 10, thanksgivingDay - 3)
-  const thanksgivingEnd = Date.UTC(year, 10, thanksgivingDay + 1)
-  const christmasStart = Date.UTC(year, 11, 23)
-  const christmasEnd = Date.UTC(year, 11, 26)
-
-  if (halloweenModeEnabled && currentTime >= halloweenStart && currentTime < halloweenEnd) {
-    return halloweenImage
+  return {
+    openGraph: {
+      type: 'website',
+      siteName: 'Retro TV Emulator',
+      title: 'Retro TV Emulator',
+      description,
+      url: 'https://retrotvemulator.com/',
+      images: [
+        {
+          url: image.src,
+          width: image.width,
+          height: image.height,
+          alt: image.alt,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Retro TV Emulator',
+      description,
+      images: [image.src],
+    },
   }
-
-  if (currentTime >= thanksgivingStart && currentTime < thanksgivingEnd) {
-    return thanksgivingImage
-  }
-
-  return currentTime >= christmasStart && currentTime < christmasEnd
-    ? christmasImage
-    : defaultImage
 }
 
 export default function HomePage() {
@@ -69,8 +51,8 @@ export default function HomePage() {
               <Image
                 src={homeImage.src}
                 alt={homeImage.alt}
-                width={2048}
-                height={1152}
+                width={homeImage.width}
+                height={homeImage.height}
                 priority
                 sizes="(min-width: 1024px) 992px, 100vw"
                 className="h-full w-full bg-black object-contain"
@@ -90,4 +72,3 @@ export default function HomePage() {
     </>
   )
 }
-
