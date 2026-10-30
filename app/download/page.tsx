@@ -66,7 +66,6 @@ export default async function DownloadPage() {
               <div className="flex w-full flex-wrap items-center gap-x-4 gap-y-3">
                 <a 
                   href={result.release.downloadUrl}
-                  download
                   className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground shadow hover:bg-primary/90 h-10 text-base"
                 >
                   <Download className="size-5" aria-hidden="true" />
@@ -113,10 +112,10 @@ export default async function DownloadPage() {
         <section className="mt-3 flex flex-col gap-1.5 sm:mt-3 sm:gap-2">
           <h2 className="font-display text-2xl sm:text-3xl">Source code</h2>
           <div className="flex flex-wrap items-center gap-3">
-            {/* GOOGLE DRIVE: Uses the direct API download node with your exact shared file ID */}
             <a 
               href="https://google.com" 
-              download="RetroTVEmulator-Source.zip"
+              target="_blank" 
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground h-10"
             >
               <Code className="size-4 mr-2" aria-hidden="true" />
@@ -125,10 +124,10 @@ export default async function DownloadPage() {
             <span className="text-xs text-muted-foreground sm:text-sm">Whole Project</span>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            {/* GITHUB: Targets the direct release archive bundle zip to initiate an automatic download link */}
             <a 
               href="https://github.com"
-              download
+              target="_blank" 
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground h-10"
             >
               <Code className="size-4 mr-2" aria-hidden="true" />
@@ -141,3 +140,4 @@ export default async function DownloadPage() {
     </div>
   )
 }
+
