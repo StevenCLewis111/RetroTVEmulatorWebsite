@@ -15,7 +15,9 @@ const credits = {
     'Next.js & React Frameworks',
     'Tailwind CSS Styling Engine',
     'GitHub Actions Automation Engine',
-    'Google Gemini AI Migration Assistant'
+    'v0 by Vercel — AI Web Architecture Generation',
+    'Claude — Component Development & Logic Assistant',
+    'Google Gemini AI — Infrastructure Migration Assistant'
   ],
   modules: [
     'Python Development Environment',
