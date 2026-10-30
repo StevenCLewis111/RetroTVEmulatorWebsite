@@ -1,6 +1,3 @@
-import 'server-only'
-import { site } from './site'
-
 export type Release = {
   version: string
   fileName: string
@@ -11,43 +8,9 @@ export type Release = {
   downloadUrl: string
 }
 
-type DriveFile = {
-  id: string
-  name: string
-  size?: string
-  sha256Checksum?: string
-  modifiedTime?: string
-}
-
-const RELEASE_EXTENSIONS = /\.(exe|zip|rar)$/i
-
 export type ReleaseResult =
   | { ok: true; release: Release }
-  | { ok: false; reason: 'missing-api-key' | 'no-release' | 'drive-error' | 'github-error' }
-
-export async function getDriveFileByName(folderId: string, fileName: string) {
-  const apiKey = process.env.GCP_API_KEY
-  if (!apiKey) return { ok: false as const, reason: 'missing-api-key' as const }
-
-  const params = new URLSearchParams({
-    q: `'${folderId}' in parents and name = '${fileName.replace(/'/g, "\\'")}' and trashed = false`,
-    fields: 'files(id,name,size,sha256Checksum,modifiedTime)',
-    pageSize: '10',
-    key: apiKey,
-  })
-
-  try {
-    const res = await fetch(`https://www.googleapis.com/drive/v3/files?${params}`, {
-      next: { revalidate: 300 },
-    })
-    if (!res.ok) return { ok: false as const, reason: 'drive-error' as const }
-    const data = (await res.json()) as { files?: DriveFile[] }
-    const file = data.files?.[0]
-    return file ? { ok: true as const, file } : { ok: false as const, reason: 'no-release' as const }
-  } catch {
-    return { ok: false as const, reason: 'drive-error' as const }
-  }
-}
+  | { ok: false; reason: 'no-release' | 'github-error' }
 
 const GITHUB_REPOSITORY = 'StevenCLewis111/RetroTVEmulator'
 const GITHUB_VERSION_PATTERN = /v(\d+\.\d+\.\d+)/i
@@ -64,7 +27,6 @@ type GitHubRelease = {
   draft?: boolean
   assets?: GitHubAsset[]
   published_at?: string | null
-  body?: string | null
 }
 
 function compareVersionText(a: string, b: string) {
@@ -88,14 +50,18 @@ function githubDisplayVersion(name: string, version: string) {
 }
 
 export async function getLatestRelease(): Promise<ReleaseResult> {
+  const headers: Record<string, string> = {
+    Accept: 'application/vnd.github+json',
+    'User-Agent': 'RetroTVEmulator-Website',
+  }
+  // Optional: raises the GitHub API rate limit during the build.
+  if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`
+
   let releases: GitHubRelease[]
   try {
     const response = await fetch(
       `https://api.github.com/repos/${GITHUB_REPOSITORY}/releases?per_page=30`,
-      {
-        headers: { Accept: 'application/vnd.github+json', 'User-Agent': 'RetroTVEmulator-Website' },
-        cache: 'no-store',
-      },
+      { headers, cache: 'no-store' },
     )
     if (!response.ok) return { ok: false, reason: 'github-error' }
     releases = (await response.json()) as GitHubRelease[]
@@ -131,4 +97,3 @@ export async function getLatestRelease(): Promise<ReleaseResult> {
     },
   }
 }
-

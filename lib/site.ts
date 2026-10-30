@@ -1,12 +1,12 @@
 export const site = {
   name: 'Retro TV Emulator',
   email: 'RetroTVEmulator@gmail.com',
-  releasesFolderId: '1kgxqZd6o8b16PqlMknvzrt-UxIGsiYcm',
-  releasesFolderUrl:
-    'https://drive.google.com/drive/folders/1kgxqZd6o8b16PqlMknvzrt-UxIGsiYcm?usp=drive_link',
-  sourceCodeFolderId: '1ULs3OYVnXJTuxjgSH1ltEStj7KP30XQt',
-  sourceCodeUrl:
-    'https://drive.google.com/drive/folders/1ULs3OYVnXJTuxjgSH1ltEStj7KP30XQt?usp=drive_link',
+  discordUrl: 'https://discord.gg/6vrk8tnuPn',
+  githubReleasesUrl: 'https://github.com/StevenCLewis111/RetroTVEmulator/releases',
+  sourceZipGithubUrl:
+    'https://github.com/StevenCLewis111/RetroTVEmulator/releases/tag/AlphaBuild',
+  sourceZipDriveUrl:
+    'https://drive.google.com/uc?export=download&id=1tx2E8cgHi2SwsCylWhomK0IhwnF5rjLn',
 }
 
 export const navLinks = [

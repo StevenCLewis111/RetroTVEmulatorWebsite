@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Geist, VT323 } from 'next/font/google'
 import { SiteHeader } from '@/components/site-header'
@@ -36,7 +35,6 @@ export const metadata: Metadata = {
     description: 'Retro TV Emulator — Free, open-source Retro TV Emulator for Windows.',
     images: ['/images/retro-tv-loading.jpg'],
   },
-  generator: 'v0.app',
   icons: {
     icon: '/images/icon.png',
     apple: '/images/icon.png',
@@ -48,7 +46,7 @@ export const viewport: Viewport = {
   themeColor: '#16181d',
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
@@ -59,7 +57,6 @@ export default async function RootLayout({
         <SiteHeader />
         <main className="flex min-h-0 w-full flex-1 flex-col">{children}</main>
         <SiteFooter />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )

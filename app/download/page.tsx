@@ -11,7 +11,9 @@ export const metadata: Metadata = {
 }
 
 function formatSize(bytes: number) {
-  return `${(bytes / 1024 / 1024 / 1024).toFixed(2)} GB`
+  const gb = bytes / 1024 / 1024 / 1024
+  if (gb >= 1) return `${gb.toFixed(2)} GB`
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`
 }
 
 function formatDate(iso: string) {
@@ -21,6 +23,11 @@ function formatDate(iso: string) {
     day: 'numeric',
   })
 }
+
+const primaryButton =
+  'inline-flex h-10 items-center gap-2 rounded-md bg-primary px-4 py-2 text-base font-medium text-primary-foreground shadow hover:bg-primary/90'
+const outlineButton =
+  'inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground'
 
 export default async function DownloadPage() {
   const result = await getLatestRelease()
@@ -35,15 +42,7 @@ export default async function DownloadPage() {
             <div className="flex flex-col gap-3 sm:gap-4">
               <div>
                 <p className="text-sm text-muted-foreground">Latest version</p>
-                <p className="font-display text-4xl">
-                  {result.release.version === 'alpha'
-                    ? 'Alpha Build'
-                    : result.release.version === 'beta'
-                      ? 'Beta Build'
-                      : result.release.version === 'stable'
-                        ? 'Stable Build'
-                        : result.release.version}
-                </p>
+                <p className="font-display text-4xl">{result.release.version}</p>
               </div>
               <dl className="grid gap-x-6 gap-y-1 text-sm sm:grid-cols-[auto_1fr]">
                 <dt className="text-muted-foreground">File</dt>
@@ -64,10 +63,7 @@ export default async function DownloadPage() {
                 <dd>Windows 10 + 11</dd>
               </dl>
               <div className="flex w-full flex-wrap items-center gap-x-4 gap-y-3">
-                <a 
-                  href={result.release.downloadUrl}
-                  className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground shadow hover:bg-primary/90 h-10 text-base"
-                >
+                <a href={result.release.downloadUrl} className={primaryButton}>
                   <Download className="size-5" aria-hidden="true" />
                   Download for Windows
                 </a>
@@ -76,16 +72,11 @@ export default async function DownloadPage() {
           ) : (
             <div className="flex flex-col gap-3 sm:gap-4">
               <p className="text-sm text-muted-foreground sm:text-base">
-                The latest version can&apos;t be loaded right now. You can still get it from the release folder.
+                The latest version can&apos;t be loaded right now. You can still get it from the releases page.
               </p>
-              <a 
-                href={site.releasesFolderUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground shadow hover:bg-primary/90 h-10 text-base self-start"
-              >
+              <a href={site.githubReleasesUrl} className={`${primaryButton} self-start`}>
                 <FolderOpen className="size-5" aria-hidden="true" />
-                Open release folder
+                Open releases page
               </a>
             </div>
           )}
@@ -97,13 +88,11 @@ export default async function DownloadPage() {
             The app checks for a newer version each time it starts and updates itself automatically.
           </p>
           <div className="flex flex-wrap items-center gap-2">
-            {/* Added data-no-prefetch and explicit absolute windows paths to completely secure redirection target hooks */}
-            <a 
-              href="https://discord.gg" 
-              target="_blank" 
+            <a
+              href={site.discordUrl}
+              target="_blank"
               rel="noopener noreferrer"
-              data-no-prefetch="true"
-              className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground h-10"
+              className={outlineButton}
             >
               Discord Link
             </a>
@@ -114,27 +103,15 @@ export default async function DownloadPage() {
         <section className="mt-3 flex flex-col gap-1.5 sm:mt-3 sm:gap-2">
           <h2 className="font-display text-2xl sm:text-3xl">Source code</h2>
           <div className="flex flex-wrap items-center gap-3">
-            <a 
-              href="https://google.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              data-no-prefetch="true"
-              className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground h-10"
-            >
-              <Code className="size-4 mr-2" aria-hidden="true" />
+            <a href={site.sourceZipDriveUrl} className={outlineButton}>
+              <Code className="mr-2 size-4" aria-hidden="true" />
               Download Source Code : Google Drive
             </a>
             <span className="text-xs text-muted-foreground sm:text-sm">Whole Project</span>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <a 
-              href="https://github.com"
-              target="_blank" 
-              rel="noopener noreferrer"
-              data-no-prefetch="true"
-              className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground h-10"
-            >
-              <Code className="size-4 mr-2" aria-hidden="true" />
+            <a href={site.sourceZipGithubUrl} className={outlineButton}>
+              <Code className="mr-2 size-4" aria-hidden="true" />
               Download Source Code : GitHub
             </a>
             <span className="text-xs text-muted-foreground sm:text-sm">Missing Faster_Whisper files</span>
@@ -144,4 +121,3 @@ export default async function DownloadPage() {
     </div>
   )
 }
-
