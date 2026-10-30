@@ -29,6 +29,13 @@ const primaryButton =
 const outlineButton =
   'inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground'
 
+// Drive API direct download: skips Google's "too large to scan" page for public files.
+// The key is read at build time (GitHub Actions secret) and must be restricted in Google Cloud.
+const driveApiKey = process.env.GCP_API_KEY
+const driveDownloadUrl = driveApiKey
+  ? `https://www.googleapis.com/drive/v3/files/${site.sourceZipDriveId}?alt=media&key=${driveApiKey}`
+  : site.sourceZipDriveFallbackUrl
+
 export default async function DownloadPage() {
   const result = await getLatestRelease()
 
@@ -103,7 +110,7 @@ export default async function DownloadPage() {
         <section className="mt-3 flex flex-col gap-1.5 sm:mt-3 sm:gap-2">
           <h2 className="font-display text-2xl sm:text-3xl">Source code</h2>
           <div className="flex flex-wrap items-center gap-3">
-            <a href={site.sourceZipDriveUrl} className={outlineButton}>
+            <a href={driveDownloadUrl} className={outlineButton}>
               <Code className="mr-2 size-4" aria-hidden="true" />
               Download Source Code : Google Drive
             </a>
