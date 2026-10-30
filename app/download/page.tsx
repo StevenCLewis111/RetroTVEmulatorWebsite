@@ -116,7 +116,11 @@ export default async function DownloadPage() {
               href="https://google.com" 
               target="_blank" 
 <<<<<<< HEAD
+<<<<<<< HEAD
               rel="external noopener noreferrer"
+=======
+              rel="noopener noreferrer"
+>>>>>>> 30c3fc9b1c98023e55d90ef1e94f6b0bb09a1dec
 =======
               rel="noopener noreferrer"
 >>>>>>> 30c3fc9b1c98023e55d90ef1e94f6b0bb09a1dec
@@ -131,7 +135,12 @@ export default async function DownloadPage() {
             <a 
               href="https://github.com"
 <<<<<<< HEAD
+<<<<<<< HEAD
               rel="external"
+=======
+              target="_blank" 
+              rel="noopener noreferrer"
+>>>>>>> 30c3fc9b1c98023e55d90ef1e94f6b0bb09a1dec
 =======
               target="_blank" 
               rel="noopener noreferrer"
