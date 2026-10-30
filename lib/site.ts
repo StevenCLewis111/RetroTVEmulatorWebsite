@@ -4,7 +4,7 @@ export const site = {
   discordUrl: 'https://discord.gg/6vrk8tnuPn',
   githubReleasesUrl: 'https://github.com/StevenCLewis111/RetroTVEmulator/releases',
   sourceZipGithubUrl:
-    'https://github.com/StevenCLewis111/RetroTVEmulator/releases/tag/SourceCode',
+    'https://github.com/StevenCLewis111/RetroTVEmulator/releases/download/SourceCode/RetroTVEmulator.Source.Code.zip',
 }
 
 export const navLinks = [
