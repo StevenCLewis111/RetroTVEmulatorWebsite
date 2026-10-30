@@ -100,7 +100,13 @@ export default async function DownloadPage() {
               variant="outline"
               className="h-8 self-start px-2 text-xs sm:h-10 sm:px-4 sm:text-sm"
               nativeButton={false}
-              render={<a href="https://discord.gg" target="_blank" rel="noopener noreferrer" />}
+              render={
+                <a 
+                  href="https://discord.gg/6vrk8tnuPn" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                />
+              }
             >
               Discord Link
             </Button>
