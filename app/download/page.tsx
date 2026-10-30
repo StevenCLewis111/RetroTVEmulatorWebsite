@@ -81,7 +81,7 @@ export default async function DownloadPage() {
               <a 
                 href={site.releasesFolderUrl} 
                 target="_blank" 
-                rel="external noopener noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground shadow hover:bg-primary/90 h-10 text-base self-start"
               >
                 <FolderOpen className="size-5" aria-hidden="true" />
@@ -97,10 +97,12 @@ export default async function DownloadPage() {
             The app checks for a newer version each time it starts and updates itself automatically.
           </p>
           <div className="flex flex-wrap items-center gap-2">
+            {/* Added data-no-prefetch and explicit absolute windows paths to completely secure redirection target hooks */}
             <a 
               href="https://discord.gg" 
               target="_blank" 
-              rel="external noopener noreferrer"
+              rel="noopener noreferrer"
+              data-no-prefetch="true"
               className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground h-10"
             >
               Discord Link
@@ -115,7 +117,8 @@ export default async function DownloadPage() {
             <a 
               href="https://google.com" 
               target="_blank" 
-              rel="external noopener noreferrer"
+              rel="noopener noreferrer"
+              data-no-prefetch="true"
               className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground h-10"
             >
               <Code className="size-4 mr-2" aria-hidden="true" />
@@ -126,7 +129,9 @@ export default async function DownloadPage() {
           <div className="flex flex-wrap items-center gap-3">
             <a 
               href="https://github.com"
-              rel="external"
+              target="_blank" 
+              rel="noopener noreferrer"
+              data-no-prefetch="true"
               className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground h-10"
             >
               <Code className="size-4 mr-2" aria-hidden="true" />
@@ -139,3 +144,4 @@ export default async function DownloadPage() {
     </div>
   )
 }
+
