@@ -79,32 +79,32 @@ function TutorialContent() {
       <div className="mx-auto w-full max-w-3xl px-4 py-12">
         <h1 className="text-center font-display text-5xl text-primary">Tutorial</h1>
 
-      <div className="mt-8 flex flex-col gap-10">
-        {steps.map((step) => (
-          <section key={step.title} className="flex flex-col gap-3 border-b border-border/60 pb-10 last:border-0">
-            <h2 className="text-center font-display text-3xl text-primary">{step.title}</h2>
-            {tutorialImages[step.title] ? (
-              <div className={tutorialImages[step.title].length === 1 ? 'flex justify-center' : 'grid gap-4 sm:grid-cols-2'}>
-                {tutorialImages[step.title].map((image) => (
-                  <Image
-                    key={image.src}
-                    src={image.src}
-                    alt={image.alt}
-                    width={1280}
-                    height={720}
-                    className={tutorialImages[step.title].length === 1 ? 'h-auto w-full rounded-lg border shadow-lg sm:w-[calc(50%-0.5rem)]' : 'w-full rounded-lg border shadow-lg'}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="scanlines flex aspect-video items-center justify-center gap-3 rounded-lg border bg-card text-muted-foreground">
-                <ImageIcon className="size-8" aria-hidden="true" />
-                <span>{step.kind === 'video' ? 'Video placeholder' : 'Tutorial image placeholder'}</span>
-              </div>
-            )}
-            {step.kind !== 'video' && <p className="leading-7 text-muted-foreground">{step.text}</p>}
-          </section>
-        ))}
+        <div className="mt-8 flex flex-col gap-10">
+          {steps.map((step) => (
+            <section key={step.title} className="flex flex-col gap-3 border-b border-border/60 pb-10 last:border-0">
+              <h2 className="text-center font-display text-3xl text-primary">{step.title}</h2>
+              {tutorialImages[step.title] ? (
+                <div className={tutorialImages[step.title].length === 1 ? 'flex justify-center' : 'grid gap-4 sm:grid-cols-2'}>
+                  {tutorialImages[step.title].map((image) => (
+                    <Image
+                      key={image.src}
+                      src={image.src}
+                      alt={image.alt}
+                      width={1280}
+                      height={720}
+                      className={tutorialImages[step.title].length === 1 ? 'h-auto w-full rounded-lg border shadow-lg sm:w-[calc(50%-0.5rem)]' : 'w-full rounded-lg border shadow-lg'}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="scanlines flex aspect-video items-center justify-center gap-3 rounded-lg border bg-card text-muted-foreground">
+                  <ImageIcon className="size-8" aria-hidden="true" />
+                  <span>{step.kind === 'video' ? 'Video placeholder' : 'Tutorial image placeholder'}</span>
+                </div>
+              )}
+              {step.kind !== 'video' && <p className="leading-7 text-muted-foreground">{step.text}</p>}
+            </section>
+          ))}
         </div>
       </div>
     </div>
@@ -112,18 +112,5 @@ function TutorialContent() {
 }
 
 export default function TutorialPage() {
-  const isProduction = process.env.VERCEL_ENV === 'production'
-
-  if (!isProduction) {
-    return <TutorialContent />
-  }
-
-  return (
-    <div className="tutorial-page scanlines flex flex-1 items-center justify-center px-4 py-12">
-      <div className="w-full max-w-2xl rounded-lg border bg-card px-6 py-12 text-center shadow-lg sm:px-12">
-        <h1 className="font-display text-4xl text-primary sm:text-5xl">Tutorial</h1>
-        <p className="mt-6 text-2xl text-foreground">Coming soon...</p>
-      </div>
-    </div>
-  )
+  return <TutorialContent />
 }

@@ -1,25 +1,26 @@
 import Image from 'next/image'
 import { site } from '@/lib/site'
 
-export const dynamic = 'force-dynamic'
+// Force this page to compile as a 100% static file for GitHub Pages
+export const dynamic = 'force-static'
 
 const defaultImage = {
-  src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-De2blMa8SxFGulScwxYoM3kywHZT7Z.png',
+  src: 'https://vercel-storage.com',
   alt: 'Retro TV Emulator scene with a glowing vintage CRT television, classic game boxes, and a retro game console',
 }
 
 const halloweenImage = {
-  src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-pmcK1kAZUmnJIK3dATOOBc9Kf5bKbO.png',
+  src: 'https://vercel-storage.com',
   alt: 'Halloween Retro TV Emulator scene with a glowing vintage CRT television, pumpkins, cobwebs, candles, a skull, and Halloween posters',
 }
 
 const thanksgivingImage = {
-  src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-fpiNJfMExnahfjuKKhBTjHF5Qqr4F0.png',
+  src: 'https://vercel-storage.com',
   alt: 'Thanksgiving Retro TV Emulator scene with a glowing vintage CRT television, autumn leaves, pumpkins, candles, and a turkey sign',
 }
 
 const christmasImage = {
-  src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-KSCAYZERsrN74wu1YEhqsnt82kWovj.png',
+  src: 'https://vercel-storage.com',
   alt: 'Christmas Retro TV Emulator scene with a glowing vintage CRT television, holiday lights, Santa, snowmen, and gifts',
 }
 
@@ -86,7 +87,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
     </>
   )
 }

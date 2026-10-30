@@ -3,14 +3,13 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, VT323 } from 'next/font/google'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
-import { recordVisitor } from '@/lib/visitor-tracking'
 import './globals.css'
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
 const vt323 = VT323({ subsets: ['latin'], weight: '400', variable: '--font-vt323' })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.retrotvemulator.com'),
+  metadataBase: new URL('https://retrotvemulator.com'),
   title: {
     default: 'Retro TV Emulator',
     template: '%s | Retro TV Emulator',
@@ -21,7 +20,7 @@ export const metadata: Metadata = {
     siteName: 'Retro TV Emulator',
     title: 'Retro TV Emulator',
     description: 'Retro TV Emulator — Free, open-source Retro TV Emulator for Windows.',
-    url: 'https://www.retrotvemulator.com/',
+    url: 'https://retrotvemulator.com/',
     images: [
       {
         url: '/images/retro-tv-loading.jpg',
@@ -54,8 +53,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  await recordVisitor()
-
   return (
     <html lang="en" className={`${geist.variable} ${vt323.variable}`}>
       <body className="flex min-h-dvh flex-col antialiased">
