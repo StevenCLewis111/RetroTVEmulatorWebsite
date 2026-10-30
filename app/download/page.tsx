@@ -123,7 +123,13 @@ export default async function DownloadPage() {
               variant="outline"
               className="h-8 px-2 text-xs sm:h-10 sm:px-4 sm:text-sm"
               nativeButton={false}
-              render={<a href="https://google.com" download="RetroTVEmulator Source Code.zip" />}
+              render={
+                <a
+                  href="https://google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
             >
               <Code aria-hidden="true" />
               Download Source Code : Google Drive
@@ -138,7 +144,7 @@ export default async function DownloadPage() {
               render={
                 <a
                   href="https://github.com"
-                  download="RetroTVEmulator-GitHub-Source.zip"
+                  download
                 />
               }
             >
