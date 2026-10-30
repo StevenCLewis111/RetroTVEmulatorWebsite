@@ -11,7 +11,12 @@ import {
 } from '@/components/ui/dialog'
 
 const credits = {
-  tools: ['Placeholder — tools & libraries go here'],
+  tools: [
+    'Next.js & React Frameworks',
+    'Tailwind CSS Styling Engine',
+    'GitHub Actions Automation Engine',
+    'Google Gemini AI Migration Assistant'
+  ],
   licenses: ['Placeholder — licenses go here'],
   thanks: ['Placeholder — names go here'],
 }
