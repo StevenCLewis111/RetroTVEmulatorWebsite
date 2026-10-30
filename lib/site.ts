@@ -4,9 +4,9 @@ export const site = {
   discordUrl: 'https://discord.gg/6vrk8tnuPn',
   githubReleasesUrl: 'https://github.com/StevenCLewis111/RetroTVEmulator/releases',
   sourceZipGithubUrl:
-    'https://github.com/StevenCLewis111/RetroTVEmulator/releases/tag/AlphaBuild',
+    'https://github.com/StevenCLewis111/RetroTVEmulator/archive/refs/tags/AlphaBuild.zip',
   sourceZipDriveUrl:
-    'https://drive.google.com/uc?export=download&id=1tx2E8cgHi2SwsCylWhomK0IhwnF5rjLn',
+    'https://drive.usercontent.google.com/download?id=1tx2E8cgHi2SwsCylWhomK0IhwnF5rjLn&export=download&confirm=t',
 }
 
 export const navLinks = [
