@@ -5,22 +5,22 @@ import { site } from '@/lib/site'
 export const dynamic = 'force-static'
 
 const defaultImage = {
-  src: 'https://vercel-storage.com',
+  src: '/images/default.png', // Points straight to your main default artwork file
   alt: 'Retro TV Emulator scene with a glowing vintage CRT television, classic game boxes, and a retro game console',
 }
 
 const halloweenImage = {
-  src: 'https://vercel-storage.com',
+  src: '/images/halloween.png',
   alt: 'Halloween Retro TV Emulator scene with a glowing vintage CRT television, pumpkins, cobwebs, candles, a skull, and Halloween posters',
 }
 
 const thanksgivingImage = {
-  src: 'https://vercel-storage.com',
+  src: '/images/thanksgiving.png',
   alt: 'Thanksgiving Retro TV Emulator scene with a glowing vintage CRT television, autumn leaves, pumpkins, candles, and a turkey sign',
 }
 
 const christmasImage = {
-  src: 'https://vercel-storage.com',
+  src: '/images/christmas.png',
   alt: 'Christmas Retro TV Emulator scene with a glowing vintage CRT television, holiday lights, Santa, snowmen, and gifts',
 }
 
@@ -90,3 +90,4 @@ export default function HomePage() {
     </>
   )
 }
+
