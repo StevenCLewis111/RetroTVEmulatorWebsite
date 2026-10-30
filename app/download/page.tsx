@@ -87,7 +87,11 @@ export default async function DownloadPage() {
           <p className="text-sm text-muted-foreground sm:text-base">
             The app checks for a newer version each time it starts and updates itself automatically.
           </p>
-          <div className="flex flex-wrap items-center gap-2">
+        </section>
+
+        <section className="mt-3 flex flex-col gap-1.5 sm:mt-3 sm:gap-2">
+          <h2 className="font-display text-2xl sm:text-3xl">Links</h2>
+          <div className="flex flex-wrap items-center gap-3">
             <a
               href={site.discordUrl}
               target="_blank"
@@ -98,10 +102,6 @@ export default async function DownloadPage() {
             </a>
             <span className="text-xs text-muted-foreground sm:text-sm">(For More Information)</span>
           </div>
-        </section>
-
-        <section className="mt-3 flex flex-col gap-1.5 sm:mt-3 sm:gap-2">
-          <h2 className="font-display text-2xl sm:text-3xl">Source code</h2>
           <div className="flex flex-wrap items-center gap-3">
             <a href={site.sourceZipGithubUrl} className={outlineButton}>
               <Code className="mr-2 size-4" aria-hidden="true" />
