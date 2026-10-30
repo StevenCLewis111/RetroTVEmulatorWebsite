@@ -12,12 +12,12 @@ import {
 
 const credits = {
   tools: [
-    'Next.js & React Frameworks',
-    'Tailwind CSS Styling Engine',
-    'GitHub Actions Automation Engine',
+    'Google Gemini AI — Infrastructure Migration Assistant',
     'v0 by Vercel — AI Web Architecture Generation',
     'Claude — Component Development & Logic Assistant',
-    'Google Gemini AI — Infrastructure Migration Assistant'
+    'Next.js & React Frameworks',
+    'Tailwind CSS Styling Engine',
+    'GitHub Actions Automation Engine'
   ],
   modules: [
     'Python Development Environment',
@@ -31,8 +31,8 @@ const credits = {
     'MondaMusic — Content Licensing Credit'
   ],
   thanks: [
-    'eyekl0pz420 / EYECLOPS — Christmas Bezel Artwork & Splash Screen Image Creator',
-    'ashthornegaming — Discord Moderator, Project Tester, and Archivist'
+    'Eyek0pz420/EYECLOPS - Helped with Christmas Bezel/GBA Splashscreen image creation',
+    'AshthorneGaming - Discord Moderator, Project Tester, and Archivist'
   ],
 }
 
@@ -62,7 +62,7 @@ export function CreditsDialog() {
           <CreditSection title="Application Frameworks & Engines" items={credits.modules} />
           <CreditSection title="Web Development Tools" items={credits.tools} />
           <CreditSection title="Media & Content Licenses" items={credits.licenses} />
-          <CreditSection title="Special Thanks" items={credits.thanks} />
+          <CreditSection title="Special Thanks (Discord Members)" items={credits.thanks} />
         </div>
       </DialogContent>
     </Dialog>
