@@ -115,15 +115,7 @@ export default async function DownloadPage() {
             <a 
               href="https://google.com" 
               target="_blank" 
-<<<<<<< HEAD
-<<<<<<< HEAD
               rel="external noopener noreferrer"
-=======
-              rel="noopener noreferrer"
->>>>>>> 30c3fc9b1c98023e55d90ef1e94f6b0bb09a1dec
-=======
-              rel="noopener noreferrer"
->>>>>>> 30c3fc9b1c98023e55d90ef1e94f6b0bb09a1dec
               className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground h-10"
             >
               <Code className="size-4 mr-2" aria-hidden="true" />
@@ -134,17 +126,7 @@ export default async function DownloadPage() {
           <div className="flex flex-wrap items-center gap-3">
             <a 
               href="https://github.com"
-<<<<<<< HEAD
-<<<<<<< HEAD
               rel="external"
-=======
-              target="_blank" 
-              rel="noopener noreferrer"
->>>>>>> 30c3fc9b1c98023e55d90ef1e94f6b0bb09a1dec
-=======
-              target="_blank" 
-              rel="noopener noreferrer"
->>>>>>> 30c3fc9b1c98023e55d90ef1e94f6b0bb09a1dec
               className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground h-10"
             >
               <Code className="size-4 mr-2" aria-hidden="true" />
@@ -157,4 +139,3 @@ export default async function DownloadPage() {
     </div>
   )
 }
-
