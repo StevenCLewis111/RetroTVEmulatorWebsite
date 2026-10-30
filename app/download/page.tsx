@@ -66,7 +66,7 @@ export default async function DownloadPage() {
                 <dd>Windows 10 + 11</dd>
               </dl>
               <div className="flex w-full flex-wrap items-center gap-x-4 gap-y-3">
-                <Button size="lg" className="h-9 shrink-0 px-3 text-sm sm:h-10 sm:px-4 sm:text-base" nativeButton={false} render={<a href={result.release.downloadUrl} />}>
+                <Button size="lg" className="h-9 shrink-0 px-3 text-sm sm:h-10 sm:px-4 sm:text-base" nativeButton={false} render={<a href={result.release.downloadUrl} download />}>
                   <Download aria-hidden="true" />
                   Download for Windows
                 </Button>
@@ -75,7 +75,8 @@ export default async function DownloadPage() {
           ) : (
             <div className="flex flex-col gap-3 sm:gap-4">
               <p className="text-sm text-muted-foreground sm:text-base">
-                The latest version can&apos;t be loaded right now. You can still get it from the release folder.
+                The latest version can&apos;t be loaded right now. You can still get it from the
+                release folder.
               </p>
               <Button
                 size="lg"
@@ -93,7 +94,8 @@ export default async function DownloadPage() {
         <section className="mt-3 flex flex-col gap-1.5 sm:mt-3 sm:gap-2">
           <h2 className="font-display text-2xl sm:text-3xl">Updating</h2>
           <p className="text-sm text-muted-foreground sm:text-base">
-            The app checks for a newer version each time it starts and updates itself automatically.
+            The app checks for a newer version each time it starts and updates itself
+            automatically.
           </p>
           <div className="flex flex-wrap items-center gap-2">
             <Button
@@ -101,10 +103,10 @@ export default async function DownloadPage() {
               className="h-8 self-start px-2 text-xs sm:h-10 sm:px-4 sm:text-sm"
               nativeButton={false}
               render={
-                <a 
-                  href="https://discord.gg/6vrk8tnuPn" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href="https://discord.gg"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 />
               }
             >
@@ -121,10 +123,10 @@ export default async function DownloadPage() {
               variant="outline"
               className="h-8 px-2 text-xs sm:h-10 sm:px-4 sm:text-sm"
               nativeButton={false}
-              render={<a href={site.sourceCodeUrl} target="_blank" rel="noopener noreferrer" />}
+              render={<a href="https://google.com" download="RetroTVEmulator Source Code.zip" />}
             >
               <Code aria-hidden="true" />
-              Open Source Code Folder
+              Download Source Code : Google Drive
             </Button>
             <span className="text-xs text-muted-foreground sm:text-sm">Whole Project</span>
           </div>
@@ -133,7 +135,12 @@ export default async function DownloadPage() {
               variant="outline"
               className="h-8 px-2 text-xs sm:h-10 sm:px-4 sm:text-sm"
               nativeButton={false}
-              render={<a href="https://github.com" />}
+              render={
+                <a
+                  href="https://github.com"
+                  download="RetroTVEmulator-GitHub-Source.zip"
+                />
+              }
             >
               <Code aria-hidden="true" />
               Download Source Code : GitHub
