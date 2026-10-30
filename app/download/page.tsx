@@ -107,7 +107,6 @@ export default async function DownloadPage() {
               <Code className="mr-2 size-4" aria-hidden="true" />
               Download Source Code : GitHub
             </a>
-            <span className="text-xs text-muted-foreground sm:text-sm">Whole Project</span>
           </div>
         </section>
       </div>
