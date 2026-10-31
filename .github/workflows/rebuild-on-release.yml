@@ -1,0 +1,17 @@
+name: Rebuild Website on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  trigger-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger GitHub Pages Deployment
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://github.com{{ github.repository }}/actions/workflows/nextjs.yml/dispatches \
+            -d '{"ref":"main"}'
