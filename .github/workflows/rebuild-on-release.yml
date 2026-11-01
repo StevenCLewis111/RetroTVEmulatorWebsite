@@ -2,7 +2,8 @@ name: Rebuild Website on Release
 
 on:
   release:
-    types: [published]
+    types: [published, edited] # <-- Added 'edited' here
+  workflow_dispatch:
 
 jobs:
   trigger-deploy:
