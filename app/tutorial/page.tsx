@@ -6,22 +6,8 @@ import { site } from '@/lib/site'
 export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
-  title: 'Download',
-  description: 'Download the latest version of Retro TV Emulator for Windows.',
-}
-
-function formatSize(bytes: number) {
-  const gb = bytes / 1024 / 1024 / 1024
-  if (gb >= 1) return `${gb.toFixed(2)} GB`
-  return `${(bytes / 1024 / 1024).toFixed(1)} MB`
-}
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
+  title: 'Tutorial',
+  description: 'How to install and use Retro TV Emulator.',
 }
 
 const primaryButton =
@@ -47,15 +33,15 @@ const steps = [
   {
     title: 'System Menu',
     kind: 'placeholder',
-    text: 'Placeholder text',
+    text: 'The System Menu provides access to global configurations and advanced emulations. From this panel, users can configure screen layout behaviors, toggle automatic update protocols, adjust rendering performance profiles, and modify file system directory paths to sync your multimedia content accurately.',
   },
+]
+const stepsPartTwo = [
   {
     title: 'Set up your channels',
     kind: 'placeholder',
     text: 'Open Settings with M and choose Channels. Channels 05–44 are your programmable stations. Turn a channel on, give it a name, and choose TV or MUSIC mode. TV mode plays your video folders on a schedule. MUSIC mode creates a visualizer station from an audio folder. Channel 03 is the Games and DVD deck, and Channel 04 is the TV Guide. A fresh install starts with Channel 05 active; enable a channel and add content before turning off the last active channel.',
   },
-]
-const stepsPartTwo = [
   {
     title: 'Schedule TV stations',
     kind: 'placeholder',
@@ -106,6 +92,7 @@ function TutorialContent() {
     <div className="tutorial-page scanlines flex-1">
       <div className="mx-auto w-full max-w-3xl px-4 py-12">
         <h1 className="text-center font-display text-5xl text-primary">Tutorial</h1>
+
         <div className="mt-8 flex flex-col gap-10">
           {allSteps.map((step) => (
             <section key={step.title} className="flex flex-col gap-3 border-b border-border/60 pb-10 last:border-0">
