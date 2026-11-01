@@ -297,5 +297,12 @@ function TutorialContent() {
 
 // Shows the coming soon screen. When ready to launch, change 'return' to: return <TutorialContent />
 export default function TutorialPage() {
-  return <TutorialContent />
+  return (
+    <div className="tutorial-page scanlines flex flex-1 items-center justify-center px-4 py-12">
+      <div className="w-full max-w-2xl rounded-lg border bg-card px-6 py-12 text-center shadow-lg sm:px-12">
+        <h1 className="font-display text-4xl text-primary sm:text-5xl">Tutorial</h1>
+        <p className="mt-6 text-2xl text-foreground">Coming soon...</p>
+      </div>
+    </div>
+  )
 }
