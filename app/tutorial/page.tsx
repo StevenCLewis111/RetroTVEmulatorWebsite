@@ -1,11 +1,33 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
-import { ImageIcon } from 'lucide-react'
+import { Code, Download, FolderOpen } from 'lucide-react'
+import { getLatestRelease } from '@/lib/releases'
+import { site } from '@/lib/site'
+
+export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
-  title: 'Tutorial',
-  description: 'How to install and use Retro TV Emulator.',
+  title: 'Download',
+  description: 'Download the latest version of Retro TV Emulator for Windows.',
 }
+
+function formatSize(bytes: number) {
+  const gb = bytes / 1024 / 1024 / 1024
+  if (gb >= 1) return `${gb.toFixed(2)} GB`
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`
+}
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+}
+
+const primaryButton =
+  'inline-flex h-10 items-center gap-2 rounded-md bg-primary px-4 py-2 text-base font-medium text-primary-foreground shadow hover:bg-primary/90'
+const outlineButton =
+  'inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground'
 
 const steps = [
   {
@@ -32,6 +54,8 @@ const steps = [
     kind: 'placeholder',
     text: 'Open Settings with M and choose Channels. Channels 05–44 are your programmable stations. Turn a channel on, give it a name, and choose TV or MUSIC mode. TV mode plays your video folders on a schedule. MUSIC mode creates a visualizer station from an audio folder. Channel 03 is the Games and DVD deck, and Channel 04 is the TV Guide. A fresh install starts with Channel 05 active; enable a channel and add content before turning off the last active channel.',
   },
+]
+const stepsPartTwo = [
   {
     title: 'Schedule TV stations',
     kind: 'placeholder',
@@ -54,6 +78,8 @@ const steps = [
   },
 ]
 
+const allSteps = [...steps, ...stepsPartTwo]
+
 const tutorialImages: Record<string, { src: string; alt: string }[]> = {
   'The Boot Process': [{ src: '/images/tutorial-boot.png', alt: 'Retro TV Emulator boot screen with loading progress' }],
   'The Controls Menu': [{ src: '/images/tutorial-controls.png', alt: 'Retro TV Emulator control menu showing keyboard controls' }],
@@ -72,15 +98,16 @@ const tutorialImages: Record<string, { src: string; alt: string }[]> = {
     { src: '/images/tutorial-mute.png', alt: 'Retro TV Emulator muted indicator' },
   ],
 }
+import Image from 'next/image'
+import { ImageIcon } from 'lucide-react'
 
 function TutorialContent() {
   return (
     <div className="tutorial-page scanlines flex-1">
       <div className="mx-auto w-full max-w-3xl px-4 py-12">
         <h1 className="text-center font-display text-5xl text-primary">Tutorial</h1>
-
         <div className="mt-8 flex flex-col gap-10">
-          {steps.map((step) => (
+          {allSteps.map((step) => (
             <section key={step.title} className="flex flex-col gap-3 border-b border-border/60 pb-10 last:border-0">
               <h2 className="text-center font-display text-3xl text-primary">{step.title}</h2>
               {tutorialImages[step.title] ? (
@@ -113,12 +140,5 @@ function TutorialContent() {
 
 // Shows the coming soon screen. When ready to launch, change 'return' to: return <TutorialContent />
 export default function TutorialPage() {
-  return (
-    <div className="tutorial-page scanlines flex flex-1 items-center justify-center px-4 py-12">
-      <div className="w-full max-w-2xl rounded-lg border bg-card px-6 py-12 text-center shadow-lg sm:px-12">
-        <h1 className="font-display text-4xl text-primary sm:text-5xl">Tutorial</h1>
-        <p className="mt-6 text-2xl text-foreground">Coming soon...</p>
-      </div>
-    </div>
-  )
+  return <TutorialContent />
 }
