@@ -409,12 +409,12 @@ function TutorialContent() {
 
                   {topic.video ? (
                     <a 
-                      href="https://youtu.be"
+                      href="https://youtube.com"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200"
                     >
-                      {/* Pulls directly from public/images/default.png */}
+                      {/* Local project path placeholder */}
                       <img 
                         src="/images/default.png" 
                         alt="Retro TV Emulator Video Tutorial"
