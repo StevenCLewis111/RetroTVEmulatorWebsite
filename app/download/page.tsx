@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { Code, Download, FolderOpen } from 'lucide-react'
 import { getLatestRelease } from '@/lib/releases'
 import { site } from '@/lib/site'
@@ -42,7 +43,16 @@ export default async function DownloadPage() {
             <div className="flex flex-col gap-3 sm:gap-4">
               <div>
                 <p className="text-sm text-muted-foreground">Latest version</p>
-                <p className="font-display text-4xl">{result.release.version}</p>
+                <div className="mt-1 flex items-center gap-3">
+                  <Image
+                    src="/images/folder.png"
+                    alt=""
+                    width={48}
+                    height={48}
+                    className="size-10 sm:size-12 [image-rendering:pixelated]"
+                  />
+                  <p className="font-display text-4xl">{result.release.version}</p>
+                </div>
               </div>
               <dl className="grid gap-x-6 gap-y-1 text-sm sm:grid-cols-[auto_1fr]">
                 <dt className="text-muted-foreground">File</dt>
