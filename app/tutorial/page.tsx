@@ -407,7 +407,7 @@ function TutorialContent() {
                     <h3 className="text-center font-display text-2xl text-primary">{topic.title}</h3>
                   )}
 
-                  {topic.video ? (
+                                    {topic.video ? (
                     <a 
                       href="https://youtube.com"
                       target="_blank"
@@ -416,7 +416,7 @@ function TutorialContent() {
                     >
                       <img 
                         src="https://youtube.com" 
-                        alt="Retro TV Emulator Video Tutorial Thumbnail"
+                        alt="Retro TV Emulator Video Tutorial"
                         className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-200"
                         loading="lazy"
                       />
@@ -427,6 +427,7 @@ function TutorialContent() {
                       </div>
                     </a>
                   ) : topic.images ? (
+
                     <div className={topic.images.length === 1 ? 'flex justify-center' : 'grid gap-4 sm:grid-cols-2'}>
                       {topic.images.map((image) => (
                         <Image
