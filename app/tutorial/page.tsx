@@ -407,15 +407,16 @@ function TutorialContent() {
                     <h3 className="text-center font-display text-2xl text-primary">{topic.title}</h3>
                   )}
 
-                                                      {topic.video ? (
+                  {topic.video ? (
                     <a 
-                      href="https://youtu.be/_6fF3i45Lg8?si=UK0HdRtaaHV1_f6m"
+                      href="https://youtu.be"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200"
                     >
+                      {/* Pulls directly from public/images/default.png */}
                       <img 
-                        src="https://youtube.com" 
+                        src="/images/default.png" 
                         alt="Retro TV Emulator Video Tutorial"
                         className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-200"
                         loading="lazy"
@@ -427,8 +428,6 @@ function TutorialContent() {
                       </div>
                     </a>
                   ) : topic.images ? (
-
-
                     <div className={topic.images.length === 1 ? 'flex justify-center' : 'grid gap-4 sm:grid-cols-2'}>
                       {topic.images.map((image) => (
                         <Image
