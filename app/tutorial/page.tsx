@@ -407,9 +407,9 @@ function TutorialContent() {
                     <h3 className="text-center font-display text-2xl text-primary">{topic.title}</h3>
                   )}
 
-                                    {topic.video ? (
+                                                      {topic.video ? (
                     <a 
-                      href="https://youtube.com"
+                      href="https://youtu.be/_6fF3i45Lg8?si=UK0HdRtaaHV1_f6m"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200"
@@ -427,6 +427,7 @@ function TutorialContent() {
                       </div>
                     </a>
                   ) : topic.images ? (
+
 
                     <div className={topic.images.length === 1 ? 'flex justify-center' : 'grid gap-4 sm:grid-cols-2'}>
                       {topic.images.map((image) => (
