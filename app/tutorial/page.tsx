@@ -408,15 +408,24 @@ function TutorialContent() {
                   )}
 
                   {topic.video ? (
-                    <div className="mx-auto aspect-video w-full rounded-lg border bg-black shadow-lg overflow-hidden">
-                      <iframe
-                        className="w-full h-full"
-                        src="https://youtube.com"
-                        title="Retro TV Emulator Video Tutorial"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                      ></iframe>
-                    </div>
+                    <a 
+                      href="https://youtube.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200"
+                    >
+                      <img 
+                        src="https://youtube.com" 
+                        alt="Retro TV Emulator Video Tutorial Thumbnail"
+                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-200"
+                        loading="lazy"
+                      />
+                      <div className="relative z-10 size-16 rounded-full bg-red-600 flex items-center justify-center shadow-xl group-hover:bg-red-700 transition-colors duration-200">
+                        <svg className="size-8 text-white fill-current ml-1" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </a>
                   ) : topic.images ? (
                     <div className={topic.images.length === 1 ? 'flex justify-center' : 'grid gap-4 sm:grid-cols-2'}>
                       {topic.images.map((image) => (
@@ -473,12 +482,5 @@ function TutorialContent() {
 }
 
 export default function TutorialPage() {
-  return (
-    <div className="tutorial-page scanlines flex flex-1 items-center justify-center px-4 py-12">
-      <div className="w-full max-w-2xl rounded-lg border bg-card px-6 py-12 text-center shadow-lg sm:px-12">
-        <h1 className="font-display text-4xl text-primary sm:text-5xl">Tutorial</h1>
-        <p className="mt-6 text-2xl text-foreground">Coming soon...</p>
-      </div>
-    </div>
-  );
+  return <TutorialContent />
 }
