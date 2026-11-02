@@ -414,17 +414,28 @@ function TutorialContent() {
                       rel="noopener noreferrer"
                       className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200"
                     >
-                      {/* Local project path placeholder */}
+                      {/* Local project path thumbnail image background */}
                       <img 
                         src="/images/default.png" 
                         alt="Retro TV Emulator Video Tutorial"
                         className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-200"
                         loading="lazy"
                       />
+                      
+                      {/* Central Action Play Icon Overlaid */}
                       <div className="relative z-10 size-16 rounded-full bg-red-600 flex items-center justify-center shadow-xl group-hover:bg-red-700 transition-colors duration-200">
                         <svg className="size-8 text-white fill-current ml-1" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z" />
                         </svg>
+                      </div>
+
+                      {/* YouTube Custom Logo Graphic - Placed in Bottom Right Corner */}
+                      <div className="absolute bottom-3 right-3 z-10 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">
+                        <img 
+                          src="/images/youtube-logo.png" 
+                          alt="YouTube Logo" 
+                          className="h-7 w-auto object-contain"
+                        />
                       </div>
                     </a>
                   ) : topic.images ? (
