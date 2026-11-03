@@ -1,15 +1,22 @@
-import type { Metadata } from 'next'
+import { createFileRoute } from "@tanstack/react-router";
 import Image from 'next/image'
-import { ImageIcon } from 'lucide-react'
+import { ImageIcon } from "lucide-react";
 import whatYouNeed1 from "@/assets/whatyouneed-1.png.asset.json";
 import whatYouNeed2 from "@/assets/whatyouneed-2.png.asset.json";
 
-export const dynamic = 'force-static'
-
-export const metadata: Metadata = {
-  title: 'Tutorial',
-  description: 'Set up Retro TV Emulator on Windows: TV and music stations, schedules, controls, retro games, DVDs, captions and troubleshooting.',
-}
+export const Route = createFileRoute("/tutorial")({
+  head: () => ({
+    meta: [
+      { title: "Tutorial | Retro TV Emulator" },
+      { name: "description", content: "Set up Retro TV Emulator on Windows: TV and music stations, schedules, controls, retro games, DVDs, captions and troubleshooting." },
+      { property: "og:title", content: "Tutorial | Retro TV Emulator" },
+      { property: "og:description", content: "Set up Retro TV Emulator on Windows: TV and music stations, schedules, controls, retro games, DVDs, captions and troubleshooting." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: TutorialPage,
+});
 
 type TutorialTopic = {
   title: string;
@@ -22,6 +29,7 @@ type TutorialTopic = {
 };
 
 type TutorialSection = { title: string; standalone?: boolean; topics: TutorialTopic[] };
+
 const section1: TutorialSection = {
   title: "Starting the Program",
   standalone: true,
@@ -261,11 +269,6 @@ const section5: TutorialSection = {
         { label: "Controller", text: "The D-pad navigates, A selects and B goes back. Hold Start + Select together for about half a second to quit a game." },
       ],
     },
-  ],
-};
-const section5Cont: TutorialSection = {
-  title: "Games, DVD & Media Player Settings (Continued)",
-  topics: [
     {
       title: "DVD & Media Player",
       intro: "Choose DVD on Channel 03 to use the media player for video files, physical movie DVDs, and digital DVD ISO backups. Insert a movie DVD into your computer’s optical drive or select the stored media or ISO file. The DVD player does not need an emulator core, game BIOS, or save profile.",
@@ -397,8 +400,8 @@ const section8: TutorialSection = {
   ],
 };
 
-const allSections = [section1, section2, section3, section3Cont, section4, section5, section5Cont, section6, section7, section8];
-function TutorialContent() {
+const allSections = [section1, section2, section3, section3Cont, section4, section5, section7, section6, section8];
+function TutorialPage() {
   return (
     <div className="tutorial-page scanlines flex-1">
       <div className="mx-auto w-full max-w-3xl px-4 py-12">
@@ -422,7 +425,7 @@ function TutorialContent() {
                       rel="noopener noreferrer"
                       className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200"
                     >
-                      {/* Video Thumbnail Background */}
+                      {/* Fixed: Optimized Next.js Image Component */}
                       <Image 
                         src="/images/default.png" 
                         alt="Retro TV Emulator Video Tutorial"
@@ -438,7 +441,7 @@ function TutorialContent() {
                         </svg>
                       </div>
 
-                      {/* YouTube Custom Logo Graphic - Top Right Corner */}
+                      {/* YouTube Custom Logo Graphic - Placed in TOP RIGHT Corner */}
                       <div className="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">
                         <Image 
                           src="/images/youtube-logo.png" 
@@ -464,24 +467,24 @@ function TutorialContent() {
                       ))}
                     </div>
                   ) : (
-                    <div className="scanlines mx-auto flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground sm:w-[calc(50%-0.5rem)]">
+                    <div
+                      className={`scanlines mx-auto flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground ${
+                        topic.video ? "" : "sm:w-[calc(50%-0.5rem)]"
+                      }`}
+                    >
                       <ImageIcon className="size-8 shrink-0" aria-hidden="true" />
-                      <span>Tutorial image placeholder</span>
+                      <span>{topic.video ? "Video placeholder" : "Tutorial image placeholder"}</span>
                     </div>
                   )}
-
                   {topic.intro && <p className="leading-7 text-muted-foreground">{topic.intro}</p>}
-                  
                   {topic.steps && (
                     <ol className="flex list-decimal flex-col gap-3 pl-5 text-muted-foreground">
                       {topic.steps.map((step) => <li key={step} className="pl-1 leading-7">{step}</li>)}
                     </ol>
                   )}
-
                   {topic.example && (
                     <pre className="overflow-x-auto rounded-lg border bg-card p-4 text-sm leading-6 text-muted-foreground"><code>{topic.example}</code></pre>
                   )}
-
                   {topic.points && (
                     <ul className="flex list-disc flex-col gap-3 pl-5 text-muted-foreground">
                       {topic.points.map((point) => (
@@ -501,6 +504,7 @@ function TutorialContent() {
   );
 }
 
+// Default layout export component to safely open or close tutorial content
 export default function TutorialPage() {
-  return <TutorialContent />
+  return <TutorialContent />;
 }
