@@ -422,12 +422,13 @@ function TutorialContent() {
                       rel="noopener noreferrer"
                       className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200"
                     >
-                      {/* Local project path thumbnail image background */}
-                      <img 
+                      {/* Video Thumbnail Background */}
+                      <Image 
                         src="/images/default.png" 
                         alt="Retro TV Emulator Video Tutorial"
+                        width={1280}
+                        height={720}
                         className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-200"
-                        loading="lazy"
                       />
                       
                       {/* Central Action Play Icon */}
@@ -437,11 +438,13 @@ function TutorialContent() {
                         </svg>
                       </div>
 
-                      {/* YouTube Custom Logo Graphic - Positioned in TOP RIGHT Corner */}
+                      {/* YouTube Custom Logo Graphic - Top Right Corner */}
                       <div className="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">
-                        <img 
+                        <Image 
                           src="/images/youtube-logo.png" 
                           alt="YouTube Logo" 
+                          width={112}
+                          height={28}
                           className="h-7 w-auto object-contain"
                         />
                       </div>
@@ -449,7 +452,7 @@ function TutorialContent() {
                   ) : topic.images ? (
                     <div className="flex flex-wrap justify-center gap-4">
                       {topic.images.map((image) => (
-                        <img
+                        <Image
                           key={image.src}
                           src={image.src}
                           alt={image.alt}
