@@ -1,7 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ImageIcon } from "lucide-react";
-import whatYouNeed1 from "@/assets/whatyouneed-1.png.asset.json";
-import whatYouNeed2 from "@/assets/whatyouneed-2.png.asset.json";
+import type { Metadata } from 'next'
+import Image from 'next/image'
+import { Code, Download, FolderOpen } from 'lucide-react'
+import { getLatestRelease } from '@/lib/releases'
+import { site } from '@/lib/site'
 
 export const Route = createFileRoute("/tutorial")({
   head: () => ({
@@ -389,13 +390,15 @@ const sections: TutorialSection[] = [
     ],
   },
 ];
+
+const allSections = [section1, section2, section3, section3Cont, section4, section5, section5Cont, section6, section7, section8];
 function TutorialPage() {
   return (
     <div className="tutorial-page scanlines flex-1">
       <div className="mx-auto w-full max-w-3xl px-4 py-12">
         <h1 className="text-center font-display text-5xl text-primary">Tutorial</h1>
         <div className="mt-8 flex flex-col gap-10">
-          {sections.map((section) => (
+          {allSections.map((section) => (
             <section key={section.title} className="flex flex-col gap-8 border-b border-border/60 pb-10 last:border-0">
               {!section.standalone && <h2 className="text-center font-display text-3xl text-primary">{section.title}</h2>}
               {section.topics.map((topic) => (
@@ -412,7 +415,6 @@ function TutorialPage() {
                       rel="noopener noreferrer"
                       className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200"
                     >
-                      {/* Fixed: Restored exact router image configuration with local path overrides */}
                       <img 
                         src="/images/default.png" 
                         alt="Retro TV Emulator Video Tutorial"
