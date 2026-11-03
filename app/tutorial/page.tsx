@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { ImageIcon } from 'lucide-react'
+import whatYouNeed1 from "@/assets/whatyouneed-1.png.asset.json";
+import whatYouNeed2 from "@/assets/whatyouneed-2.png.asset.json";
 
 export const dynamic = 'force-static'
 
@@ -29,9 +31,14 @@ const section1: TutorialSection = {
       title: "What You Need",
       intro: "Retro TV Emulator turns your own video and music library into scheduled television on a Windows PC. Channel 03 also provides retro games and a DVD/media player.",
       points: [
-        { label: "Computer", text: "Use Windows 10 or 11, 64-bit, with a keyboard for initial setup. A compatible controller and a PC remote can also be mapped." },
-        { label: "Your media", text: "Bring your own videos, music, game ROMs, movie DVDs or DVD ISO files. For games, each console needs a compatible libretro core (.dll); some consoles also need BIOS files, including PlayStation." },
-        { label: "Included tools", text: "VLC and ffmpeg are bundled with the app; you do not need to install them separately. Opening game archives in .7z or .rar format requires 7-Zip." },
+        { label: "Computer", text: "Use a Windows 10 or 11 computer, 64-bit. Linux and Mac have compatibility programs that can run Windows applications; compatibility with Retro TV Emulator depends on the program and your setup." },
+        { label: "Keyboard, mouse and controller", text: "Have a keyboard and mouse for setup. Video games require a compatible controller. A PC remote can also be mapped for TV controls." },
+        { label: "Your games and media", text: "You need your own ROMs, BIOS files, Emulation Cores, videos and music. You can also use DVDs (if you have an optical drive) or DVD .iso backups. Point the emulator at your RetroArch folder and it will find and organize the ROMs, BIOS and cores for you." },
+        { label: "Included tools", text: "VLC, ffmpeg and 7-Zip are included; no separate installation of these tools is needed." },
+      ],
+      images: [
+        { src: whatYouNeed1.url, alt: "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller" },
+        { src: whatYouNeed2.url, alt: "A second desk setup photo showing the Retro TV Emulator screen with keyboard, mouse and controller" }
       ],
     },
     {
@@ -219,7 +226,7 @@ const section5: TutorialSection = {
       intro: "Enable Channel 03 in the System Tab to open the Games/DVD hub. The DVD module is active by default; use the Games Tab to enable the consoles you want to play.",
       points: [
         { label: "Game files, cores and BIOS", text: "Use the directory selection tool to point the program at the main folder containing your retro files. Automatic discovery identifies ROMs, emulator cores, and BIOS files for their systems. Some consoles require a compatible core and BIOS before games can run." },
-        { label: "Console and controller settings", text: "Select a console, choose a core where needed, set a save profile, and configure the controller. Use the keyboard to navigate the hub and configure a compatible controller for gameplay. XInput and DirectInput controllers are supported, with controllers assigned per player." },
+        { label: "Console and controller settings", text: "Select a console, choose a core where needed, set a save profile, and configure the controller. The keyboard navigates the hub; a compatible controller is required for gameplay. XInput and DirectInput controllers are supported, with controllers assigned per player." },
         { label: "Hub appearance", text: "Choose a custom background image, text colors, and console-selection animation. Enable only the consoles you use and toggle Game Music for music while browsing the hub." },
         { label: "Idle protection", text: "Keep the Channel 03 screen saver active so idle menus do not remain fixed on the display." },
       ],
@@ -229,9 +236,10 @@ const section5: TutorialSection = {
       title: "Console Cores, ROMs & BIOS",
       intro: "The Games tab supports Game Boy, Game Boy Color, Game Boy Advance, NES, SNES, Sega Genesis, Sega 32X, Master System, Game Gear, Nintendo 64, PlayStation, Atari 2600, Neo Geo Pocket and Neo Geo Pocket Color.",
       points: [
-        { label: "Core folders", text: "Inside _internal/main, place a console’s libretro .dll in cores/<CONSOLE>/, for example cores/SNES/snes9x_libretro.dll. Scan for Cores finds available cores; select one in the console’s options if more than one is available." },
-        { label: "ROM folders", text: "Use roms/<CONSOLE>/ or Scan for ROMs to discover files elsewhere. ZIP archives work; 7Z and RAR archives require 7-Zip. Clear ROMs and Clear Cores clear the corresponding lists." },
-        { label: "PlayStation BIOS", text: "Place a compatible BIOS in cores/PSX/system/ or use Add BIOS in the console menu. When several are available, a USA BIOS is preferred." },
+        { label: "Find and organize your files", text: "Point the directory selection tool at your RetroArch folder or the folder containing your retro collection. The emulator finds and organizes your ROMs, BIOS and emulation cores; you do not need to sort them manually first." },
+        { label: "Core choice", text: "Each console needs a compatible libretro .dll core. Use Scan for Cores and select a core in the console’s options if more than one is available. The app’s organized core location is _internal/main/cores/<CONSOLE>/." },
+        { label: "ROM discovery", text: "Scan for ROMs finds games in your selected collection. ZIP, 7Z and RAR archives are supported using the included tools. Clear ROMs and Clear Cores clear the corresponding lists." },
+        { label: "PlayStation BIOS", text: "Automatic discovery can find your BIOS files. If needed, use Add BIOS in the console menu to select a compatible PlayStation BIOS. The organized location is cores/PSX/system/; when several BIOS files are available, a USA BIOS is preferred." },
         { label: "Cartridge formats", text: "GB: .gb; GBC: .gbc/.gb; GBA: .gba; NES: .nes; SNES: .smc/.sfc; Genesis: .md/.gen/.bin/.smd; 32X: .32x/.bin/.smd/.md; Master System: .sms; Game Gear: .gg." },
         { label: "Other formats", text: "N64: .n64/.z64/.v64; PlayStation: .cue/.bin/.iso/.chd/.pbp/.img; Atari 2600: .a26/.bin; Neo Geo Pocket: .ngp; Neo Geo Pocket Color: .ngc." },
       ],
@@ -422,15 +430,15 @@ function TutorialContent() {
                         loading="lazy"
                       />
                       
-                      {/* Central Action Play Icon Overlaid */}
+                      {/* Central Action Play Icon */}
                       <div className="relative z-10 size-16 rounded-full bg-red-600 flex items-center justify-center shadow-xl group-hover:bg-red-700 transition-colors duration-200">
                         <svg className="size-8 text-white fill-current ml-1" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z" />
                         </svg>
                       </div>
 
-                      {/* YouTube Custom Logo Graphic - Placed in Bottom Right Corner */}
-                      <div className="absolute bottom-3 right-3 z-10 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">
+                      {/* YouTube Custom Logo Graphic - Positioned in TOP RIGHT Corner */}
+                      <div className="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">
                         <img 
                           src="/images/youtube-logo.png" 
                           alt="YouTube Logo" 
@@ -439,20 +447,21 @@ function TutorialContent() {
                       </div>
                     </a>
                   ) : topic.images ? (
-                    <div className={topic.images.length === 1 ? 'flex justify-center' : 'grid gap-4 sm:grid-cols-2'}>
+                    <div className="flex flex-wrap justify-center gap-4">
                       {topic.images.map((image) => (
-                        <Image
+                        <img
                           key={image.src}
                           src={image.src}
                           alt={image.alt}
                           width={1280}
                           height={720}
-                          className={topic.images.length === 1 ? 'h-auto w-full rounded-lg border shadow-lg sm:w-[calc(50%-0.5rem)]' : 'w-full rounded-lg border shadow-lg'}
+                          loading="lazy"
+                          className="aspect-video w-full rounded-lg border object-contain shadow-lg sm:w-[calc(50%-0.5rem)]"
                         />
                       ))}
                     </div>
                   ) : (
-                    <div className="scanlines mx-auto flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground">
+                    <div className="scanlines mx-auto flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground sm:w-[calc(50%-0.5rem)]">
                       <ImageIcon className="size-8 shrink-0" aria-hidden="true" />
                       <span>Tutorial image placeholder</span>
                     </div>
@@ -461,17 +470,13 @@ function TutorialContent() {
                   {topic.intro && <p className="leading-7 text-muted-foreground">{topic.intro}</p>}
                   
                   {topic.steps && (
-                    <ol className="flex list-decimal flex-col gap-2 pl-5 text-muted-foreground">
-                      {topic.steps.map((step, idx) => (
-                        <li key={idx} className="pl-1 leading-7">{step}</li>
-                      ))}
+                    <ol className="flex list-decimal flex-col gap-3 pl-5 text-muted-foreground">
+                      {topic.steps.map((step) => <li key={step} className="pl-1 leading-7">{step}</li>)}
                     </ol>
                   )}
 
                   {topic.example && (
-                    <pre className="rounded-md bg-muted p-4 font-mono text-sm overflow-x-auto text-foreground whitespace-pre">
-                      {topic.example}
-                    </pre>
+                    <pre className="overflow-x-auto rounded-lg border bg-card p-4 text-sm leading-6 text-muted-foreground"><code>{topic.example}</code></pre>
                   )}
 
                   {topic.points && (
@@ -494,12 +499,5 @@ function TutorialContent() {
 }
 
 export default function TutorialPage() {
-  return (
-    <div className="tutorial-page scanlines flex flex-1 items-center justify-center px-4 py-12">
-      <div className="w-full max-w-2xl rounded-lg border bg-card px-6 py-12 text-center shadow-lg sm:px-12">
-        <h1 className="font-display text-4xl text-primary sm:text-5xl">Tutorial</h1>
-        <p className="mt-6 text-2xl text-foreground">Coming soon...</p>
-      </div>
-    </div>
-  );
+  return <TutorialContent />
 }
