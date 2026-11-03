@@ -12,7 +12,7 @@ const whatYouNeed1 = { url: "/images/whatyouneed1.png" };
 const whatYouNeed2 = { url: "/images/whatyouneed2.png" };
 
 // Put your real tutorial video link here.
-const VIDEO_URL = "https://youtube.com";
+const VIDEO_URL = "https://youtu.be/EW4z56b0Lag?si=Btd9Bgr4YfXnAoTM";
 
 function ImageIcon({ className }: { className?: string }) {
   return (
@@ -530,12 +530,5 @@ function TutorialContent() {
 // Public page — shows "Coming Soon" until you're ready
 // ---------------------------------------------------------------------------
 export default function TutorialPage() {
-  return (
-    <div className="tutorial-page scanlines flex flex-1 items-center justify-center px-4 py-12">
-      <div className="w-full max-w-2xl rounded-lg border bg-card px-6 py-12 text-center shadow-lg sm:px-12">
-        <h1 className="font-display text-4xl text-primary sm:text-5xl">Tutorial</h1>
-        <p className="mt-6 text-2xl text-foreground">Coming soon...</p>
-      </div>
-    </div>
-  );
+  return <TutorialContent />
 }
