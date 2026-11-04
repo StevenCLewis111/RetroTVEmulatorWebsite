@@ -49,7 +49,7 @@ const sections: TutorialSection[] = [
           { label: "Your media stays put", text: "Shows, movies, music and commercials can stay on any drive. You choose their folders inside the app; nothing is copied into the install folder." },
           { label: "First setup order", text: "Press M for the Main Menu. Check the System tab and Advanced Settings first, then open Channels to build your first station. This tutorial follows that order." },
         ],
-        images: [{ src: "/images/download.png", alt: "Downloading Retro TV Emulator and unzipping the app folder" }],
+        images: [{ src: "/images/download.png?v=2", alt: "Downloading Retro TV Emulator and unzipping the app folder" }],
       },
       {
         title: "The Boot Process",
