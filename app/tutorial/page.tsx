@@ -1,99 +1,16 @@
-import { useEffect, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
-import { ChevronLeft, ChevronRight, ImageIcon } from "lucide-react";
-import whatYouNeed1 from "@/assets/whatyouneed-1.png.asset.json";
-import whatYouNeed2 from "@/assets/whatyouneed-2.png.asset.json";
+import type { Metadata } from "next";
+import { ImageIcon } from "lucide-react";
+import { NumberedImageCarousel } from "./numbered-image-carousel";
 
-const MAX_NUMBERED_IMAGES = 50;
+const description =
+  "Set up Retro TV Emulator on Windows: TV and music stations, schedules, controls, retro games, DVDs, captions and troubleshooting.";
 
-function numberedSrc(base: string, n: number) {
-  if (n === 0) return base;
-  const dot = base.lastIndexOf(".");
-  return dot === -1 ? `${base}${n}` : `${base.slice(0, dot)}${n}${base.slice(dot)}`;
-}
-
-function imageExists(src: string) {
-  return new Promise<boolean>((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-    img.src = src;
-  });
-}
-
-function NumberedImageCarousel({ src, alt, title }: { src: string; alt: string; title: string }) {
-  const [sources, setSources] = useState<string[]>([src]);
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      const found = [src];
-      for (let n = 1; n <= MAX_NUMBERED_IMAGES; n++) {
-        const next = numberedSrc(src, n);
-        if (!(await imageExists(next))) break;
-        found.push(next);
-      }
-      if (!cancelled) setSources(found);
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [src]);
-
-  const count = sources.length;
-  const go = (step: number) => setIndex((i) => (i + step + count) % count);
-  const current = sources[index % count];
-
-  return (
-    <div className="relative mx-auto w-full">
-      <img
-        key={current}
-        src={current}
-        alt={count > 1 ? `${alt} (${(index % count) + 1} of ${count})` : alt}
-        loading="lazy"
-        className="aspect-video w-full rounded-lg border object-contain shadow-lg"
-      />
-      {count > 1 && (
-        <>
-          <button
-            type="button"
-            onClick={() => go(-1)}
-            aria-label={`Previous ${title} image`}
-            className="absolute left-2 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors duration-200 hover:bg-black/70"
-          >
-            <ChevronLeft className="size-6" aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            onClick={() => go(1)}
-            aria-label={`Next ${title} image`}
-            className="absolute right-2 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors duration-200 hover:bg-black/70"
-          >
-            <ChevronRight className="size-6" aria-hidden="true" />
-          </button>
-          <div className="mt-2 text-center text-sm text-muted-foreground">
-            {(index % count) + 1} / {count}
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
-
-export const Route = createFileRoute("/tutorial")({
-  head: () => ({
-    meta: [
-      { title: "Tutorial | Retro TV Emulator" },
-      { name: "description", content: "Set up Retro TV Emulator on Windows: TV and music stations, schedules, controls, retro games, DVDs, captions and troubleshooting." },
-      { property: "og:title", content: "Tutorial | Retro TV Emulator" },
-      { property: "og:description", content: "Set up Retro TV Emulator on Windows: TV and music stations, schedules, controls, retro games, DVDs, captions and troubleshooting." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: TutorialPage,
-});
+export const metadata: Metadata = {
+  title: "Tutorial | Retro TV Emulator",
+  description,
+  openGraph: { title: "Tutorial | Retro TV Emulator", description, type: "website" },
+  twitter: { card: "summary_large_image" },
+};
 
 type TutorialTopic = {
   title: string;
@@ -123,7 +40,7 @@ const sections: TutorialSection[] = [
           { label: "Your games and media", text: "You need your own ROMs, BIOS files, Emulation Cores, videos and music. You can also use DVDs (if you have an optical drive) or DVD .iso backups. Point the emulator at your RetroArch folder and it will find and organize the ROMs, BIOS and cores for you." },
           { label: "Included tools", text: "VLC, ffmpeg and 7-Zip are included; no separate installation of these tools is needed." },
         ],
-        images: [{ src: whatYouNeed1.url, alt: "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller" }, { src: whatYouNeed2.url, alt: "A second desk setup photo showing the Retro TV Emulator screen with keyboard, mouse and controller" }],
+        images: [{ src: "/images/whatyouneed-1.png", alt: "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller" }, { src: "/images/whatyouneed-2.png", alt: "A second desk setup photo showing the Retro TV Emulator screen with keyboard, mouse and controller" }],
       },
       {
         title: "Installing & First Start",
