@@ -40,7 +40,7 @@ const sections: TutorialSection[] = [
           { label: "Your games and media", text: "You need your own ROMs, BIOS files, Emulation Cores, videos and music. You can also use DVDs (if you have an optical drive) or DVD .iso backups. Point the emulator at your RetroArch folder and it will find and organize the ROMs, BIOS and cores for you." },
           { label: "Included tools", text: "VLC, ffmpeg and 7-Zip are included; no separate installation of these tools is needed." },
         ],
-        images: [{ src: "/images/whatyouneed-1.png", alt: "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller" }, { src: "/images/whatyouneed-2.png", alt: "A second desk setup photo showing the Retro TV Emulator screen with keyboard, mouse and controller" }],
+        images: [{ src: "/images/whatyouneed1.png", alt: "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller" }, { src: "/images/whatyouneed2.png", alt: "A second desk setup photo showing the Retro TV Emulator screen with keyboard, mouse and controller" }],
       },
       {
         title: "Installing & First Start",
