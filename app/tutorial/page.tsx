@@ -248,6 +248,8 @@ const sections: TutorialSection[] = [
           { label: "Audio track", text: "Pick a track with Enter; the channel remembers it for that show." },
           { label: "Loudness gain", text: "A and D make the show louder or quieter in 1 dB steps, from −12 to +12. Your change also teaches Smart Loudness, which uses it for the series’ other episodes." },
         ],
+        images: [{ src: "/images/GainAdjustment.png", alt: "Gain button and Audio Track Button" }],
+
       },
     ],
   },
