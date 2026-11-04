@@ -33,9 +33,9 @@ const sections: TutorialSection[] = [
       { title: "Start Here - Watch or Read Below", video: true },
       {
         title: "What You Need",
-        intro: "Retro TV Emulator turns your own video and music library into scheduled television on a Windows PC. Channel 03 adds retro games and a DVD/media player.",
+        intro: "Retro TV Emulator turns your own video and music library into scheduled television and Visualizer stations on a Windows PC. Channel 03 adds retro games and a DVD/media player. There is also a TV Guide and plenty of theme options and static options",
         points: [
-          { label: "Computer", text: "A 64-bit Windows 10 or 11 PC. The app checks your hardware at every start and adjusts itself, so older 4-core PCs run it too. Linux and Mac can run Windows programs through compatibility tools; how well depends on the tool and your setup." },
+          { label: "Computer", text: "A 64-bit Windows 10 or 11 PC. The app checks your hardware at every start and adjusts itself to run its best on each PC. Linux and Mac can run Windows programs through compatibility tools; how well depends on the tool and your setup." },
           { label: "Keyboard, mouse and controller", text: "A keyboard for the TV and menus, a mouse for the file explorer, and a compatible controller for playing games. A PC remote can be mapped to the TV controls." },
           { label: "Your games and media", text: "Your own videos, music, ROMs, BIOS files and emulator cores. DVDs work from an optical drive or as .iso backups. Point the Games tab at your RetroArch folder and it finds and sorts the ROMs, BIOS and cores for you." },
           { label: "Included tools", text: "VLC, ffmpeg and 7-Zip come with the app; nothing else needs installing." },
