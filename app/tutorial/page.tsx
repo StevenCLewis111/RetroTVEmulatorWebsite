@@ -402,6 +402,7 @@ const sections: TutorialSection[] = [
           { label: "Checking your schedule", text: "After building a station, look here to see what aired, what is on and what comes next." },
           { label: "Idle", text: "After 60 seconds without a key press the guide closes and tunes to the station it was previewing." },
         ],
+	images: [{ src: "/images/TVGuide.png", alt: "Retro TV Emulator Theme tab with colour and opacity sliders" }],
       },
     ],
   },
