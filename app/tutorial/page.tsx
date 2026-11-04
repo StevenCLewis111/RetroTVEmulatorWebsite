@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { ImageIcon } from "lucide-react";
 import { NumberedImageCarousel } from "./numbered-image-carousel";
 
+// Set to true to show the full tutorial, false to show the "Coming soon..." page.
+const SHOW_TUTORIAL = false;
+
 const description =
   "Set up Retro TV Emulator on Windows: TV and music stations, schedules, controls, retro games, DVDs, captions and troubleshooting.";
 
@@ -562,5 +565,5 @@ function TutorialContent() {
   );
 }
 export default function TutorialPage() {
-  return <TutorialContent />;
+  return SHOW_TUTORIAL ? <TutorialContent /> : <TutorialComingSoon />;
 }
