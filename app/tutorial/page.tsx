@@ -135,7 +135,7 @@ const sections: TutorialSection[] = [
           { label: "Actions you can remap", text: "Nav Up, Nav Down, Nav Left, Nav Right, Select, Channel Up, Channel Down, Volume Up, Volume Down, Mute, Menu, Controls Menu and Back/Minimize." },
           { label: "Defaults", text: "W, S, A, D, Enter, Up, Down, Right, Left, N, M, C and Escape. The controls in this tutorial are the default keys." },
         ],
-        images: [{ src: "/images/Remapping.png", alt: "Remote Remapping and Number Remapping page" }],
+        images: [{ src: "/images/Remapping1.png", alt: "Remote Remapping and Number Remapping page" }],
       },
     ],
   },
