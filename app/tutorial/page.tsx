@@ -1,43 +1,32 @@
-import type { Metadata } from 'next'
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight, ImageIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import whatYouNeed1 from "@/assets/whatyouneed-1.png.asset.json";
+import whatYouNeed2 from "@/assets/whatyouneed-2.png.asset.json";
 
-export const dynamic = 'force-static'
+export const Route = createFileRoute("/tutorial")({
+  head: () => ({
+    meta: [
+      { title: "Tutorial | Retro TV Emulator" },
+      { name: "description", content: "Set up Retro TV Emulator on Windows: TV and music stations, schedules, controls, retro games, DVDs, captions and troubleshooting." },
+      { property: "og:title", content: "Tutorial | Retro TV Emulator" },
+      { property: "og:description", content: "Set up Retro TV Emulator on Windows: TV and music stations, schedules, controls, retro games, DVDs, captions and troubleshooting." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: TutorialPage,
+});
 
-export const metadata: Metadata = {
-  title: "Tutorial | Retro TV Emulator",
-  description: "Set up Retro TV Emulator on Windows: TV and music stations, schedules, controls, retro games, DVDs, captions and troubleshooting.",
-}
-
-// Images live in /public/images. Change a path here if a file name differs.
-const whatYouNeed1 = { url: "/images/whatyouneed1.png" };
-const whatYouNeed2 = { url: "/images/whatyouneed2.png" };
-
-// Put your real tutorial video link here.
-const VIDEO_URL = "https://youtu.be/EW4z56b0Lag?si=Btd9Bgr4YfXnAoTM";
-
-function ImageIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-      <circle cx="9" cy="9" r="2" />
-      <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-    </svg>
-  );
-}
+type TutorialImage = { src: string; alt: string };
 
 type TutorialTopic = {
   title: string;
   intro?: string;
   points?: { label: string; text: string }[];
-  images?: { src: string; alt: string }[];
+  images?: TutorialImage[];
+  carousel?: boolean;
   video?: boolean;
   steps?: string[];
   example?: string;
@@ -45,6 +34,31 @@ type TutorialTopic = {
 
 type TutorialSection = { title: string; standalone?: boolean; topics: TutorialTopic[] };
 
+export function orderTutorialImages(images: TutorialImage[]) {
+  return [...images].sort((a, b) => 
+    a.src.split("/").at(-1)?.localeCompare(b.src.split("/").at(-1) ?? "", undefined, { numeric: true }) ?? 0
+  );
+}
+
+export function TutorialImageCarousel({ images, title }: { images: TutorialImage[]; title: string }) {
+  const ordered = orderTutorialImages(images);
+  const [index, setIndex] = useState(0);
+  const image = ordered[index] ?? ordered[0];
+  if (!image) return null;
+
+  return (
+    <div className="flex items-center justify-center gap-2" role="group" aria-label={`${title} images`}>
+      <Button variant="ghost" size="icon" className="shrink-0 text-primary" aria-label={`Previous ${title} image`} title="Previous image" disabled={index === 0} onClick={() => setIndex((current) => current - 1)}>
+        <ChevronLeft aria-hidden="true" />
+      </Button>
+      <img src={image.src} alt={image.alt} width={1280} height={720} loading="lazy" className="aspect-video min-w-0 w-[calc(100%-5.5rem)] rounded-lg border object-contain shadow-lg sm:w-[calc(50%-0.5rem)]" />
+      <Button variant="ghost" size="icon" className="shrink-0 text-primary" aria-label={`Next ${title} image`} title="Next image" disabled={index >= ordered.length - 1} onClick={() => setIndex((current) => current + 1)}>
+        <ChevronRight aria-hidden="true" />
+      </Button>
+      <span className="sr-only" aria-live="polite">Image {index + 1} of {ordered.length}</span>
+    </div>
+  );
+}
 const section1: TutorialSection = {
   title: "Starting the Program",
   standalone: true,
@@ -59,10 +73,7 @@ const section1: TutorialSection = {
         { label: "Your games and media", text: "You need your own ROMs, BIOS files, Emulation Cores, videos and music. You can also use DVDs (if you have an optical drive) or DVD .iso backups. Point the emulator at your RetroArch folder and it will find and organize the ROMs, BIOS and cores for you." },
         { label: "Included tools", text: "VLC, ffmpeg and 7-Zip are included; no separate installation of these tools is needed." },
       ],
-      images: [
-        { src: whatYouNeed1.url, alt: "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller" },
-        { src: whatYouNeed2.url, alt: "A second desk setup photo showing the Retro TV Emulator screen with keyboard, mouse and controller" }
-      ],
+      images: [{ src: whatYouNeed1.url, alt: "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller" }, { src: whatYouNeed2.url, alt: "A second desk setup photo showing the Retro TV Emulator screen with keyboard, mouse and controller" }],
     },
     {
       title: "Installing & First Start",
@@ -73,6 +84,12 @@ const section1: TutorialSection = {
         { label: "Media location", text: "TV shows, movies, music and commercials can stay on any drive. Select their folders in the app rather than moving them into the installation folder." },
       ],
     },
+  ],
+};
+const section1Cont: TutorialSection = {
+  title: "Starting the Program (Continued)",
+  standalone: true,
+  topics: [
     {
       title: "The Boot Process",
       intro: "Launch Retro TV Emulator on your Windows computer. During startup, it prepares your media drives, checks your hardware, and loads cached TV Guide and menu information before opening the television experience.",
@@ -85,6 +102,7 @@ const section1: TutorialSection = {
     },
     {
       title: "The Controls Menu",
+      carousel: true,
       intro: "The Controls Menu appears on startup by default and shows the controls for the area you are using. Press C at any time to show or hide it. You can turn off its startup appearance in the System Tab.",
       points: [
         { label: "Watching TV", text: "Up/Down changes channels, Left/Right adjusts volume, and N toggles mute. M opens or closes the Main Menu; C opens or closes Controls. Escape minimizes the window while watching TV." },
@@ -92,11 +110,15 @@ const section1: TutorialSection = {
         { label: "Settings menus", text: "W/S moves up or down; A/D moves sideways or changes a value. Enter selects or confirms. Escape goes back to the previous menu. Escape’s action depends on where you are." },
         { label: "Channel dial", text: "Channel 03 is Games/DVD, Channel 04 is the TV Guide, and Channels 05–44 are your 40 TV or music stations. Disabled channels are skipped when surfing." },
       ],
-      images: [{ src: "/images/tutorial-controls.png", alt: "Retro TV Emulator control menu showing keyboard controls" }],
+      images: [
+        { src: "/images/tutorial-controls.png", alt: "Retro TV Emulator control menu showing default keyboard controls" },
+        { src: "/images/tutorial-controls1.png", alt: "Retro TV Emulator control menu secondary configuration page" },
+        { src: "/images/tutorial-controls2.png", alt: "Retro TV Emulator control menu console gaming page" },
+        { src: "/images/tutorial-controls3.png", alt: "Retro TV Emulator control menu media player page" }
+      ],
     },
   ],
 };
-
 const section2: TutorialSection = {
   title: "System Settings & Advanced Settings",
   topics: [
@@ -129,7 +151,6 @@ const section2: TutorialSection = {
     },
   ],
 };
-
 const section3: TutorialSection = {
   title: "Channel Settings",
   topics: [
@@ -154,6 +175,11 @@ const section3: TutorialSection = {
         "Optionally add holiday programming and a corner watermark. Let the first media scans finish, then check Channel 04 to review your schedule.",
       ],
     },
+  ],
+};
+const section3Media: TutorialSection = {
+  title: "Channel Settings (Media Library)",
+  topics: [
     {
       title: "Organize Your Media & Supported Files",
       intro: "Keep each show in its own folder, with season folders beneath it. Clear folder and episode names help the app identify shows and build the guide.",
@@ -166,9 +192,8 @@ const section3: TutorialSection = {
     },
   ],
 };
-
 const section3Cont: TutorialSection = {
-  title: "Channel Settings (Continued)",
+  title: "Channel Settings (Scheduling Options)",
   topics: [
     {
       title: "Schedule TV Stations",
@@ -186,6 +211,11 @@ const section3Cont: TutorialSection = {
         { src: "/images/tutorial-file-picker.png", alt: "Retro TV Emulator video file selection screen" },
       ],
     },
+  ],
+};
+const section3Extras: TutorialSection = {
+  title: "Channel Settings (Bumpers, Scans & Visualizers)",
+  topics: [
     {
       title: "Commercials & Station Bumpers",
       intro: "Enable commercials for a TV station and select the folder containing your commercial clips. With commercials enabled, assign intros, outros, or station bumpers to create transitions into and out of breaks. These can include your own “we will be right back” and “we are returning” clips with fade-in and fade-out transitions.",
@@ -226,7 +256,6 @@ const section3Cont: TutorialSection = {
     },
   ],
 };
-
 const section4: TutorialSection = {
   title: "Channel Effects & CRT Appearance",
   topics: [
@@ -244,7 +273,6 @@ const section4: TutorialSection = {
     },
   ],
 };
-
 const section5: TutorialSection = {
   title: "Games, DVD & Media Player Settings",
   topics: [
@@ -290,7 +318,6 @@ const section5: TutorialSection = {
     },
   ],
 };
-
 const section5Cont: TutorialSection = {
   title: "Games, DVD & Media Player Settings (Continued)",
   topics: [
@@ -353,7 +380,6 @@ const section7: TutorialSection = {
     },
   ],
 };
-
 const section8: TutorialSection = {
   title: "Extras",
   topics: [
@@ -426,12 +452,19 @@ const section8: TutorialSection = {
   ],
 };
 
-const allSections = [section1, section2, section3, section3Cont, section4, section5, section5Cont, section6, section7, section8];
+const allSections = [section1, section1Cont, section2, section3, section3Media, section3Cont, section3Extras, section4, section5, section5Cont, section6, section7, section8];
+function TutorialPage() {
+  return (
+    <div className="tutorial-page scanlines flex flex-1 items-center justify-center px-4 py-12">
+      <div className="w-full max-w-2xl rounded-lg border bg-card px-6 py-12 text-center shadow-lg sm:px-12">
+        <h1 className="font-display text-4xl text-primary sm:text-5xl">Tutorial</h1>
+        <p className="mt-6 text-2xl text-foreground">Coming soon...</p>
+      </div>
+    </div>
+  );
+}
 
-// ---------------------------------------------------------------------------
-// Full tutorial content (kept for when you're ready to publish it)
-// ---------------------------------------------------------------------------
-function TutorialContent() {
+function TutorialPageContent() {
   return (
     <div className="tutorial-page scanlines flex-1">
       <div className="mx-auto w-full max-w-3xl px-4 py-12">
@@ -447,66 +480,39 @@ function TutorialContent() {
                   ) : (
                     <h3 className="text-center font-display text-2xl text-primary">{topic.title}</h3>
                   )}
-
                   {topic.video ? (
-                    <a 
-                      href={VIDEO_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200"
-                    >
-                      <img 
-                        src="/images/default.png" 
-                        alt="Retro TV Emulator Video Tutorial"
-                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-200"
-                        loading="lazy"
-                      />
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200">
+                      <img src="/images/default.png" alt="Retro TV Emulator Video Tutorial" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
                       <div className="relative z-10 size-16 rounded-full bg-red-600 flex items-center justify-center shadow-xl group-hover:bg-red-700 transition-colors duration-200">
-                        <svg className="size-8 text-white fill-current ml-1" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
+                        <svg className="size-8 text-white fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                       </div>
                       <div className="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">
-                        <img 
-                          src="/images/youtube-logo.png" 
-                          alt="YouTube Logo" 
-                          className="h-7 w-auto object-contain"
-                        />
+                        <img src="/images/youtube-logo.png" alt="YouTube Logo" className="h-7 w-auto object-contain" />
                       </div>
                     </a>
+                  ) : topic.images && topic.carousel ? (
+                    <TutorialImageCarousel images={topic.images} title={topic.title} />
                   ) : topic.images ? (
                     <div className="flex flex-wrap justify-center gap-4">
                       {topic.images.map((image) => (
-                        <img
-                          key={image.src}
-                          src={image.src}
-                          alt={image.alt}
-                          width={1280}
-                          height={720}
-                          loading="lazy"
-                          className="aspect-video w-full rounded-lg border object-contain shadow-lg sm:w-[calc(50%-0.5rem)]"
-                        />
+                        <img key={image.src} src={image.src} alt={image.alt} loading="lazy" className="aspect-video w-full rounded-lg border object-contain shadow-lg sm:w-[calc(50%-0.5rem)]" />
                       ))}
                     </div>
                   ) : (
-                    <div className="scanlines mx-auto flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground sm:w-[calc(50%-0.5rem)]">
-                      <ImageIcon className="size-8 shrink-0" />
-                      <span>Tutorial image placeholder</span>
+                    <div className={`scanlines mx-auto flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground ${topic.video ? "" : "sm:w-[calc(50%-0.5rem)]"}`}>
+                      <ImageIcon className="size-8 shrink-0" aria-hidden="true" />
+                      <span>{topic.video ? "Video placeholder" : "Tutorial image placeholder"}</span>
                     </div>
                   )}
-
                   {topic.intro && <p className="leading-7 text-muted-foreground">{topic.intro}</p>}
-                  
                   {topic.steps && (
                     <ol className="flex list-decimal flex-col gap-3 pl-5 text-muted-foreground">
                       {topic.steps.map((step) => <li key={step} className="pl-1 leading-7">{step}</li>)}
                     </ol>
                   )}
-
                   {topic.example && (
                     <pre className="overflow-x-auto rounded-lg border bg-card p-4 text-sm leading-6 text-muted-foreground"><code>{topic.example}</code></pre>
                   )}
-
                   {topic.points && (
                     <ul className="flex list-disc flex-col gap-3 pl-5 text-muted-foreground">
                       {topic.points.map((point) => (
@@ -525,17 +531,6 @@ function TutorialContent() {
     </div>
   );
 }
-
-// ---------------------------------------------------------------------------
-// Public page — shows "Coming Soon" until you're ready
-// ---------------------------------------------------------------------------
 export default function TutorialPage() {
-  return (
-    <div className="tutorial-page scanlines flex flex-1 items-center justify-center px-4 py-12">
-      <div className="w-full max-w-2xl rounded-lg border bg-card px-6 py-12 text-center shadow-lg sm:px-12">
-        <h1 className="font-display text-4xl text-primary sm:text-5xl">Tutorial</h1>
-        <p className="mt-6 text-2xl text-foreground">Coming soon...</p>
-      </div>
-    </div>
-  );
+  return <TutorialPageContent />
 }
