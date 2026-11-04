@@ -239,8 +239,7 @@ const sections: TutorialSection[] = [
       },
       {
         title: "Watermark",
-        intro: "Turn Watermark on and use Add to pick an image with the mouse; it shows in the corner of that station, like a TV network logo. Keep it subtle: a logo that never moves adds burn-in risk.", },
-        ],
+        intro: "Turn Watermark on and use Add to pick an image with the mouse; it shows in the corner of that station, like a TV network logo. Keep it subtle: a logo that never moves adds burn-in risk.",
         images: [{ src: "/images/Watermark.png", alt: "Watermark on screen" }],
       },
       {
