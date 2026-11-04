@@ -18,6 +18,7 @@ type TutorialTopic = {
   points?: { label: string; text: string }[];
   images?: { src: string; alt: string }[];
   carousel?: boolean;
+  stretchImages?: boolean;
   video?: boolean;
   steps?: string[];
   example?: string;
@@ -44,6 +45,7 @@ const sections: TutorialSection[] = [
       },
       {
         title: "Installing & First Start",
+        stretchImages: true,
         intro: "Unzip the app folder somewhere such as your Desktop, keep everything in it together, and run Retro TV Emulator.exe. Do not move or rename anything inside _internal.",
         points: [
           { label: "Your media stays put", text: "Shows, movies, music and commercials can stay on any drive. You choose their folders inside the app; nothing is copied into the install folder." },
@@ -509,7 +511,7 @@ function TutorialContent() {
                   ) : topic.images ? (
                     <div className={`flex flex-wrap justify-center gap-4 ${topic.images.length > 1 ? "sm:-mx-10" : ""}`}>
                       {topic.images.map((image) => (
-                        <img key={image.src} src={image.src} alt={image.alt} loading="lazy" className={`aspect-video w-full rounded-lg border object-contain shadow-lg ${topic.images!.length > 1 ? "sm:w-[calc(50%-0.5rem)]" : "sm:w-[70%]"}`} />
+                        <img key={image.src} src={image.src} alt={image.alt} loading="lazy" className={`aspect-video w-full rounded-lg border ${topic.stretchImages ? "object-fill" : "object-contain"} shadow-lg ${topic.images!.length > 1 ? "sm:w-[calc(50%-0.5rem)]" : "sm:w-[70%]"}`} />
                       ))}
                     </div>
                   ) : section.noPlaceholder ? null : (
