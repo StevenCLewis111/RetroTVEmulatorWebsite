@@ -19,6 +19,7 @@ type TutorialTopic = {
   images?: { src: string; alt: string }[];
   carousel?: boolean;
   stretchImages?: boolean;
+  noPlaceholder?: boolean;
   video?: boolean;
   steps?: string[];
   example?: string;
@@ -135,7 +136,7 @@ const sections: TutorialSection[] = [
           { label: "Actions you can remap", text: "Nav Up, Nav Down, Nav Left, Nav Right, Select, Channel Up, Channel Down, Volume Up, Volume Down, Mute, Menu, Controls Menu and Back/Minimize." },
           { label: "Defaults", text: "W, S, A, D, Enter, Up, Down, Right, Left, N, M, C and Escape. The controls in this tutorial are the default keys." },
         ],
-        images: [{ src: "/images/Remapping1.png", alt: "Remote Remapping and Number Remapping page" }],
+        images: [{ src: "/images/Remapping.png", alt: "Remote Remapping and Number Remapping page" }],
       },
     ],
   },
@@ -162,6 +163,7 @@ const sections: TutorialSection[] = [
       },
       {
         title: "Organize Your Media & Supported Files",
+        noPlaceholder: true,
         intro: "Keep each show in its own folder with season folders inside it. Clear folder and file names help the app recognise shows and fill in the guide.",
         example: "TV Shows/\n  Show Name/\n    Season 1/\n      Show Name S01E01.mkv\n      Show Name S01E02.mkv\n    Season 2/\n      Show Name S02E01.mkv",
         points: [
@@ -173,6 +175,7 @@ const sections: TutorialSection[] = [
       },
       {
         title: "Media Scans",
+        noPlaceholder: true,
         intro: "When you add media, the app scans each file once and saves the results in its media library, so the TV Guide, the station and a restart all use the same answers.",
         points: [
           { label: "What is scanned", text: "Each file’s length, its picture box (the real picture inside any black bars) and its loudness, in that order. Shows airing now come first, then upcoming commercials, then the next few shows, then everything further out." },
@@ -317,6 +320,7 @@ const sections: TutorialSection[] = [
       },
       {
         title: "Supported Consoles & Files",
+        noPlaceholder: true,
         points: [
           { label: "Consoles", text: "Game Boy, Game Boy Color, Game Boy Advance, NES, SNES, Genesis, 32X, Master System, Game Gear, Nintendo 64, PlayStation, Atari 2600, Neo Geo Pocket and Neo Geo Pocket Color. Each needs a libretro .dll core." },
           { label: "Cartridge formats", text: "GB .gb; GBC .gbc/.gb; GBA .gba; NES .nes; SNES .smc/.sfc; Genesis .md/.gen/.bin/.smd; 32X .32x/.bin/.smd/.md; Master System .sms; Game Gear .gg." },
@@ -325,6 +329,7 @@ const sections: TutorialSection[] = [
       },
       {
         title: "Playing Games",
+        noPlaceholder: true,
         points: [
           { label: "Game menus", text: "Keyboard: W/A/S/D move, Enter selects, Escape goes back. Controller: the D-pad moves, A selects, B goes back. The legend at the bottom of each game screen shows both." },
           { label: "Playing", text: "Launched games are played with a controller only." },
@@ -350,6 +355,7 @@ const sections: TutorialSection[] = [
       },
       {
         title: "Screen Modes",
+        noPlaceholder: true,
         intro: "The buttons along the top decide how each show fills your screen. They apply to Channels 05–44; games and the DVD player have their own.",
         points: [
           { label: "Normal Mode", text: "Keeps the picture’s shape, with bars where it does not fill the screen (black or grey, set in the Theme tab)." },
@@ -360,6 +366,7 @@ const sections: TutorialSection[] = [
       },
       {
         title: "Picture Box in Normal Mode",
+        noPlaceholder: true,
         intro: "Many files have black bars recorded into the video itself: bars top and bottom, at the sides, or all the way round (a picture inside a box). The picture-box scan finds the real picture inside those bars. In Normal Mode the app cuts the recorded bars away and fits the real picture to your screen, so an old 4:3 show stored in a widescreen file does not end up as a small box in the middle. Each file is scanned once; until its scan lands it plays with its full frame.",
       },
     ],
@@ -402,6 +409,7 @@ const sections: TutorialSection[] = [
     topics: [
       {
         title: "Using the DVD Player",
+        noPlaceholder: true,
         intro: "Choose DVD on Channel 03 to play movie DVDs from your optical drive, DVD .iso backups, or video files. No core, BIOS or save profile is needed. Movie files and .iso files can go in main/roms/DVD/ inside _internal. Movie DVD menus work; interactive DVD games are not supported.",
       },
       {
@@ -419,6 +427,7 @@ const sections: TutorialSection[] = [
       },
       {
         title: "DVD Controls",
+        noPlaceholder: true,
         points: [
           { label: "Keyboard", text: "Play pauses and plays. Tap Rewind or Fast Forward to skip, hold to seek. Backspace returns to the disc’s main menu. W/A/S/D navigate disc menus and Yes/No popups, Enter confirms. Escape quits the DVD." },
           { label: "Controller", text: "Down pauses and plays. Tap Left or Right to skip, hold to seek. The D-pad navigates, A selects, B goes back, and Y returns to the disc’s main menu. Hold Start and Select to quit the DVD." },
@@ -514,7 +523,7 @@ function TutorialContent() {
                         <img key={image.src} src={image.src} alt={image.alt} loading="lazy" className={`aspect-video w-full rounded-lg border ${topic.stretchImages ? "object-fill" : "object-contain"} shadow-lg ${topic.images!.length > 1 ? "sm:w-[calc(50%-0.5rem)]" : "sm:w-[70%]"}`} />
                       ))}
                     </div>
-                  ) : section.noPlaceholder ? null : (
+                  ) : section.noPlaceholder || topic.noPlaceholder ? null : (
                     <div className={`scanlines mx-auto flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground ${topic.video ? "" : "sm:w-[calc(50%-0.5rem)]"}`}>
                       <ImageIcon className="size-8 shrink-0" aria-hidden="true" />
                       <span>{topic.video ? "Video placeholder" : "Tutorial image placeholder"}</span>
