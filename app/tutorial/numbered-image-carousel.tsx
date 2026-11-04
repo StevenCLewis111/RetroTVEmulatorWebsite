@@ -44,37 +44,30 @@ export function NumberedImageCarousel({ src, alt, title }: { src: string; alt: s
   const go = (step: number) => setIndex((i) => (i + step + count) % count);
   const current = sources[index % count];
 
+  const arrowClass =
+    "flex size-10 shrink-0 items-center justify-center rounded-full border bg-card text-primary shadow-lg transition-colors duration-200 hover:border-primary disabled:invisible";
+
   return (
-    <div className="relative mx-auto w-full">
-      <img
-        key={current}
-        src={current}
-        alt={count > 1 ? `${alt} (${(index % count) + 1} of ${count})` : alt}
-        loading="lazy"
-        className="aspect-video w-full rounded-lg border object-contain shadow-lg"
-      />
+    <div className="flex flex-col items-center gap-2">
+      <div className="flex w-full items-center justify-center gap-3">
+        <button type="button" onClick={() => go(-1)} disabled={count < 2} aria-label={`Previous ${title} image`} className={arrowClass}>
+          <ChevronLeft className="size-6" aria-hidden="true" />
+        </button>
+        <img
+          key={current}
+          src={current}
+          alt={count > 1 ? `${alt} (${(index % count) + 1} of ${count})` : alt}
+          loading="lazy"
+          className="aspect-video min-w-0 flex-1 rounded-lg border object-contain shadow-lg sm:w-[calc(50%-0.5rem)] sm:flex-none"
+        />
+        <button type="button" onClick={() => go(1)} disabled={count < 2} aria-label={`Next ${title} image`} className={arrowClass}>
+          <ChevronRight className="size-6" aria-hidden="true" />
+        </button>
+      </div>
       {count > 1 && (
-        <>
-          <button
-            type="button"
-            onClick={() => go(-1)}
-            aria-label={`Previous ${title} image`}
-            className="absolute left-2 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors duration-200 hover:bg-black/70"
-          >
-            <ChevronLeft className="size-6" aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            onClick={() => go(1)}
-            aria-label={`Next ${title} image`}
-            className="absolute right-2 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors duration-200 hover:bg-black/70"
-          >
-            <ChevronRight className="size-6" aria-hidden="true" />
-          </button>
-          <div className="mt-2 text-center text-sm text-muted-foreground">
-            {(index % count) + 1} / {count}
-          </div>
-        </>
+        <div className="text-center text-sm text-muted-foreground">
+          {(index % count) + 1} / {count}
+        </div>
       )}
     </div>
   );
