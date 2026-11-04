@@ -68,7 +68,6 @@ const sections: TutorialSection[] = [
     title: "The Controls Menu",
     topics: [
       {
-        title: "Opening the Controls Menu",
         carousel: true,
         intro: "The Controls Menu shows every key and controller button as a picture, one page per area. It opens at start unless you turn Controls Menu (Nav Info) off in the System tab. Press C or Escape to close it and A or D to turn the pages; the line at the bottom of every page reminds you.",
         points: [
@@ -125,7 +124,7 @@ const sections: TutorialSection[] = [
           { label: "Custom Shell Launcher", text: "Starts the emulator in place of the Windows desktop when the PC turns on, for a PC used only as a TV. With it on, the System tab also shows Turn Off Computer, which shuts Windows down." },
           { label: "Server Mode", text: "Greyed out; not available in this version." },
         ],
-        images: [{ src: "/images/Advanced_Settings.png", alt: "Advanced Settings page" }],
+        images: [{ src: "/images/AdvancedSettings.png", alt: "Advanced Settings page" }],
       },
       {
         title: "Remote Remapping",
