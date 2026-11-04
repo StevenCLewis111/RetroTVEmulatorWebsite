@@ -23,7 +23,7 @@ type TutorialTopic = {
   example?: string;
 };
 
-type TutorialSection = { title: string; standalone?: boolean; topics: TutorialTopic[] };
+type TutorialSection = { title: string; standalone?: boolean; noPlaceholder?: boolean; topics: TutorialTopic[] };
 
 const sections: TutorialSection[] = [
   {
@@ -426,6 +426,7 @@ const sections: TutorialSection[] = [
   },
   {
     title: "Extras",
+    noPlaceholder: true,
     topics: [
       {
         title: "Captions",
@@ -511,7 +512,7 @@ function TutorialContent() {
                         <img key={image.src} src={image.src} alt={image.alt} loading="lazy" className={`aspect-video w-full rounded-lg border object-contain shadow-lg ${topic.images!.length > 1 ? "sm:w-[calc(50%-0.5rem)]" : "sm:w-[70%]"}`} />
                       ))}
                     </div>
-                  ) : (
+                  ) : section.noPlaceholder ? null : (
                     <div className={`scanlines mx-auto flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground ${topic.video ? "" : "sm:w-[calc(50%-0.5rem)]"}`}>
                       <ImageIcon className="size-8 shrink-0" aria-hidden="true" />
                       <span>{topic.video ? "Video placeholder" : "Tutorial image placeholder"}</span>
