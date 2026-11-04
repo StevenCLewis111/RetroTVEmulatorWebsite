@@ -506,9 +506,9 @@ function TutorialContent() {
                   ) : topic.images && (topic.carousel || topic.images.length > 2) ? (
                     <NumberedImageCarousel images={topic.images} title={topic.title} discover={topic.carousel} />
                   ) : topic.images ? (
-                    <div className="flex flex-wrap justify-center gap-4">
+                    <div className={`flex flex-wrap justify-center gap-4 ${topic.images.length > 1 ? "sm:-mx-10" : ""}`}>
                       {topic.images.map((image) => (
-                        <img key={image.src} src={image.src} alt={image.alt} loading="lazy" className="aspect-video w-full rounded-lg border object-contain shadow-lg sm:w-[calc(50%-0.5rem)]" />
+                        <img key={image.src} src={image.src} alt={image.alt} loading="lazy" className={`aspect-video w-full rounded-lg border object-contain shadow-lg ${topic.images!.length > 1 ? "sm:w-[calc(50%-0.5rem)]" : "sm:w-[70%]"}`} />
                       ))}
                     </div>
                   ) : (

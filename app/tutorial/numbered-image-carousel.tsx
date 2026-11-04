@@ -70,7 +70,7 @@ export function NumberedImageCarousel({
     <div className="flex flex-col items-center gap-2">
       {/* Same width as every other tutorial image; arrows sit over the edges on
           phones and just outside the image on wider screens. */}
-      <div className="relative w-full sm:w-[calc(50%-0.5rem)]">
+      <div className="relative w-full sm:w-[70%]">
         <img
           key={current.src}
           src={current.src}
