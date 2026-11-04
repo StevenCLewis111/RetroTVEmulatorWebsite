@@ -5,6 +5,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const MAX_NUMBERED_IMAGES = 50;
 
+type Slide = { src: string; alt: string };
+
 function numberedSrc(base: string, n: number) {
   if (n === 0) return base;
   const dot = base.lastIndexOf(".");
@@ -20,53 +22,72 @@ function imageExists(src: string) {
   });
 }
 
-export function NumberedImageCarousel({ src, alt, title }: { src: string; alt: string; title: string }) {
-  const [sources, setSources] = useState<string[]>([src]);
+/**
+ * images: the slides to show.
+ * discover: when true, only images[0] is used as a base name and the numbered
+ * files next to it (name.png, name1.png, name2.png ...) are found automatically.
+ */
+export function NumberedImageCarousel({
+  images,
+  title,
+  discover = false,
+}: {
+  images: Slide[];
+  title: string;
+  discover?: boolean;
+}) {
+  const [slides, setSlides] = useState<Slide[]>(discover ? [images[0]] : images);
   const [index, setIndex] = useState(0);
+  const baseSrc = images[0].src;
+  const baseAlt = images[0].alt;
 
   useEffect(() => {
+    if (!discover) return;
     let cancelled = false;
     (async () => {
-      const found = [src];
+      const found: Slide[] = [{ src: baseSrc, alt: baseAlt }];
       for (let n = 1; n <= MAX_NUMBERED_IMAGES; n++) {
-        const next = numberedSrc(src, n);
+        const next = numberedSrc(baseSrc, n);
         if (!(await imageExists(next))) break;
-        found.push(next);
+        found.push({ src: next, alt: baseAlt });
       }
-      if (!cancelled) setSources(found);
+      if (!cancelled) setSlides(found);
     })();
     return () => {
       cancelled = true;
     };
-  }, [src]);
+  }, [discover, baseSrc, baseAlt]);
 
-  const count = sources.length;
+  const count = slides.length;
+  const position = index % count;
   const go = (step: number) => setIndex((i) => (i + step + count) % count);
-  const current = sources[index % count];
+  const current = slides[position];
 
   const arrowClass =
-    "flex size-10 shrink-0 items-center justify-center rounded-full border bg-card text-primary shadow-lg transition-colors duration-200 hover:border-primary disabled:invisible";
+    "absolute top-1/2 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border bg-card/90 text-primary shadow-lg transition-colors duration-200 hover:border-primary disabled:invisible";
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <div className="flex w-full items-center justify-center gap-3">
-        <button type="button" onClick={() => go(-1)} disabled={count < 2} aria-label={`Previous ${title} image`} className={arrowClass}>
+      {/* Same width as every other tutorial image; arrows sit over the edges on
+          phones and just outside the image on wider screens. */}
+      <div className="relative w-full sm:w-[calc(50%-0.5rem)]">
+        <img
+          key={current.src}
+          src={current.src}
+          alt={count > 1 ? `${current.alt} (${position + 1} of ${count})` : current.alt}
+          loading="lazy"
+          className="aspect-video w-full rounded-lg border object-contain shadow-lg"
+        />
+        <button type="button" onClick={() => go(-1)} disabled={count < 2} aria-label={`Previous ${title} image`} className={`${arrowClass} left-2 sm:-left-14`}>
           <ChevronLeft className="size-6" aria-hidden="true" />
         </button>
-        <img
-          key={current}
-          src={current}
-          alt={count > 1 ? `${alt} (${(index % count) + 1} of ${count})` : alt}
-          loading="lazy"
-          className="aspect-video min-w-0 flex-1 rounded-lg border object-contain shadow-lg sm:w-[calc(50%-0.5rem)] sm:flex-none"
-        />
-        <button type="button" onClick={() => go(1)} disabled={count < 2} aria-label={`Next ${title} image`} className={arrowClass}>
+        <button type="button" onClick={() => go(1)} disabled={count < 2} aria-label={`Next ${title} image`} className={`${arrowClass} right-2 sm:-right-14`}>
           <ChevronRight className="size-6" aria-hidden="true" />
         </button>
       </div>
       {count > 1 && (
         <div className="text-center text-sm text-muted-foreground">
-          {(index % count) + 1} / {count}
+          {position + 1} / {count}
         </div>
       )}
     </div>

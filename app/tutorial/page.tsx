@@ -111,7 +111,7 @@ const sections: TutorialSection[] = [
           { label: "Reset All Settings", text: "Puts every setting back to its default after asking you to confirm. Your media files and the saved scan results are not deleted." },
           { label: "Exit Program", text: "Closes the app." },
         ],
-        images: [{ src: "/images/tutorial-system.png", alt: "Retro TV Emulator System menu" }],
+        images: [{ src: "/images/SystemTab.png", alt: "Retro TV Emulator System tab with the on/off switches" }],
       },
       {
         title: "Advanced Settings",
@@ -124,6 +124,7 @@ const sections: TutorialSection[] = [
           { label: "Custom Shell Launcher", text: "Starts the emulator in place of the Windows desktop when the PC turns on, for a PC used only as a TV. With it on, the System tab also shows Turn Off Computer, which shuts Windows down." },
           { label: "Server Mode", text: "Greyed out; not available in this version." },
         ],
+        images: [{ src: "/images/Advanced_Settings.png", alt: "Advanced Settings page" }],
       },
       {
         title: "Remote Remapping",
@@ -132,6 +133,7 @@ const sections: TutorialSection[] = [
           { label: "Actions you can remap", text: "Nav Up, Nav Down, Nav Left, Nav Right, Select, Channel Up, Channel Down, Volume Up, Volume Down, Mute, Menu, Controls Menu and Back/Minimize." },
           { label: "Defaults", text: "W, S, A, D, Enter, Up, Down, Right, Left, N, M, C and Escape. The controls in this tutorial are the default keys." },
         ],
+        images: [{ src: "/images/Remapping.png", alt: "Remote Remapping and Number Remapping page" }],
       },
     ],
   },
@@ -141,7 +143,7 @@ const sections: TutorialSection[] = [
       {
         title: "The Channel List",
         intro: "Open the Channels tab to see Channels 05–44 over two pages; the arrow at the bottom right turns the page. A green dot means the channel is on, red means off. Select a channel to open its settings, or Settings (bottom left) for the effects shared by all stations.",
-        images: [{ src: "/images/tutorial-channels.png", alt: "Retro TV Emulator Channels menu" }],
+        images: [{ src: "/images/ChannelsTab.png", alt: "Retro TV Emulator Channels tab showing Channels 05 to 24" }],
       },
       {
         title: "Channel Settings (Effects)",
@@ -154,6 +156,7 @@ const sections: TutorialSection[] = [
           { label: "Reception Lines", text: "Bands of interference that roll down the picture now and then." },
           { label: "Scan Lines", text: "Thin horizontal lines across the picture like a CRT. Not available in Lite mode." },
         ],
+        images: [{ src: "/images/ChannelsTabSettings.png", alt: "Channels Settings page with the CRT effect switches" }],
       },
       {
         title: "Organize Your Media & Supported Files",
@@ -200,8 +203,10 @@ const sections: TutorialSection[] = [
           { label: "Clear Media", text: "Removes all of this channel’s media from its schedule after asking you to confirm. Your files are not deleted." },
         ],
         images: [
-          { src: "/images/tutorial-schedule.png", alt: "Retro TV Emulator channel scheduling settings" },
-          { src: "/images/tutorial-file-picker.png", alt: "Retro TV Emulator file explorer choosing video folders" },
+          { src: "/images/Scheduling.png", alt: "Channel scheduling settings with a 24-hour schedule" },
+          { src: "/images/scheduling1.png", alt: "Channel scheduling settings with 8-hour blocks" },
+          { src: "/images/Scheduling2.png", alt: "Channel scheduling settings with 4-hour blocks" },
+          { src: "/images/Scheduling3.png", alt: "File explorer choosing video folders for a schedule block" },
         ],
       },
       {
@@ -214,6 +219,7 @@ const sections: TutorialSection[] = [
           { label: "Mode", text: "Interrupt Show puts breaks inside a show at the half-hour marks, at least five minutes apart and no more than two in a half hour. End of Show plays them between shows." },
           { label: "Clear Media", text: "Removes this channel’s commercial clips." },
         ],
+        images: [{ src: "/images/Commercials.png", alt: "Channel commercials page with Commercials, Fade-In and Fade-Out buttons" }],
       },
       {
         title: "Holiday Schedules",
@@ -223,6 +229,7 @@ const sections: TutorialSection[] = [
           { label: "Force", text: "Plays that holiday’s schedule now, whatever the date, until you turn it off." },
           { label: "Clear Media", text: "Removes this channel’s holiday media." },
         ],
+        images: [{ src: "/images/Holidays.png", alt: "Channel holiday schedule page with Force switches" }],
       },
       {
         title: "Watermark",
@@ -254,7 +261,7 @@ const sections: TutorialSection[] = [
           { label: "Clear Media", text: "Removes the station’s music from its schedule." },
           { label: "On screen", text: "The song’s title shows in the top-left corner and disappears after 60 seconds." },
         ],
-        images: [{ src: "/images/tutorial-music.png", alt: "Retro TV Emulator music visualizer channel settings" }],
+        images: [{ src: "/images/VisualizerSchedulingmenu.png", alt: "Music station settings with visualizer style and reactive strength" }],
       },
     ],
   },
@@ -272,7 +279,7 @@ const sections: TutorialSection[] = [
           { label: "Game Music", text: "Plays music while you browse the game menus." },
           { label: "Set Music", text: "Picks your own music track for the game menus; Add opens the file explorer." },
         ],
-        images: [{ src: "/images/tutorial-games.png", alt: "Retro TV Emulator Games menu" }],
+        images: [{ src: "/images/GamesTab.png", alt: "Retro TV Emulator Games tab showing the console tiles" }],
       },
       {
         title: "Menu Options",
@@ -287,6 +294,7 @@ const sections: TutorialSection[] = [
           { label: "Scan for Cores and Scan for ROMs", text: "Point them at your RetroArch folder or your retro collection; the app finds and sorts the emulator cores, ROMs and BIOS files. ZIP, 7Z and RAR archives work." },
           { label: "Clear Cores and Clear ROMs", text: "Empty the app’s core and ROM lists after asking you to confirm. Your own files elsewhere are not deleted." },
         ],
+        images: [{ src: "/images/GameChannelMenu.png", alt: "Games Menu Options page" }],
       },
       {
         title: "Console Settings",
@@ -299,6 +307,10 @@ const sections: TutorialSection[] = [
           { label: "Add BIOS (PlayStation)", text: "Picks a PlayStation BIOS if the scan did not find one. It is kept in cores/PSX/system/; a USA BIOS is used when there are several." },
           { label: "Add/Remove ROMs and Clear ROMs", text: "Add or remove this console’s games with the file explorer, or clear its list." },
           { label: "Change Disc (PlayStation)", text: "Swaps to the next disc of a multi-disc game while it is loaded." },
+        ],
+        images: [
+          { src: "/images/PSXMenu.png", alt: "PlayStation console settings with BIOS, save profiles and Change Disc" },
+          { src: "/images/GBAMenu.png", alt: "Game Boy Advance console settings with core, save profiles and ROMs" },
         ],
       },
       {
@@ -332,7 +344,7 @@ const sections: TutorialSection[] = [
           { label: "Sharpness", text: "Sharpens or softens edges." },
           { label: "Tint", text: "Shifts the colours toward green or purple, like the tint knob on an old set." },
         ],
-        images: [{ src: "/images/tutorial-video.png", alt: "Retro TV Emulator Video settings sliders" }],
+        images: [{ src: "/images/VideoTab.png", alt: "Retro TV Emulator Video tab with screen modes and picture sliders" }],
       },
       {
         title: "Screen Modes",
@@ -365,11 +377,7 @@ const sections: TutorialSection[] = [
           { label: "Background Color", text: "The colour of the menu backgrounds; slide along the rainbow." },
           { label: "Border/Text Color", text: "The colour of the borders, highlights and titles." },
         ],
-        images: [
-          { src: "/images/tutorial-theme.png", alt: "Retro TV Emulator Theme settings" },
-          { src: "/images/tutorial-volume.png", alt: "Retro TV Emulator volume bar" },
-          { src: "/images/tutorial-mute.png", alt: "Retro TV Emulator mute indicator" },
-        ],
+        images: [{ src: "/images/ThemeTab.png", alt: "Retro TV Emulator Theme tab with colour and opacity sliders" }],
       },
     ],
   },
@@ -405,6 +413,7 @@ const sections: TutorialSection[] = [
           { label: "Captions", text: "Captions for movies, separate from the TV stations’ captions. Not available in Lite mode." },
           { label: "Resume", text: "Starts a disc again where you stopped it." },
         ],
+        images: [{ src: "/images/DVDMenu.png", alt: "DVD Video Interactive settings" }],
       },
       {
         title: "DVD Controls",
@@ -494,8 +503,8 @@ function TutorialContent() {
                         <img src="/images/youtube-logo.png" alt="YouTube Logo" className="h-7 w-auto object-contain" />
                       </div>
                     </a>
-                  ) : topic.images && topic.carousel ? (
-                    <NumberedImageCarousel src={topic.images[0].src} alt={topic.images[0].alt} title={topic.title} />
+                  ) : topic.images && (topic.carousel || topic.images.length > 2) ? (
+                    <NumberedImageCarousel images={topic.images} title={topic.title} discover={topic.carousel} />
                   ) : topic.images ? (
                     <div className="flex flex-wrap justify-center gap-4">
                       {topic.images.map((image) => (
