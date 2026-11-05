@@ -1,67 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
-const MAX_NUMBERED_IMAGES = 50;
 
 type Slide = { src: string; alt: string };
 
-function numberedSrc(base: string, n: number) {
-  if (n === 0) return base;
-  const dot = base.lastIndexOf(".");
-  return dot === -1 ? `${base}${n}` : `${base.slice(0, dot)}${n}${base.slice(dot)}`;
-}
-
-function imageExists(src: string) {
-  return new Promise<boolean>((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-    img.src = src;
-  });
-}
-
 /**
- * images: the slides to show.
- * discover: when true, only images[0] is used as a base name and the numbered
- * files next to it (name.png, name1.png, name2.png ...) are found automatically.
+ * Three or more pictures of one tutorial picture spot: one picture with arrows that cycle through them.
+ * The page finds the pictures (name.png, name1.png, name2.png ...) while the site is built.
  */
-export function NumberedImageCarousel({
-  images,
-  title,
-  discover = false,
-}: {
-  images: Slide[];
-  title: string;
-  discover?: boolean;
-}) {
-  const [slides, setSlides] = useState<Slide[]>(discover ? [images[0]] : images);
+export function NumberedImageCarousel({ images, title }: { images: Slide[]; title: string }) {
   const [index, setIndex] = useState(0);
-  const baseSrc = images[0].src;
-  const baseAlt = images[0].alt;
 
-  useEffect(() => {
-    if (!discover) return;
-    let cancelled = false;
-    (async () => {
-      const found: Slide[] = [{ src: baseSrc, alt: baseAlt }];
-      for (let n = 1; n <= MAX_NUMBERED_IMAGES; n++) {
-        const next = numberedSrc(baseSrc, n);
-        if (!(await imageExists(next))) break;
-        found.push({ src: next, alt: baseAlt });
-      }
-      if (!cancelled) setSlides(found);
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [discover, baseSrc, baseAlt]);
-
-  const count = slides.length;
+  const count = images.length;
   const position = index % count;
   const go = (step: number) => setIndex((i) => (i + step + count) % count);
-  const current = slides[position];
+  const current = images[position];
 
   const arrowClass =
     "absolute top-1/2 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border bg-card/90 text-primary shadow-lg transition-colors duration-200 hover:border-primary disabled:invisible";

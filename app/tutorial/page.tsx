@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ImageIcon } from "lucide-react";
 import { NumberedImageCarousel } from "./numbered-image-carousel";
+import { findNumberedImages } from "@/lib/tutorial-images";
 
 // Set to true to show the full tutorial, false to show the "Coming soon..." page.
 const SHOW_TUTORIAL = false;
@@ -15,12 +16,18 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
+// One picture spot. src is the base name of the spot, for example "/images/visualizer.png".
+// The page looks in public/images for visualizer.png, visualizer1.png, visualizer2.png ... in that order
+// (visualizer.png may be left out; upper and lower case do not matter) and lays out what it finds:
+// none: a placeholder, one: one picture, two: side by side, three or more: one picture with arrows.
+// alt is the description of the spot; alts (optional) describes each picture in order.
+type TutorialImage = { src: string; alt: string; alts?: string[] };
+
 type TutorialTopic = {
   title: string;
   intro?: string;
   points?: { label: string; text: string }[];
-  images?: { src: string; alt: string }[];
-  carousel?: boolean;
+  image?: TutorialImage;
   stretchImages?: boolean;
   noPlaceholder?: boolean;
   video?: boolean;
@@ -45,7 +52,7 @@ const sections: TutorialSection[] = [
           { label: "Your games and media", text: "Your own videos, music, ROMs, BIOS files and emulator cores. DVDs work from an optical drive or as .iso backups. Point the Games tab at your RetroArch folder and it finds and sorts the ROMs, BIOS and cores for you." },
           { label: "Included tools", text: "VLC, ffmpeg and 7-Zip come with the app; nothing else needs installing." },
         ],
-        images: [{ src: "/images/whatyouneed1.png", alt: "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller" }, { src: "/images/whatyouneed2.png", alt: "A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller" }],
+        image: { src: "/images/whatyouneed.png", alt: "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller", alts: ["A desk setup with a Windows computer, monitor, keyboard, mouse and game controller", "A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller"] },
       },
       {
         title: "Installing & First Start",
@@ -55,7 +62,7 @@ const sections: TutorialSection[] = [
           { label: "Your media stays put", text: "Shows, movies, music and commercials can stay on any drive. You choose their folders inside the app; nothing is copied into the install folder." },
           { label: "First setup order", text: "Press M for the Main Menu. Check the System tab and Advanced Settings first, then open Channels to build your first station. This tutorial follows that order." },
         ],
-        images: [{ src: "/images/Download1.png", alt: "Downloading Retro TV Emulator and unzipping the app folder" }, { src: "/images/Download2.png", alt: "A computer screen showing a folder icon and the file explorer open to its contents" }],
+        image: { src: "/images/Download.png", alt: "Downloading Retro TV Emulator and unzipping the app folder", alts: ["Downloading Retro TV Emulator and unzipping the app folder", "A computer screen showing a folder icon and the file explorer open to its contents"] },
       },
       {
         title: "The Boot Process",
@@ -66,7 +73,7 @@ const sections: TutorialSection[] = [
           { label: "Saved information", text: "Show lengths, loudness, picture framing and the TV Guide schedule are loaded from the app’s media library, so channels open without waiting for scans." },
           { label: "Screen layout", text: "Screens shaped 4:3, 5:4 or 16:10 use the 4:3 layout; 16:9, 21:9 and 32:9 screens use the 16:9 layout." },
         ],
-        images: [{ src: "/images/tutorial-boot.png", alt: "Retro TV Emulator boot screen with loading progress" }],
+        image: { src: "/images/tutorial-boot.png", alt: "Retro TV Emulator boot screen with loading progress" },
       },
     ],
   },
@@ -74,7 +81,6 @@ const sections: TutorialSection[] = [
     title: "The Controls Menu",
     topics: [
       {
-        carousel: true,
         intro: "The Controls Menu shows every key and controller button as a picture, one page per area. It opens at start unless you turn Controls Menu (Nav Info) off in the System tab. Press C or Escape to close it and A or D to turn the pages; the line at the bottom of every page reminds you.",
         points: [
           { label: "Page 1: TV Controls", text: "Up/Down change channel, Left/Right change volume, N mutes, M opens the Main Menu, C opens and closes this menu, Escape then Enter minimizes or goes full screen, and the number keys tune straight to a channel." },
@@ -83,7 +89,7 @@ const sections: TutorialSection[] = [
           { label: "Pages 4 and 5: Games", text: "Keyboard (W/A/S/D, Enter, Escape) for the game menus, and the controller page (D-pad, A, B, Start + Select). Launched games are played with a controller only." },
           { label: "Pages 6 and 7: DVD Player", text: "The DVD player’s keyboard keys and controller buttons; see DVD Controls below." },
         ],
-        images: [{ src: "/images/tutorial-controls.png", alt: "Retro TV Emulator Controls Menu showing keyboard and controller buttons" }],
+        image: { src: "/images/tutorial-controls.png", alt: "Retro TV Emulator Controls Menu showing keyboard and controller buttons" },
       },
       {
         title: "Watching TV",
@@ -95,7 +101,7 @@ const sections: TutorialSection[] = [
           { label: "Channel dial", text: "Channel 03 is Games/DVD, Channel 04 is the TV Guide, and Channels 05–44 are your 40 stations. Channels that are turned off are skipped." },
           { label: "Idle menus", text: "Menus and the Controls Menu close by themselves after 60 seconds without a key press." },
         ],
- 	images: [{ src: "/images/ChannelNumber.png", alt: "Static screen with channel number" }],
+        image: { src: "/images/ChannelNumber.png", alt: "Static screen with channel number" },
       },
     ],
   },
@@ -118,7 +124,7 @@ const sections: TutorialSection[] = [
           { label: "Reset All Settings", text: "Puts every setting back to its default after asking you to confirm. Your media files and the saved scan results are not deleted." },
           { label: "Exit Program", text: "Closes the app." },
         ],
-        images: [{ src: "/images/SystemTab.png", alt: "Retro TV Emulator System tab with the on/off switches" }],
+        image: { src: "/images/SystemTab.png", alt: "Retro TV Emulator System tab with the on/off switches" },
       },
       {
         title: "Advanced Settings",
@@ -131,7 +137,7 @@ const sections: TutorialSection[] = [
           { label: "Custom Shell Launcher", text: "Starts the emulator in place of the Windows desktop when the PC turns on, for a PC used only as a TV. With it on, the System tab also shows Turn Off Computer, which shuts Windows down." },
           { label: "Server Mode", text: "Greyed out; not available in this version." },
         ],
-        images: [{ src: "/images/AdvancedSettings.png", alt: "Advanced Settings page" }],
+        image: { src: "/images/AdvancedSettings.png", alt: "Advanced Settings page" },
       },
       {
         title: "Remote Remapping",
@@ -140,7 +146,7 @@ const sections: TutorialSection[] = [
           { label: "Actions you can remap", text: "Nav Up, Nav Down, Nav Left, Nav Right, Select, Channel Up, Channel Down, Volume Up, Volume Down, Mute, Menu, Controls Menu and Back/Minimize." },
           { label: "Defaults", text: "W, S, A, D, Enter, Up, Down, Right, Left, N, M, C and Escape. The controls in this tutorial are the default keys." },
         ],
-        images: [{ src: "/images/Remapping1.png", alt: "Remote Remapping and Number Remapping page" }],
+        image: { src: "/images/Remapping.png", alt: "Remote Remapping and Number Remapping page" },
       },
     ],
   },
@@ -150,7 +156,7 @@ const sections: TutorialSection[] = [
       {
         title: "The Channel List",
         intro: "Open the Channels tab to see Channels 05–44 over two pages; the arrow at the bottom right turns the page. A green dot means the channel is on, red means off. Select a channel to open its settings, or Settings (bottom left) for the effects shared by all stations.",
-        images: [{ src: "/images/ChannelsTab.png", alt: "Retro TV Emulator Channels tab showing Channels 05 to 24" }],
+        image: { src: "/images/ChannelsTab.png", alt: "Retro TV Emulator Channels tab showing Channels 05 to 24" },
       },
       {
         title: "Channel Settings (Effects)",
@@ -163,7 +169,7 @@ const sections: TutorialSection[] = [
           { label: "Reception Lines", text: "Bands of interference that roll down the picture now and then." },
           { label: "Scan Lines", text: "Thin horizontal lines across the picture like a CRT. Not available in Lite mode." },
         ],
-        images: [{ src: "/images/ChannelsTabSettings.png", alt: "Channels Settings page with the CRT effect switches" }],
+        image: { src: "/images/ChannelsTabSettings.png", alt: "Channels Settings page with the CRT effect switches" },
       },
       {
         title: "Organize Your Media & Supported Files",
@@ -202,11 +208,7 @@ const sections: TutorialSection[] = [
           { label: "Menus", text: "While a bezel style is on, the menus shrink slightly so they fit inside the frame." },
           { label: "Burn-in", text: "A fixed frame that never moves adds burn-in risk on long sessions, so turning a bezel on shows a warning. See Burn-In Safeguards at the end." },
         ],
-        images: [
-          { src: "/images/Bezel1.png", alt: "A TV station playing inside the first TV bezel style" },
-          { src: "/images/Bezel2.png", alt: "A TV station playing inside the second TV bezel style, with the channel number in its window" },
-          { src: "/images/Bezel3.png", alt: "A TV station playing inside the wood-cabinet TV bezel style" },
-        ],
+        image: { src: "/images/Bezel.png", alt: "A TV station playing inside the first TV bezel style", alts: ["A TV station playing inside the first TV bezel style", "A TV station playing inside the second TV bezel style, with the channel number in its window", "A TV station playing inside the wood-cabinet TV bezel style"] },
       },
       {
         title: "Holiday Bezels",
@@ -217,11 +219,7 @@ const sections: TutorialSection[] = [
           { label: "Styles without one", text: "A style that has no holiday version keeps its normal bezel during the holiday." },
           { label: "Your own bezels", text: "Bezel pictures are kept in main/images/bezel. A holiday version goes next to the style it replaces and is named with the holiday: bezelHalloween, bezelChristmas or bezelThanksgiving for the first style, and bezelChristmas1 or bezelChristmas2 for numbered styles." },
         ],
-        images: [
-          { src: "/images/BezelHalloween.png", alt: "The TV bezel in its Halloween version" },
-          { src: "/images/BezelChristmas.png", alt: "The TV bezel in its Christmas version" },
-          { src: "/images/BezelThanksgiving.png", alt: "The TV bezel in its Thanksgiving version" },
-        ],
+        image: { src: "/images/HolidayBezel.png", alt: "The TV bezel in its Halloween version", alts: ["The TV bezel in its Halloween version", "The TV bezel in its Christmas version", "The TV bezel in its Thanksgiving version"] },
       },
       {
         title: "Console Bezels",
@@ -255,12 +253,7 @@ const sections: TutorialSection[] = [
           { label: "Current Playing Audio Settings", text: "The audio track and loudness gain of the show playing now; explained below." },
           { label: "Clear Media", text: "Removes all of this channel’s media from its schedule after asking you to confirm. Your files are not deleted." },
         ],
-        images: [
-          { src: "/images/Scheduling.png", alt: "Channel scheduling settings with a 24-hour schedule" },
-          { src: "/images/scheduling1.png", alt: "Channel scheduling settings with 8-hour blocks" },
-          { src: "/images/Scheduling2.png", alt: "Channel scheduling settings with 4-hour blocks" },
-          { src: "/images/Scheduling3.png", alt: "File explorer choosing video folders for a schedule block" },
-        ],
+        image: { src: "/images/Scheduling.png", alt: "Channel scheduling settings with a 24-hour schedule", alts: ["Channel scheduling settings with a 24-hour schedule", "Channel scheduling settings with 8-hour blocks", "Channel scheduling settings with 4-hour blocks", "File explorer choosing video folders for a schedule block"] },
       },
       {
         title: "Commercials",
@@ -272,7 +265,7 @@ const sections: TutorialSection[] = [
           { label: "Mode", text: "Interrupt Show puts breaks inside a show at the half-hour marks, at least five minutes apart and no more than two in a half hour. End of Show plays them between shows." },
           { label: "Clear Media", text: "Removes this channel’s commercial clips." },
         ],
-        images: [{ src: "/images/Commercials.png", alt: "Channel commercials page with Commercials, Fade-In and Fade-Out buttons" }],
+        image: { src: "/images/Commercials.png", alt: "Channel commercials page with Commercials, Fade-In and Fade-Out buttons" },
       },
       {
         title: "Holiday Schedules",
@@ -282,12 +275,12 @@ const sections: TutorialSection[] = [
           { label: "Force", text: "Plays that holiday’s schedule now, whatever the date, until you turn it off." },
           { label: "Clear Media", text: "Removes this channel’s holiday media." },
         ],
-        images: [{ src: "/images/Holidays.png", alt: "Channel holiday schedule page with Force switches" }],
+        image: { src: "/images/Holidays.png", alt: "Channel holiday schedule page with Force switches" },
       },
       {
         title: "Watermark",
         intro: "Turn Watermark on and use Add to pick an image with the mouse; it shows in the corner of that station, like a TV network logo. Keep it subtle: a logo that never moves adds burn-in risk.",
-        images: [{ src: "/images/Watermark.png", alt: "Watermark on screen" }],
+        image: { src: "/images/Watermark.png", alt: "Watermark on screen" },
       },
       {
         title: "Audio Track & Loudness Gain",
@@ -296,7 +289,7 @@ const sections: TutorialSection[] = [
           { label: "Audio track", text: "Pick a track with Enter; the channel remembers it for that show." },
           { label: "Loudness gain", text: "A and D make the show louder or quieter in 1 dB steps, from −12 to +12. Your change also teaches Smart Loudness, which uses it for the series’ other episodes." },
         ],
-        images: [{ src: "/images/GainAdjustment.png", alt: "Gain button and Audio Track Button" }],
+        image: { src: "/images/GainAdjustment.png", alt: "Gain button and Audio Track Button" },
 
       },
     ],
@@ -317,7 +310,12 @@ const sections: TutorialSection[] = [
           { label: "Clear Media", text: "Removes the station’s music from its schedule." },
           { label: "On screen", text: "The song’s title shows in the top-left corner and disappears after 60 seconds." },
         ],
-        images: [{ src: "/images/VisualizerSchedulingmenu.png", alt: "Music station settings with visualizer style and reactive strength" }],
+        image: { src: "/images/VisualizerSchedulingmenu.png", alt: "Music station settings with visualizer style and reactive strength" },
+      },
+      {
+        title: "Visualizer Choices",
+        intro: "In a music station’s settings, A and D pick the visualizer design. Choose Random for a new design with each song, or lock one design.",
+        image: { src: "/images/visualizer.png", alt: "The visualizer designs you can choose for a music station" },
       },
     ],
   },
@@ -335,7 +333,7 @@ const sections: TutorialSection[] = [
           { label: "Game Music", text: "Plays music while you browse the game menus." },
           { label: "Set Music", text: "Picks your own music track for the game menus; Add opens the file explorer." },
         ],
-        images: [{ src: "/images/GamesTab.png", alt: "Retro TV Emulator Games tab showing the console tiles" }],
+        image: { src: "/images/GamesTab.png", alt: "Retro TV Emulator Games tab showing the console tiles" },
       },
       {
         title: "Menu Options",
@@ -350,7 +348,7 @@ const sections: TutorialSection[] = [
           { label: "Scan for Cores and Scan for ROMs", text: "Point them at your RetroArch folder or your retro collection; the app finds and sorts the emulator cores, ROMs and BIOS files. ZIP, 7Z and RAR archives work." },
           { label: "Clear Cores and Clear ROMs", text: "Empty the app’s core and ROM lists after asking you to confirm. Your own files elsewhere are not deleted." },
         ],
-        images: [{ src: "/images/GameChannelMenu.png", alt: "Games Menu Options page" }],
+        image: { src: "/images/GameChannelMenu.png", alt: "Games Menu Options page" },
       },
       {
         title: "Console Settings",
@@ -364,10 +362,7 @@ const sections: TutorialSection[] = [
           { label: "Add/Remove ROMs and Clear ROMs", text: "Add or remove this console’s games with the file explorer, or clear its list." },
           { label: "Change Disc (PlayStation)", text: "Swaps to the next disc of a multi-disc game while it is loaded." },
         ],
-        images: [
-          { src: "/images/PSXMenu.png", alt: "PlayStation console settings with BIOS, save profiles and Change Disc" },
-          { src: "/images/GBAMenu.png", alt: "Game Boy Advance console settings with core, save profiles and ROMs" },
-        ],
+        image: { src: "/images/ConsoleSettings.png", alt: "PlayStation console settings with BIOS, save profiles and Change Disc", alts: ["PlayStation console settings with BIOS, save profiles and Change Disc", "Game Boy Advance console settings with core, save profiles and ROMs"] },
       },
       {
         title: "Supported Consoles & Files",
@@ -402,7 +397,7 @@ const sections: TutorialSection[] = [
           { label: "Sharpness", text: "Sharpens or softens edges." },
           { label: "Tint", text: "Shifts the colours toward green or purple, like the tint knob on an old set." },
         ],
-        images: [{ src: "/images/VideoTab.png", alt: "Retro TV Emulator Video tab with screen modes and picture sliders" }],
+        image: { src: "/images/VideoTab.png", alt: "Retro TV Emulator Video tab with screen modes and picture sliders" },
       },
       {
         title: "Screen Modes",
@@ -437,7 +432,7 @@ const sections: TutorialSection[] = [
           { label: "Background Color", text: "The colour of the menu backgrounds; slide along the rainbow." },
           { label: "Border/Text Color", text: "The colour of the borders, highlights and titles." },
         ],
-        images: [{ src: "/images/ThemeTab.png", alt: "Retro TV Emulator Theme tab with colour and opacity sliders" }],
+        image: { src: "/images/ThemeTab.png", alt: "Retro TV Emulator Theme tab with colour and opacity sliders" },
       },
     ],
   },
@@ -452,7 +447,7 @@ const sections: TutorialSection[] = [
           { label: "Checking your schedule", text: "After building a station, look here to see what aired, what is on and what comes next." },
           { label: "Idle", text: "After 60 seconds without a key press the guide closes and tunes to the station it was previewing." },
         ],
-	images: [{ src: "/images/TVGuide.png", alt: "Retro TV Emulator Theme tab with colour and opacity sliders" }],
+        image: { src: "/images/TVGuide.png", alt: "Retro TV Emulator Theme tab with colour and opacity sliders" },
       },
     ],
   },
@@ -475,7 +470,7 @@ const sections: TutorialSection[] = [
           { label: "Captions", text: "Captions for movies, separate from the TV stations’ captions. Not available in Lite mode." },
           { label: "Resume", text: "Starts a disc again where you stopped it." },
         ],
-        images: [{ src: "/images/DVDMenu.png", alt: "DVD Video Interactive settings" }],
+        image: { src: "/images/DVDMenu.png", alt: "DVD Video Interactive settings" },
       },
       {
         title: "DVD Controls",
@@ -530,6 +525,30 @@ const sections: TutorialSection[] = [
 
 const allSections = sections;
 
+function TutorialImages({ spot, title, stretch }: { spot: TutorialImage; title: string; stretch?: boolean }) {
+  const files = findNumberedImages(spot.src);
+  const alts = files.map((_, i) => spot.alts?.[i] ?? (files.length > 1 ? `${spot.alt} (${i + 1} of ${files.length})` : spot.alt));
+
+  if (files.length === 0) {
+    return (
+      <div className="scanlines mx-auto flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground sm:w-[calc(50%-0.5rem)]">
+        <ImageIcon className="size-8 shrink-0" aria-hidden="true" />
+        <span>Tutorial image placeholder</span>
+      </div>
+    );
+  }
+  if (files.length > 2) {
+    return <NumberedImageCarousel images={files.map((src, i) => ({ src, alt: alts[i] }))} title={title} />;
+  }
+  return (
+    <div className={`flex flex-wrap justify-center gap-4 ${files.length > 1 ? "sm:-mx-10" : ""}`}>
+      {files.map((src, i) => (
+        <img key={src} src={src} alt={alts[i]} loading="lazy" className={`aspect-video w-full rounded-lg border ${stretch ? "object-fill" : "object-contain"} shadow-lg ${files.length > 1 ? "sm:w-[calc(50%-0.5rem)]" : "sm:w-[70%]"}`} />
+      ))}
+    </div>
+  );
+}
+
 function TutorialComingSoon() {
   return (
     <div className="tutorial-page scanlines flex flex-1 items-center justify-center px-4 py-12">
@@ -567,14 +586,8 @@ function TutorialContent() {
                         <img src="/images/youtube-logo.png" alt="YouTube Logo" className="h-3.5 w-auto object-contain" />
                       </div>
                     </a>
-                  ) : topic.images && (topic.carousel || topic.images.length > 2) ? (
-                    <NumberedImageCarousel images={topic.images} title={topic.title} discover={topic.carousel} />
-                  ) : topic.images ? (
-                    <div className={`flex flex-wrap justify-center gap-4 ${topic.images.length > 1 ? "sm:-mx-10" : ""}`}>
-                      {topic.images.map((image) => (
-                        <img key={image.src} src={image.src} alt={image.alt} loading="lazy" className={`aspect-video w-full rounded-lg border ${topic.stretchImages ? "object-fill" : "object-contain"} shadow-lg ${topic.images!.length > 1 ? "sm:w-[calc(50%-0.5rem)]" : "sm:w-[70%]"}`} />
-                      ))}
-                    </div>
+                  ) : topic.image ? (
+                    <TutorialImages spot={topic.image} title={topic.title} stretch={topic.stretchImages} />
                   ) : section.noPlaceholder || topic.noPlaceholder ? null : (
                     <div className={`scanlines mx-auto flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground ${topic.video ? "" : "sm:w-[calc(50%-0.5rem)]"}`}>
                       <ImageIcon className="size-8 shrink-0" aria-hidden="true" />
