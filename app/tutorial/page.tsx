@@ -608,6 +608,3 @@ function TutorialContent() {
     </div>
   );
 }
-export default function TutorialPage() {
-  return SHOW_TUTORIAL ? <TutorialContent /> : <TutorialComingSoon />;
-}
