@@ -564,7 +564,7 @@ function TutorialContent() {
                         <svg className="size-8 text-white fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                       </div>
                       <div className="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">
-                        <img src="/images/youtube-logo.png" alt="YouTube Logo" className="h-7 w-auto object-contain" />
+                        <img src="/images/youtube-logo.png" alt="YouTube Logo" className="h-3.5 w-auto object-contain" />
                       </div>
                     </a>
                   ) : topic.images && (topic.carousel || topic.images.length > 2) ? (
