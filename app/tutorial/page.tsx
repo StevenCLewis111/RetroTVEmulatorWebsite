@@ -156,7 +156,7 @@ const sections: TutorialSection[] = [
         title: "Channel Settings (Effects)",
         intro: "Channels > Settings sets the look of every station. Each switch turns its effect on or off.",
         points: [
-          { label: "CRT TV Bezels", text: "Frames the picture inside a vintage TV set. A fixed frame on screen adds burn-in risk on long sessions, so a warning reminds you." },
+          { label: "CRT TV Bezels", text: "Frames the picture inside a vintage TV set. When more than one style is installed, a Bezel Style number appears under it. A fixed frame on screen adds burn-in risk on long sessions, so a warning reminds you. See Bezels below." },
           { label: "Warp Screen", text: "Curves the picture and darkens its corners like the glass of a CRT. Not available in Lite mode." },
           { label: "Boot Anim", text: "Plays the old-TV power-on animation when the app starts." },
           { label: "Static Noise", text: "Light snow over the picture, stronger or weaker with the reception, like an aerial signal." },
@@ -186,6 +186,50 @@ const sections: TutorialSection[] = [
           { label: "Tuning to a channel", text: "The channel you tune to jumps the queue: its show is scanned first so it plays at the right size and volume, and background scans wait until its picture is steady." },
           { label: "Loudness", text: "With Loudness Scan on, every file is measured against the broadcast target of −24 LUFS so volume stays even between shows and commercials." },
           { label: "Saved results", text: "Unchanged files are never scanned again, even when moved or renamed. Files confirmed broken are taken out of the schedule; a short episode that loses its partner gets a new one." },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Bezels",
+    topics: [
+      {
+        title: "TV Bezels",
+        intro: "A bezel is the frame of a vintage TV set drawn around the picture. Turn on CRT TV Bezels in Channels > Settings and the stations play inside the screen of the set, with the channel number shown in the set’s own number window on the styles that have one.",
+        points: [
+          { label: "Bezel Style", text: "When more than one style is installed, a Bezel Style number appears under the CRT TV Bezels switch. Press A or D to step through the styles and see each one change on screen." },
+          { label: "Screen shape", text: "The wood-cabinet style is drawn for a true 16:9 screen, so it is only offered on one. On other screen shapes it is hidden and the other styles stay." },
+          { label: "Menus", text: "While a bezel style is on, the menus shrink slightly so they fit inside the frame." },
+          { label: "Burn-in", text: "A fixed frame that never moves adds burn-in risk on long sessions, so turning a bezel on shows a warning. See Burn-In Safeguards at the end." },
+        ],
+        images: [
+          { src: "/images/Bezel1.png", alt: "A TV station playing inside the first TV bezel style" },
+          { src: "/images/Bezel2.png", alt: "A TV station playing inside the second TV bezel style, with the channel number in its window" },
+          { src: "/images/Bezel3.png", alt: "A TV station playing inside the wood-cabinet TV bezel style" },
+        ],
+      },
+      {
+        title: "Holiday Bezels",
+        intro: "Each bezel style can have Halloween, Christmas and Thanksgiving versions. During a holiday the app swaps the bezel for that style’s holiday version by itself, and puts the normal one back when the holiday is over.",
+        points: [
+          { label: "When they show", text: "The holiday bezel appears for the three days up to and including the holiday, the same days the holiday schedules take over. Thanksgiving is the fourth Thursday of November." },
+          { label: "Force", text: "Turning on Force for a holiday in a channel’s Holiday Schedule page shows that holiday’s bezel now, whatever the date, until you turn it off." },
+          { label: "Styles without one", text: "A style that has no holiday version keeps its normal bezel during the holiday." },
+          { label: "Your own bezels", text: "Bezel pictures are kept in main/images/bezel. A holiday version goes next to the style it replaces and is named with the holiday: bezelHalloween, bezelChristmas or bezelThanksgiving for the first style, and bezelChristmas1 or bezelChristmas2 for numbered styles." },
+        ],
+        images: [
+          { src: "/images/BezelHalloween.png", alt: "The TV bezel in its Halloween version" },
+          { src: "/images/BezelChristmas.png", alt: "The TV bezel in its Christmas version" },
+          { src: "/images/BezelThanksgiving.png", alt: "The TV bezel in its Thanksgiving version" },
+        ],
+      },
+      {
+        title: "Console Bezels",
+        noPlaceholder: true,
+        intro: "Games have bezels too. A console’s Save Profile page has its own TV Bezel switch and, when the console has more than one, a style number.",
+        points: [
+          { label: "Per profile", text: "The choice belongs to the save profile. Turning a console’s bezel on for Profile 1 does not turn it on for Profile 2 or 3." },
+          { label: "With the TV bezel", text: "When CRT TV Bezels is on in Channels > Settings, the console’s own bezel is not drawn, so the two frames never stack." },
         ],
       },
     ],
