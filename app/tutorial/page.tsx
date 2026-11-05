@@ -622,5 +622,5 @@ function TutorialContent() {
   );
 }
 export default function TutorialPage() {
-  return <TutorialContent />;
+  return SHOW_TUTORIAL ? <TutorialContent /> : <TutorialComingSoon />;
 }
