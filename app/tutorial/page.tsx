@@ -581,7 +581,7 @@ function TutorialImages({ spot, title, stretch }: { spot: TutorialImage; title: 
   return (
     <div className={`flex flex-wrap justify-center gap-4 ${files.length > 1 ? "sm:-mx-10" : ""}`}>
       {files.map((src, i) => (
-        <img key={src} src={src} alt={alts[i]} loading="lazy" className={`aspect-video w-full rounded-lg border ${stretch ? "object-fill" : "object-contain"} shadow-lg ${files.length > 1 ? "sm:w-[calc(50%-0.5rem)]" : "sm:w-[70%]"}`} />
+        <img key={src} src={src} alt={alts[i]} loading="lazy" className={`aspect-video w-full rounded-lg border object-fill shadow-lg ${files.length > 1 ? "sm:w-[calc(50%-0.5rem)]" : "sm:w-[70%]"}`} />
       ))}
     </div>
   );

@@ -30,7 +30,7 @@ export function NumberedImageCarousel({ images, title }: { images: Slide[]; titl
           src={current.src}
           alt={count > 1 ? `${current.alt} (${position + 1} of ${count})` : current.alt}
           loading="lazy"
-          className="aspect-video w-full rounded-lg border object-contain shadow-lg"
+          className="aspect-video w-full rounded-lg border object-fill shadow-lg"
         />
         <button type="button" onClick={() => go(-1)} disabled={count < 2} aria-label={`Previous ${title} image`} className={`${arrowClass} left-2 sm:-left-14`}>
           <ChevronLeft className="size-6" aria-hidden="true" />
