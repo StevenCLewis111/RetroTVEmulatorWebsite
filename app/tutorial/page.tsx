@@ -4,7 +4,7 @@ import { NumberedImageCarousel } from "./numbered-image-carousel";
 import { findNumberedImages } from "@/lib/tutorial-images";
 
 // Set to true to show the full tutorial, false to show the "Coming soon..." page.
-const SHOW_TUTORIAL = false;
+const SHOW_TUTORIAL = true;
 
 const description =
   "Set up Retro TV Emulator on Windows: TV and music stations, schedules, controls, retro games, DVDs, captions and troubleshooting.";
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 type TutorialImage = { src: string; alt: string; alts?: string[] };
 
 type TutorialTopic = {
-  title: string;
+  title?: string;
   intro?: string;
   points?: { label: string; text: string }[];
   image?: TutorialImage;
@@ -33,9 +33,10 @@ type TutorialTopic = {
   video?: boolean;
   steps?: string[];
   example?: string;
+  exampleIcon?: string;
 };
 
-type TutorialSection = { title: string; standalone?: boolean; noPlaceholder?: boolean; topics: TutorialTopic[] };
+type TutorialSection = { title: string; standalone?: boolean; noPlaceholder?: boolean; lead?: TutorialTopic; topics: TutorialTopic[] };
 
 const sections: TutorialSection[] = [
   {
@@ -45,49 +46,53 @@ const sections: TutorialSection[] = [
       { title: "Start Here - Watch or Read Below", video: true },
       {
         title: "What You Need",
-        intro: "Retro TV Emulator turns your own video and music library into scheduled television and Visualizer stations on a Windows PC. Channel 03 adds retro games and a DVD/media player. There is also a TV Guide and plenty of theme options and static options",
+        intro: "Retro TV Emulator turns your own video and music library into scheduled television and music Visualizer stations on a Windows PC. Channel 03 adds retro games and a DVD/media player, Channel 04 is a TV Guide, and there are plenty of theme and static options to make it look like the real thing.",
         points: [
           { label: "Computer", text: "A 64-bit Windows 10 or 11 PC. The app checks your hardware at every start and adjusts itself to run its best on each PC. Linux and Mac can run Windows programs through compatibility tools; how well depends on the tool and your setup." },
           { label: "Keyboard, mouse and controller", text: "A keyboard for the TV and menus, a mouse for the file explorer, and a compatible controller for playing games. A PC remote can be mapped to the TV controls." },
-          { label: "Your games and media", text: "Your own videos, music, ROMs, BIOS files and emulator cores. DVDs work from an optical drive or as .iso backups. Point the Games tab at your RetroArch folder and it finds and sorts the ROMs, BIOS and cores for you." },
+          { label: "Your media", text: "Your own videos, music and commercials. They can stay on any drive, internal or external; you choose their folders inside the app and nothing is copied into the install folder." },
+          { label: "For games (optional)", text: "Your own ROMs, BIOS files and libretro emulator cores. DVDs work from an optical drive or as .iso backups. Point the Games tab at your RetroArch folder and it finds and sorts the ROMs, BIOS and cores for you." },
           { label: "Included tools", text: "VLC, ffmpeg and 7-Zip come with the app; nothing else needs installing." },
         ],
         image: { src: "/images/whatyouneed.png", alt: "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller", alts: ["A desk setup with a Windows computer, monitor, keyboard, mouse and game controller", "A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller"] },
       },
       {
-        title: "Installing & First Start",
+        title: "Download & Install",
         stretchImages: true,
-        intro: "Unzip the app folder somewhere such as your Desktop, keep everything in it together, and run Retro TV Emulator.exe. Do not move or rename anything inside _internal.",
+        intro: "Download the app from the Download page, unzip the app folder somewhere such as your Desktop, keep everything in it together, and run Retro TV Emulator.exe. Do not move or rename anything inside _internal.",
         points: [
-          { label: "Your media stays put", text: "Shows, movies, music and commercials can stay on any drive. You choose their folders inside the app; nothing is copied into the install folder." },
+          { label: "Your settings live beside the exe", text: "The app saves your channels, settings and schedule positions in retro_config.json next to the exe. Keep that file with the app; if it is missing, the app starts as if it had never been used." },
+          { label: "Your media stays put", text: "Shows, movies, music and commercials can stay where they are. Nothing is copied into the install folder." },
           { label: "First setup order", text: "Press M for the Main Menu. Check the System tab and Advanced Settings first, then open Channels to build your first station. This tutorial follows that order." },
         ],
         image: { src: "/images/Download.png", alt: "Downloading Retro TV Emulator and unzipping the app folder", alts: ["Downloading Retro TV Emulator and unzipping the app folder", "A computer screen showing a folder icon and the file explorer open to its contents"] },
       },
       {
-        title: "The Boot Process",
-        intro: "Each start shows a loading screen while the app gets everything ready, so the first channel plays straight away.",
+        title: "Booting Up",
+        intro: "Each start shows a loading screen while the app gets everything ready, so the first channel plays straight away. The first start has no channels yet, so every station shows static until you add media.",
         points: [
           { label: "Drives", text: "Internal and external media drives are woken up so a sleeping drive does not delay the first show." },
           { label: "Hardware check", text: "The app counts your CPU cores and threads, finds your graphics cards and picks Lite, Standard or Performance mode. It keeps back only what Windows needs and turns the background work up and down while you watch, so playback always comes first." },
           { label: "Saved information", text: "Show lengths, loudness, picture framing and the TV Guide schedule are loaded from the app’s media library, so channels open without waiting for scans." },
           { label: "Screen layout", text: "Screens shaped 4:3, 5:4 or 16:10 use the 4:3 layout; 16:9, 21:9 and 32:9 screens use the 16:9 layout." },
+          { label: "Boot Anim", text: "If Boot Anim is on (Channels > Settings), the old-TV power-on animation plays as the app starts." },
         ],
         image: { src: "/images/tutorial-boot.png", alt: "Retro TV Emulator boot screen with loading progress" },
       },
     ],
   },
   {
-    title: "The Controls Menu",
+    title: "The Controls",
     topics: [
       {
+        title: "The Controls Menu",
         intro: "The Controls Menu shows every key and controller button as a picture, one page per area. It opens at start unless you turn Controls Menu (Nav Info) off in the System tab. Press C or Escape to close it and A or D to turn the pages; the line at the bottom of every page reminds you.",
         points: [
           { label: "Page 1: TV Controls", text: "Up/Down change channel, Left/Right change volume, N mutes, M opens the Main Menu, C opens and closes this menu, Escape then Enter minimizes or goes full screen, and the number keys tune straight to a channel." },
           { label: "Page 2: TV Guide", text: "W/S move between channels, A/D move through the time slots, Enter tunes to the highlighted channel." },
           { label: "Page 3: Main Menu", text: "W/S move up and down, A/D move sideways or change a value, Enter selects, Escape goes back or minimizes. The file explorer is used with the mouse only." },
           { label: "Pages 4 and 5: Games", text: "Keyboard (W/A/S/D, Enter, Escape) for the game menus, and the controller page (D-pad, A, B, Start + Select). Launched games are played with a controller only." },
-          { label: "Pages 6 and 7: DVD Player", text: "The DVD player’s keyboard keys and controller buttons; see DVD Controls below." },
+          { label: "Pages 6 and 7: DVD Player", text: "The DVD player’s keyboard keys and controller buttons; see the DVD Player section." },
         ],
         image: { src: "/images/tutorial-controls.png", alt: "Retro TV Emulator Controls Menu showing keyboard and controller buttons" },
       },
@@ -99,6 +104,7 @@ const sections: TutorialSection[] = [
           { label: "Volume", text: "Left and Right change the volume; N mutes and unmutes. The volume bar style is set in the Theme tab." },
           { label: "Window", text: "Escape, then Enter, switches between a minimized window and full screen." },
           { label: "Channel dial", text: "Channel 03 is Games/DVD, Channel 04 is the TV Guide, and Channels 05–44 are your 40 stations. Channels that are turned off are skipped." },
+          { label: "Real-TV clock", text: "Stations run on the clock like real TV: tune in halfway through a show and you join it halfway through, and after the app has been closed the schedule catches up to real time." },
           { label: "Idle menus", text: "Menus and the Controls Menu close by themselves after 60 seconds without a key press." },
         ],
         image: { src: "/images/ChannelNumber.png", alt: "Static screen with channel number" },
@@ -106,10 +112,8 @@ const sections: TutorialSection[] = [
     ],
   },
   {
-    title: "System Menu & Advanced Settings",
-    topics: [
-      {
-        title: "System Menu",
+    title: "System Tab",
+    lead: {
         intro: "Press M; the Main Menu opens on the System tab. Each switch is turned on or off with Enter. Set these before building your stations.",
         points: [
           { label: "Games (Channel 03)", text: "Turns the game and DVD channel on or off. When it is off, Channel 03 is skipped and the Games tab is hidden." },
@@ -121,17 +125,18 @@ const sections: TutorialSection[] = [
           { label: "Closed Captions", text: "Shows captions on the TV stations. The small box beside the switch sets the caption colour. The DVD player has its own captions switch. Not available in Lite mode." },
           { label: "Mono Audio", text: "Mixes the left and right sound into one, for a single speaker or one ear." },
           { label: "Advanced Settings", text: "Opens the next page of options." },
-          { label: "Reset All Settings", text: "Puts every setting back to its default after asking you to confirm. Your media files and the saved scan results are not deleted." },
+          { label: "Reset All Settings", text: "Puts every setting back to its default and clears the saved scan results and TV Guide data after asking you to confirm. Your media files are not deleted." },
           { label: "Exit Program", text: "Closes the app." },
         ],
         image: { src: "/images/SystemTab.png", alt: "Retro TV Emulator System tab with the on/off switches" },
-      },
+    },
+    topics: [
       {
         title: "Advanced Settings",
         intro: "Open Advanced Settings from the System tab for the hardware choices and a dedicated TV setup. The options, top to bottom:",
         points: [
           { label: "Look for Updates", text: "Checks for a newer version now and offers to install it; see Updates at the end." },
-          { label: "Remote Remapping", text: "Changes which key or remote button does each action; explained below." },
+          { label: "Remote Remapping", text: "Changes which key or remote button does each action; explained next." },
           { label: "Performance Mode", text: "Enter steps through Lite, Standard and Performance. Lite keeps background work light, moves the music visualizer without following the beat, and turns off Warp Screen, Scan Lines and captions. Standard is the normal mode. Performance allows more background work, faster scans and the full reactive visualizer. A PC rated as weak at start cannot pick Performance. In every mode the background work slows down by itself when playback needs the PC." },
           { label: "GPU/CPU", text: "Enter steps through your graphics cards (largest memory first) and CPU Only. The chosen card draws the picture; pick a laptop’s dedicated graphics card here. If the card has problems, the app switches to the CPU by itself." },
           { label: "Custom Shell Launcher", text: "Starts the emulator in place of the Windows desktop when the PC turns on, for a PC used only as a TV. With it on, the System tab also shows Turn Off Computer, which shuts Windows down." },
@@ -140,7 +145,7 @@ const sections: TutorialSection[] = [
         image: { src: "/images/AdvancedSettings.png", alt: "Advanced Settings page" },
       },
       {
-        title: "Remote Remapping",
+        title: "Advanced Settings - Remote Remapping",
         intro: "Open Advanced Settings > Remote Remapping to see every action and the key it uses now. Remap Remote goes through the actions one by one: press the key or PC remote button you want for each, or Backspace to skip one. Remap Numbers does the same for the number keys 0 to 9, so a remote’s number buttons can tune channels.",
         points: [
           { label: "Actions you can remap", text: "Nav Up, Nav Down, Nav Left, Nav Right, Select, Channel Up, Channel Down, Volume Up, Volume Down, Mute, Menu, Controls Menu and Back/Minimize." },
@@ -151,31 +156,39 @@ const sections: TutorialSection[] = [
     ],
   },
   {
-    title: "Channels Menu",
+    title: "Channels Tab",
     topics: [
       {
-        title: "The Channel List",
-        intro: "Open the Channels tab to see Channels 05–44 over two pages; the arrow at the bottom right turns the page. A green dot means the channel is on, red means off. Select a channel to open its settings, or Settings (bottom left) for the effects shared by all stations.",
+        title: "Channels Menu",
+        intro: "Set up your stations here. Open the Channels tab to see Channels 05–44 over two pages. Setting up a station in short: pick a channel, turn it on, give it a name, choose how long its schedule blocks are, then add folders to each block. The sub-menus below follow that order.",
+        points: [
+          { label: "Channel buttons", text: "Channels 05–44, twenty to a page. A green dot means the channel is on, red means off. Select a channel to open its settings (Setup Channel below)." },
+          { label: "Arrow (bottom right)", text: "Turns to the other page of channels." },
+          { label: "Settings (bottom left)", text: "The effects shared by every station: bezels, warp, static and scan lines (see Settings below)." },
+          { label: "Close", text: "Closes the menu." },
+        ],
         image: { src: "/images/ChannelsTab.png", alt: "Retro TV Emulator Channels tab showing Channels 05 to 24" },
       },
       {
-        title: "Channel Settings (Effects)",
-        intro: "Channels > Settings sets the look of every station. Each switch turns its effect on or off.",
+        title: "Settings",
+        intro: "Settings at the bottom left of the Channels tab sets the look of every station. Each switch turns its effect on or off. The Theme tab’s Channel Static colour tints the noise and lines.",
         points: [
-          { label: "CRT TV Bezels", text: "Frames the picture inside a vintage TV set. When more than one style is installed, a Bezel Style number appears under it. A fixed frame on screen adds burn-in risk on long sessions, so a warning reminds you. See Bezels below." },
+          { label: "CRT TV Bezels", text: "Frames the picture inside a vintage TV set. When more than one style is installed, a Bezel Style number appears under it. See Bezels in Extras." },
           { label: "Warp Screen", text: "Curves the picture and darkens its corners like the glass of a CRT. Not available in Lite mode." },
           { label: "Boot Anim", text: "Plays the old-TV power-on animation when the app starts." },
-          { label: "Static Noise", text: "Light snow over the picture, stronger or weaker with the reception, like an aerial signal." },
-          { label: "Reception Lines", text: "Bands of interference that roll down the picture now and then." },
+          { label: "Static Noise", text: "Fast-moving see-through snow laid over the picture, like a bad aerial signal. It sits on top of the picture from the first frame." },
+          { label: "Reception Lines", text: "Bands of interference that roll down the picture now and then, also like bad reception." },
           { label: "Scan Lines", text: "Thin horizontal lines across the picture like a CRT. Not available in Lite mode." },
+          { label: "Where they show", text: "Static Noise and Reception Lines play over the TV stations and the TV Guide preview, not over the guide grid or the changing-channel screen. Channel 03 never shows static, noise or lines." },
         ],
         image: { src: "/images/ChannelsTabSettings.png", alt: "Channels Settings page with the CRT effect switches" },
       },
       {
         title: "Organize Your Media & Supported Files",
         noPlaceholder: true,
-        intro: "Keep each show in its own folder with season folders inside it. Clear folder and file names help the app recognise shows and fill in the guide.",
+        intro: "Before adding media, keep each show in its own folder with season folders inside it. Clear folder and file names help the app recognise shows and fill in the guide.",
         example: "TV Shows/\n  Show Name/\n    Season 1/\n      Show Name S01E01.mkv\n      Show Name S01E02.mkv\n    Season 2/\n      Show Name S02E01.mkv",
+        exampleIcon: "/images/folder.png",
         points: [
           { label: "Shows and movies", text: "Season 1 and Season 01 folders, and S01E01 or Season 1 Episode 1 file names, are recognised. Videos over 80 minutes are treated as movies. Movie parts stay together, and duplicate copies of an episode are scheduled once." },
           { label: "Video formats", text: "MP4, MKV, AVI, MOV, WEBM, M4V, WMV, FLV, MPG, MPEG, TS and M2TS." },
@@ -184,60 +197,8 @@ const sections: TutorialSection[] = [
         ],
       },
       {
-        title: "Media Scans",
-        noPlaceholder: true,
-        intro: "When you add media, the app scans each file once and saves the results in its media library, so the TV Guide, the station and a restart all use the same answers.",
-        points: [
-          { label: "What is scanned", text: "Each file’s length, its picture box (the real picture inside any black bars) and its loudness, in that order. Shows airing now come first, then upcoming commercials, then the next few shows, then everything further out." },
-          { label: "Tuning to a channel", text: "The channel you tune to jumps the queue: its show is scanned first so it plays at the right size and volume, and background scans wait until its picture is steady." },
-          { label: "Loudness", text: "With Loudness Scan on, every file is measured against the broadcast target of −24 LUFS so volume stays even between shows and commercials." },
-          { label: "Saved results", text: "Unchanged files are never scanned again, even when moved or renamed. Files confirmed broken are taken out of the schedule; a short episode that loses its partner gets a new one." },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Bezels",
-    topics: [
-      {
-        title: "TV Bezels",
-        intro: "A bezel is the frame of a vintage TV set drawn around the picture. Turn on CRT TV Bezels in Channels > Settings and the stations play inside the screen of the set, with the channel number shown in the set’s own number window on the styles that have one.",
-        points: [
-          { label: "Bezel Style", text: "When more than one style is installed, a Bezel Style number appears under the CRT TV Bezels switch. Press A or D to step through the styles and see each one change on screen." },
-          { label: "Screen shape", text: "The wood-cabinet style is drawn for a true 16:9 screen, so it is only offered on one. On other screen shapes it is hidden and the other styles stay." },
-          { label: "Menus", text: "While a bezel style is on, the menus shrink slightly so they fit inside the frame." },
-          { label: "Burn-in", text: "A fixed frame that never moves adds burn-in risk on long sessions, so turning a bezel on shows a warning. See Burn-In Safeguards at the end." },
-        ],
-        image: { src: "/images/Bezel.png", alt: "A TV station playing inside the first TV bezel style", alts: ["A TV station playing inside the first TV bezel style", "A TV station playing inside the second TV bezel style, with the channel number in its window", "A TV station playing inside the wood-cabinet TV bezel style"] },
-      },
-      {
-        title: "Holiday Bezels",
-        intro: "Each bezel style can have Halloween, Christmas and Thanksgiving versions. During a holiday the app swaps the bezel for that style’s holiday version by itself, and puts the normal one back when the holiday is over.",
-        points: [
-          { label: "When they show", text: "The holiday bezel appears for the three days up to and including the holiday, the same days the holiday schedules take over. Thanksgiving is the fourth Thursday of November." },
-          { label: "Force", text: "Turning on Force for a holiday in a channel’s Holiday Schedule page shows that holiday’s bezel now, whatever the date, until you turn it off." },
-          { label: "Styles without one", text: "A style that has no holiday version keeps its normal bezel during the holiday." },
-          { label: "Your own bezels", text: "Bezel pictures are kept in main/images/bezel. A holiday version goes next to the style it replaces and is named with the holiday: bezelHalloween, bezelChristmas or bezelThanksgiving for the first style, and bezelChristmas1 or bezelChristmas2 for numbered styles." },
-        ],
-        image: { src: "/images/HolidayBezel.png", alt: "The TV bezel in its Halloween version", alts: ["The TV bezel in its Halloween version", "The TV bezel in its Christmas version", "The TV bezel in its Thanksgiving version"] },
-      },
-      {
-        title: "Console Bezels",
-        noPlaceholder: true,
-        intro: "Games have bezels too. A console’s Save Profile page has its own TV Bezel switch and, when the console has more than one, a style number.",
-        points: [
-          { label: "Per profile", text: "The choice belongs to the save profile. Turning a console’s bezel on for Profile 1 does not turn it on for Profile 2 or 3." },
-          { label: "With the TV bezel", text: "When CRT TV Bezels is on in Channels > Settings, the console’s own bezel is not drawn, so the two frames never stack." },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Each Channel’s Settings",
-    topics: [
-      {
-        title: "The Channel’s Settings Page",
-        intro: "Select a channel in the Channels tab. Stations run on the clock like real TV: tune in halfway through a show and you join it halfway through, and after the app has been closed the schedule catches up to real time. Changes affect what is coming up; what already aired stays as it was. The options, top to bottom:",
+        title: "Channel Menu - Setup Channel - TV Station",
+        intro: "Select a channel in the Channels tab. Changes affect what is coming up; what already aired stays as it was. The options, top to bottom:",
         points: [
           { label: "On/Off", text: "Turns the channel on or off. The last channel left on cannot be turned off, and turning off the channel you are watching tunes to the next one." },
           { label: "Music", text: "Makes the channel a music station with a visualizer instead of video; see Music Visualizer Stations." },
@@ -245,60 +206,53 @@ const sections: TutorialSection[] = [
           { label: "Number of Episodes", text: "How many episodes of one series play in a row before another show: One, Two, or Random (one to three, the show with the most episodes getting three). Marathon plays through one whole series or movie collection before moving to the next." },
           { label: "Episode Order", text: "In Order follows the episode numbers and remembers where each show is up to. Random plays every episode once before any repeats." },
           { label: "Pair Shorts Under", text: "Episodes shorter than this share one time slot with another short episode, so two 11-minute cartoons fill a half hour. 15 minutes by default, up to 30; 0 turns pairing off." },
-          { label: "Commercials", text: "Turns commercial breaks on. Commercials (Add) opens the commercials page below, and Mode picks where the breaks go." },
+          { label: "Commercials", text: "Turns commercial breaks on. Commercials (Add) opens the commercials page, and Mode picks where the breaks go." },
           { label: "Schedule Length", text: "24-Hour uses one Full Day block. 8-Hour uses Morning (4am–12pm), Evening (12pm–8pm) and Night (8pm–4am). 4-Hour uses six blocks: midnight–4am, 4–8am, 8am–noon, noon–4pm, 4–8pm and 8pm–midnight." },
           { label: "Block buttons", text: "One green button per block. Each opens the file explorer, where you pick that block’s folders and files with the mouse; the number shows how many are added." },
-          { label: "Watermark", text: "Shows a channel logo in the corner; Add picks the image." },
-          { label: "Holiday Schedule", text: "Opens the holiday page below." },
+          { label: "Watermark and Holiday Schedule", text: "A channel logo and a set of holiday shows; both have their own sections below." },
           { label: "Current Playing Audio Settings", text: "The audio track and loudness gain of the show playing now; explained below." },
           { label: "Clear Media", text: "Removes all of this channel’s media from its schedule after asking you to confirm. Your files are not deleted." },
         ],
         image: { src: "/images/Scheduling.png", alt: "Channel scheduling settings with a 24-hour schedule", alts: ["Channel scheduling settings with a 24-hour schedule", "Channel scheduling settings with 8-hour blocks", "Channel scheduling settings with 4-hour blocks", "File explorer choosing video folders for a schedule block"] },
       },
       {
-        title: "Commercials",
+        title: "Channel Menu - Setup Channel - Commercials",
         intro: "Turn Commercials on, then open Commercials (Add). Each button opens the file explorer for its clips.",
         points: [
           { label: "Commercials", text: "The commercial clips played in each break. A file longer than five minutes is not used as a commercial." },
-          { label: "Fade-In", text: "A clip played going into a break, such as your own “we’ll be right back” bumper." },
-          { label: "Fade-Out", text: "A clip played coming out of a break, such as “now back to our show”." },
+          { label: "Fade-In", text: "A clip played at the start of every show, such as your own “now showing” bumper." },
+          { label: "Fade-Out", text: "A clip played when a show ends, such as “we’ll be right back” or “thanks for watching”." },
           { label: "Mode", text: "Interrupt Show puts breaks inside a show at the half-hour marks, at least five minutes apart and no more than two in a half hour. End of Show plays them between shows." },
           { label: "Clear Media", text: "Removes this channel’s commercial clips." },
         ],
         image: { src: "/images/Commercials.png", alt: "Channel commercials page with Commercials, Fade-In and Fade-Out buttons" },
       },
       {
-        title: "Holiday Schedules",
-        intro: "Holiday Schedule gives the channel its own Halloween, Christmas and Thanksgiving media. Each holiday button opens the file explorer for that holiday’s shows.",
-        points: [
-          { label: "When they play", text: "A holiday schedule takes over for the three days up to and including the holiday; Thanksgiving is the fourth Thursday of November. Holiday media always plays in random order." },
-          { label: "Force", text: "Plays that holiday’s schedule now, whatever the date, until you turn it off." },
-          { label: "Clear Media", text: "Removes this channel’s holiday media." },
-        ],
-        image: { src: "/images/Holidays.png", alt: "Channel holiday schedule page with Force switches" },
-      },
-      {
-        title: "Watermark",
-        intro: "Turn Watermark on and use Add to pick an image with the mouse; it shows in the corner of that station, like a TV network logo. Keep it subtle: a logo that never moves adds burn-in risk.",
-        image: { src: "/images/Watermark.png", alt: "Watermark on screen" },
-      },
-      {
-        title: "Audio Track & Loudness Gain",
+        title: "Channel Menu - Setup Channel - Audio Track & Loudness Gain",
         intro: "Current Playing Audio Settings works on the channel you are watching (tune to it first). It lists the show’s audio tracks, such as languages or a commentary, and its loudness gain.",
         points: [
           { label: "Audio track", text: "Pick a track with Enter; the channel remembers it for that show." },
           { label: "Loudness gain", text: "A and D make the show louder or quieter in 1 dB steps, from −12 to +12. Your change also teaches Smart Loudness, which uses it for the series’ other episodes." },
         ],
         image: { src: "/images/GainAdjustment.png", alt: "Gain button and Audio Track Button" },
-
       },
-    ],
-  },
-  {
-    title: "Music Visualizer Stations",
-    topics: [
       {
-        title: "Music Station Settings",
+        title: "Channel Menu - Setup Channel - Holiday Schedule",
+        intro: "Each channel can have its own Halloween, Christmas and Thanksgiving media. In the channel’s settings open Holiday Schedule; each holiday button opens the file explorer for that holiday’s shows.",
+        points: [
+          { label: "When they play", text: "A holiday schedule takes over for the three days up to and including the holiday; Thanksgiving is the fourth Thursday of November. Holiday media always plays in random order." },
+          { label: "Force", text: "Plays that holiday’s schedule now, whatever the date, until you turn it off. It also shows that holiday’s bezel." },
+          { label: "Clear Media", text: "Removes this channel’s holiday media." },
+        ],
+        image: { src: "/images/Holidays.png", alt: "Channel holiday schedule page with Force switches" },
+      },
+      {
+        title: "Channel Menu - Setup Channel - Watermark",
+        intro: "In a channel’s settings, turn Watermark on and use Add to pick an image with the mouse; it shows in the corner of that station, like a TV network logo. The app keeps its own copy of the image in the channel’s folder. Keep it subtle: a logo that never moves adds burn-in risk.",
+        image: { src: "/images/Watermark.png", alt: "Watermark on screen" },
+      },
+      {
+        title: "Channel Menu - Setup Channel - Visualizer",
         intro: "Turn Music on in a channel’s settings to make it a music station. Music plays on the clock like a TV station, with a visualizer on screen. The options, top to bottom:",
         points: [
           { label: "On/Off, Music and Name", text: "The same as for a TV channel." },
@@ -313,25 +267,109 @@ const sections: TutorialSection[] = [
         image: { src: "/images/VisualizerSchedulingmenu.png", alt: "Music station settings with visualizer style and reactive strength" },
       },
       {
-        title: "Visualizer Choices",
+        title: "Channel Menu - Setup Channel - Visualizer Choices",
         intro: "In a music station’s settings, A and D pick the visualizer design. Choose Random for a new design with each song, or lock one design.",
-        image: { src: "/images/visualizer.png", alt: "The visualizer designs you can choose for a music station" },
+        image: { src: "/images/visualizer.png", alt: "The visualizer designs you can choose for a music station", alts: ["The Prism Shards visualizer", "The Liquid Chrome visualizer", "The Pulse Rings visualizer", "The Warp Tunnel visualizer", "The Glow Braid visualizer", "The Equalizer Grid visualizer", "The Particle Flow visualizer", "The Neon Starfield visualizer", "The Lightning visualizer"] },
+      },
+      {
+        title: "Media Scans",
+        noPlaceholder: true,
+        intro: "When you add media, the app scans each file once and saves the results in its media library, so the TV Guide, the station and a restart all use the same answers.",
+        points: [
+          { label: "What is scanned", text: "Each file’s length, its picture box (the real picture inside any black bars) and its loudness, in that order. Shows airing now come first, then upcoming commercials, then the next few shows, then everything further out." },
+          { label: "Tuning to a channel", text: "The channel you tune to jumps the queue: its show is scanned first so it plays at the right size and volume." },
+          { label: "Loudness", text: "With Loudness Scan on, every file is measured against the broadcast target of −24 LUFS so volume stays even between shows and commercials." },
+          { label: "Saved results", text: "Unchanged files are never scanned again, even when moved or renamed. Files confirmed broken are taken out of the schedule; a short episode that loses its partner gets a new one." },
+        ],
       },
     ],
   },
   {
-    title: "Game Channel (Channel 03)",
+    title: "Video Tab",
+    lead: {
+        intro: "The Video tab sets the TV stations’ picture. Each slider runs from 0 to 100 with 50 as normal; A and D move it, and holding the key slides it all the way across.",
+        points: [
+          { label: "Brightness", text: "Lifts or darkens the whole picture." },
+          { label: "Contrast", text: "Widens or narrows the gap between dark and bright." },
+          { label: "Color", text: "How strong the colours are; all the way down gives a black-and-white broadcast." },
+          { label: "Sharpness", text: "Sharpens or softens edges." },
+          { label: "Tint", text: "Shifts the colours toward green or purple, like the tint knob on an old set." },
+        ],
+        image: { src: "/images/VideoTab.png", alt: "Retro TV Emulator Video tab with screen modes and picture sliders" },
+    },
     topics: [
       {
-        title: "The Games Tab",
-        intro: "Turn on Games (Channel 03) in the System tab, then open the Games tab. The tiles are Menu Options, DVD Video Interactive and every console; a green dot means on, red off. The arrow turns the page. Below the tiles:",
+        title: "Screen Modes",
+        noPlaceholder: true,
+        intro: "The buttons along the top of the Video tab decide how each show fills your screen. They apply to Channels 05–44; games and the DVD player have their own.",
+        points: [
+          { label: "Normal Mode", text: "Keeps the picture’s shape, with bars where it does not fill the screen (black or grey, set in the Theme tab)." },
+          { label: "Stretch Fit", text: "Stretches the picture to fill the screen, even if that changes its shape." },
+          { label: "Crop Fit", text: "Zooms in to fill the screen and trims the edges, without stretching." },
+          { label: "Pan & Scan", text: "Fills the screen like Crop Fit, but the crop moves to follow the action instead of always keeping the middle." },
+          { label: "Picture box (Normal Mode)", text: "Many files have black bars recorded into the video itself. Each file is scanned once to find the real picture inside them, and in Normal Mode the app cuts the recorded bars away and fits the real picture to your screen, so an old 4:3 show stored in a widescreen file does not end up as a small box in the middle. Until its scan lands, a file plays with its full frame." },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Theme Tab",
+    lead: {
+        intro: "The Theme tab sets the look of the menus and the screens between channels. The options, top to bottom:",
+        points: [
+          { label: "Volume Bar", text: "Volume 1 or Volume 2: the style of the volume and mute display that appears when you press Left, Right or N." },
+          { label: "Channel Static", text: "The colour of the static: White, Grey, Rainbow, or Theme (your background colour). It changes the static between channels and tints the Static Noise and Reception Lines effects." },
+          { label: "Channel Transition", text: "What shows when you change channel: Static (a short burst of static) or Black (a quick grey TV screen). Either one falls back to the grey screen if the next show is not ready yet." },
+          { label: "Letterboxing", text: "The colour of the bars beside a picture that does not fill the screen: Black or Grey." },
+          { label: "Menu Opacity", text: "How see-through the menus are, so the show behind stays visible." },
+          { label: "Background Color", text: "The colour of the menu backgrounds; slide along the rainbow." },
+          { label: "Border/Text Color", text: "The colour of the borders, highlights and titles." },
+        ],
+        image: { src: "/images/ThemeTab.png", alt: "Retro TV Emulator Theme tab with colour and opacity sliders" },
+    },
+    topics: [
+
+    ],
+  },
+  {
+    title: "TV Guide (Channel 04)",
+    lead: {
+        intro: "Turn on TV Guide (Channel 04) in the System tab, then tune to Channel 04 to see every station’s schedule, with a live preview of the highlighted channel. The grid, the preview and the station all read the same saved information, so what the guide shows is what plays.",
+        points: [
+          { label: "Moving around", text: "W and S move between channels, A and D move through the time slots, and Enter tunes to the highlighted station." },
+          { label: "Checking your schedule", text: "After building a station, look here to see what aired, what is on and what comes next." },
+          { label: "Preview", text: "The preview shows what is playing on the highlighted station. If that station’s media cannot load, the preview shows static." },
+        ],
+        image: { src: "/images/TVGuide.png", alt: "Retro TV Emulator TV Guide showing the channel grid and live preview" },
+    },
+    topics: [
+
+    ],
+  },
+  {
+    title: "Game Channel (Channel 03)",
+    lead: {
+        noPlaceholder: true,
+        intro: "Setting up in short: turn on Games (Channel 03) in the System tab, open the Games tab, scan for your cores and ROMs, turn on the consoles you want, then tune to Channel 03 and pick a game.",
+        steps: [
+          "System tab: turn on Games (Channel 03). Channel 03 then appears on the dial and the Games tab appears.",
+          "Games tab > Menu Options: use Scan for Cores and Scan for ROMs and point them at your RetroArch folder or your retro collection. The app finds and sorts the emulator cores, ROMs and BIOS files. ZIP, 7Z and RAR archives work.",
+          "Turn on the consoles you want (green dot) and open each one to check its core, controller mapping and save profile.",
+          "PlayStation games need a BIOS. If the scan did not find one, use Add BIOS inside the PlayStation settings.",
+          "Tune to Channel 03, pick a console with the arrows and Enter, pick a game, and play with a controller.",
+        ],
+    },
+    topics: [
+      {
+        title: "Games Tab",
+        intro: "The tiles are Menu Options, DVD Video Interactive and every console; a green dot means on, red off. The arrow turns the page. Below the tiles:",
         points: [
           { label: "All Consoles", text: "Turns every console on or off at once. The DVD player is not changed." },
           { label: "All Settings", text: "A setting you change on one console (controller mapping, screen size, splash screen) is copied to every console, for the save profile shown beside it." },
-          { label: "Screen Saver", text: "Starts a moving screen saver when the game menus sit idle, so nothing stays fixed on the screen. Keep it on; turning it off shows a burn-in warning." },
+          { label: "Screen Saver", text: "Starts a moving screen saver when the game menus sit idle, so nothing stays fixed on the screen. Keep it on; turning it off shows a burn-in warning. A key press, controller button or stick move dismisses it." },
           { label: "Screen Saver Timer", text: "How long the menus wait before the screen saver starts (5 minutes by default)." },
-          { label: "Game Music", text: "Plays music while you browse the game menus." },
-          { label: "Set Music", text: "Picks your own music track for the game menus; Add opens the file explorer." },
+          { label: "Game Music", text: "Plays music while you browse the game menus (not while a game or disc is playing)." },
+          { label: "Set Music", text: "Picks your own tracks for the game menus; Add opens the file explorer. Without your own music the app plays its built-in track." },
         ],
         image: { src: "/images/GamesTab.png", alt: "Retro TV Emulator Games tab showing the console tiles" },
       },
@@ -345,10 +383,21 @@ const sections: TutorialSection[] = [
           { label: "Multitap (All Consoles)", text: "Adds players three and four on consoles that support them." },
           { label: "Game Screen Mode", text: "Normal Mode keeps the game’s shape; Stretch Fit fills the screen. Separate from the TV stations’ screen mode." },
           { label: "Scroll Style", text: "How the consoles move on Channel 03: Carousel, Side to Side or Up / Down. The colour box beside it sets the menu text colour." },
-          { label: "Scan for Cores and Scan for ROMs", text: "Point them at your RetroArch folder or your retro collection; the app finds and sorts the emulator cores, ROMs and BIOS files. ZIP, 7Z and RAR archives work." },
-          { label: "Clear Cores and Clear ROMs", text: "Empty the app’s core and ROM lists after asking you to confirm. Your own files elsewhere are not deleted." },
+          { label: "Scan for Cores and Scan for ROMs", text: "Point them at your RetroArch folder or your retro collection; the app finds and sorts the emulator cores, ROMs and BIOS files." },
+          { label: "Clear Cores, Clear BIOS and Clear ROMs", text: "Forget the app’s core, BIOS and ROM lists after asking you to confirm. Clearing cores and BIOS also deletes the copies the app made in main/cores; your own files elsewhere are never deleted." },
         ],
         image: { src: "/images/GameChannelMenu.png", alt: "Games Menu Options page" },
+      },
+      {
+        title: "Menu Options - Controller Mapping",
+        intro: "Menu Options > Controller Mapping shows your controller’s buttons, with the name each console uses on one side and the controller button on the other, so you can see what every button does in the game menus.",
+        points: [
+          { label: "Map Controller", text: "Goes through the buttons one by one: press the button you want for each one." },
+          { label: "L-Stick as D-Pad", text: "Lets the left analogue stick move around the menus like the D-pad." },
+          { label: "Pick Controller", text: "Chooses which connected controller you are mapping; the number beside it is the player." },
+          { label: "Close", text: "Returns to the Games menu." },
+        ],
+        image: { src: "/images/ControllerMapping.png", alt: "Controller Mapping page showing the controller diagram and button names" },
       },
       {
         title: "Console Settings",
@@ -365,6 +414,48 @@ const sections: TutorialSection[] = [
         image: { src: "/images/ConsoleSettings.png", alt: "PlayStation console settings with BIOS, save profiles and Change Disc", alts: ["PlayStation console settings with BIOS, save profiles and Change Disc", "Game Boy Advance console settings with core, save profiles and ROMs"] },
       },
       {
+        title: "Save Profile Page",
+        image: { src: "/images/SaveProfile.png", alt: "Save profile page with Active Profile, Save Now, Load Now, Auto-Save, Auto-Load, Screen Size and TV Bezel" },
+        intro: "Open a console’s profile page to manage saves. Everything except Active Profile works on the active profile only.",
+        points: [
+          { label: "Active Profile", text: "Shows which profile you are on (Profile 1, 2 or 3) and makes it the active one." },
+          { label: "Save Now and Load Now", text: "Write or load a save state for the running game in the active profile. If it cannot, a banner says why (for example NO GAME IS RUNNING or NO SAVE FOUND)." },
+          { label: "Auto-Save and Auto-Load", text: "Auto Save writes a save state when you quit the game, leave Channel 03 or the screen saver starts. Auto Load loads that state when the game starts." },
+          { label: "Screen Size and TV Bezel", text: "Screen Size (Full in the picture) is for handheld consoles. TV Bezel frames the game in a TV set (consoles with a bezel); turning it on shows a burn-in warning. It belongs to the profile and is not drawn while CRT TV Bezels is on for the TV stations." },
+        ],
+      },
+      {
+        title: "Console Picker",
+        intro: "Tune to Channel 03 to see the console picker. It shows the consoles you turned on, plus the DVD player, one at a time over your background picture, and the line at the bottom shows the keys and controller buttons.",
+        points: [
+          { label: "Navigate", text: "Move between consoles with the D-pad or W/A/S/D. How they move follows the Scroll Style you chose in Menu Options." },
+          { label: "Select", text: "A or Enter opens the console’s game list (or starts the DVD player)." },
+          { label: "Back", text: "B or Escape goes back." },
+        ],
+        image: { src: "/images/ConsolePicker.png", alt: "Channel 03 console picker showing the Super Nintendo logo with the other consoles around it" },
+      },
+      {
+        title: "Game List",
+        intro: "Select a console to see its games. The highlighted game is shown in green with arrows beside it; the arrows at the right show that the list continues up or down.",
+        points: [
+          { label: "Navigate", text: "Move up and down the list with the D-pad or W/A/S/D." },
+          { label: "Launch", text: "A or Enter starts the highlighted game." },
+          { label: "Back", text: "B or Escape returns to the console picker." },
+        ],
+        image: { src: "/images/GameList.png", alt: "Channel 03 game list for the Super Nintendo with one game highlighted" },
+      },
+      {
+        title: "Playing Games",
+        image: { src: "/images/GameLoading.png", alt: "The game loading screen with a progress bar over a retro Super Nintendo scene" },
+        intro: "While a game starts, this loading screen shows a progress bar.",
+        points: [
+          { label: "Game menus", text: "Keyboard: W/A/S/D move, Enter selects, Escape goes back. Controller: the D-pad moves, A selects, B goes back. The legend at the bottom of each game screen shows both." },
+          { label: "Playing", text: "Launched games are played with a controller only." },
+          { label: "Save and load hotkeys", text: "During a game, Left Bumper + Right Bumper + Back saves a state, and Left Trigger + Right Trigger + Back loads it." },
+          { label: "Quitting", text: "Press Escape, or hold Start and Select together, to open EXIT GAME? with No selected. The game pauses behind it. Choose Yes to quit (the state is saved first when Auto Save is on) and return to the game list; choose No or press Back to keep playing. It closes itself after 30 seconds." },
+        ],
+      },
+      {
         title: "Supported Consoles & Files",
         noPlaceholder: true,
         points: [
@@ -374,94 +465,8 @@ const sections: TutorialSection[] = [
         ],
       },
       {
-        title: "Playing Games",
-        noPlaceholder: true,
-        points: [
-          { label: "Game menus", text: "Keyboard: W/A/S/D move, Enter selects, Escape goes back. Controller: the D-pad moves, A selects, B goes back. The legend at the bottom of each game screen shows both." },
-          { label: "Playing", text: "Launched games are played with a controller only." },
-          { label: "Quitting", text: "Hold Start and Select together for about half a second, or press Escape, to quit the game." },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Video Settings",
-    topics: [
-      {
-        title: "Picture Adjustments",
-        intro: "The Video tab sets the TV stations’ picture. Each slider runs from 0 to 100 with 50 as normal; A and D move it.",
-        points: [
-          { label: "Brightness", text: "Lifts or darkens the whole picture." },
-          { label: "Contrast", text: "Widens or narrows the gap between dark and bright." },
-          { label: "Color", text: "How strong the colours are; all the way down gives a black-and-white broadcast." },
-          { label: "Sharpness", text: "Sharpens or softens edges." },
-          { label: "Tint", text: "Shifts the colours toward green or purple, like the tint knob on an old set." },
-        ],
-        image: { src: "/images/VideoTab.png", alt: "Retro TV Emulator Video tab with screen modes and picture sliders" },
-      },
-      {
-        title: "Screen Modes",
-        noPlaceholder: true,
-        intro: "The buttons along the top decide how each show fills your screen. They apply to Channels 05–44; games and the DVD player have their own.",
-        points: [
-          { label: "Normal Mode", text: "Keeps the picture’s shape, with bars where it does not fill the screen (black or grey, set in the Theme tab)." },
-          { label: "Stretch Fit", text: "Stretches the picture to fill the screen, even if that changes its shape." },
-          { label: "Crop Fit", text: "Zooms in to fill the screen and trims the edges, without stretching." },
-          { label: "Pan & Scan", text: "Fills the screen like Crop Fit, but the crop moves to follow the action instead of always keeping the middle." },
-        ],
-      },
-      {
-        title: "Picture Box in Normal Mode",
-        noPlaceholder: true,
-        intro: "Many files have black bars recorded into the video itself: bars top and bottom, at the sides, or all the way round (a picture inside a box). The picture-box scan finds the real picture inside those bars. In Normal Mode the app cuts the recorded bars away and fits the real picture to your screen, so an old 4:3 show stored in a widescreen file does not end up as a small box in the middle. Each file is scanned once; until its scan lands it plays with its full frame.",
-      },
-    ],
-  },
-  {
-    title: "Theme Settings",
-    topics: [
-      {
-        title: "Theme Options",
-        intro: "The Theme tab sets the look of the menus and the screens between channels. The options, top to bottom:",
-        points: [
-          { label: "Volume Bar", text: "Volume 1 or Volume 2: the style of the volume and mute display that appears when you press Left, Right or N." },
-          { label: "Channel Static", text: "The colour of the static between channels: White, Grey, Rainbow, or Theme (your background colour)." },
-          { label: "Channel Transition", text: "What shows between channels: Static or Black. This is separate from the static shown when a channel cannot play." },
-          { label: "Letterboxing", text: "The colour of the bars beside a picture that does not fill the screen: Black or Grey." },
-          { label: "Menu Opacity", text: "How see-through the menus are, so the show behind stays visible." },
-          { label: "Background Color", text: "The colour of the menu backgrounds; slide along the rainbow." },
-          { label: "Border/Text Color", text: "The colour of the borders, highlights and titles." },
-        ],
-        image: { src: "/images/ThemeTab.png", alt: "Retro TV Emulator Theme tab with colour and opacity sliders" },
-      },
-    ],
-  },
-  {
-    title: "TV Guide (Channel 04)",
-    topics: [
-      {
-        title: "Using the TV Guide",
-        intro: "Tune to Channel 04 to see every station’s schedule, with a live preview of the highlighted channel. The grid, the preview and the station all read the same saved information, so what the guide shows is what plays.",
-        points: [
-          { label: "Moving around", text: "W and S move between channels, A and D move through the time slots, and Enter tunes to the highlighted station." },
-          { label: "Checking your schedule", text: "After building a station, look here to see what aired, what is on and what comes next." },
-          { label: "Idle", text: "After 60 seconds without a key press the guide closes and tunes to the station it was previewing." },
-        ],
-        image: { src: "/images/TVGuide.png", alt: "Retro TV Emulator Theme tab with colour and opacity sliders" },
-      },
-    ],
-  },
-  {
-    title: "DVD & Media Player",
-    topics: [
-      {
-        title: "Using the DVD Player",
-        noPlaceholder: true,
-        intro: "Choose DVD on Channel 03 to play movie DVDs from your optical drive, DVD .iso backups, or video files. No core, BIOS or save profile is needed. Movie files and .iso files can go in main/roms/DVD/ inside _internal. Movie DVD menus work; interactive DVD games are not supported.",
-      },
-      {
-        title: "DVD Settings",
-        intro: "Games tab > DVD Video Interactive. The DVD player is always on.",
+        title: "DVD & Media Player",
+        intro: "Choose DVD on Channel 03 to play movie DVDs from your optical drive, DVD .iso backups, or plain video files. No core, BIOS or save profile is needed. Movie files and .iso files can go in main/roms/DVD/ inside _internal. Movie DVD menus work; interactive DVD games are not supported. Settings are in Games tab > DVD Video Interactive; the DVD player is always on.",
         points: [
           { label: "Button Mapping", text: "Changes which keys play, pause, skip and return to the disc menu." },
           { label: "Screen Mode", text: "Normal Mode, Stretch Fit, Crop Fit or Pan & Scan for movies, separate from the TV stations." },
@@ -469,29 +474,68 @@ const sections: TutorialSection[] = [
           { label: "Splash Screen", text: "Your own picture or video while a disc loads; Video and Image pick the file." },
           { label: "Captions", text: "Captions for movies, separate from the TV stations’ captions. Not available in Lite mode." },
           { label: "Resume", text: "Starts a disc again where you stopped it." },
+          { label: "Keyboard", text: "Play pauses and plays. Tap Rewind or Fast Forward to skip, hold to seek. Backspace returns to the disc’s main menu. W/A/S/D navigate disc menus and Yes/No popups, Enter confirms. Escape asks Quit? with No selected." },
+          { label: "Controller", text: "Down pauses and plays. Tap Left or Right to skip, hold to seek. The D-pad navigates, A selects, B goes back, and Y returns to the disc’s main menu. Hold Start and Select to open Quit?." },
         ],
         image: { src: "/images/DVDMenu.png", alt: "DVD Video Interactive settings" },
-      },
-      {
-        title: "DVD Controls",
-        noPlaceholder: true,
-        points: [
-          { label: "Keyboard", text: "Play pauses and plays. Tap Rewind or Fast Forward to skip, hold to seek. Backspace returns to the disc’s main menu. W/A/S/D navigate disc menus and Yes/No popups, Enter confirms. Escape quits the DVD." },
-          { label: "Controller", text: "Down pauses and plays. Tap Left or Right to skip, hold to seek. The D-pad navigates, A selects, B goes back, and Y returns to the disc’s main menu. Hold Start and Select to quit the DVD." },
-        ],
       },
     ],
   },
   {
     title: "Extras",
-    noPlaceholder: true,
     topics: [
       {
+        title: "TV Bezels",
+        intro: "A bezel is the frame of a vintage TV set drawn around the picture. Turn on CRT TV Bezels in Channels > Settings and the stations play inside the screen of the set, with the channel number shown in the set’s own number window on the styles that have one.",
+        points: [
+          { label: "Bezel Style", text: "When more than one style is installed, a Bezel Style number appears under the CRT TV Bezels switch. Press A or D to step through the styles and see each one change on screen." },
+          { label: "Screen shape", text: "The wood-cabinet style is drawn for a true 16:9 screen, so it is only offered on one. On other screen shapes it is hidden and the other styles stay." },
+          { label: "Menus", text: "While a bezel style is on, the menus shrink slightly so they fit inside the frame." },
+          { label: "Burn-in", text: "A fixed frame that never moves adds burn-in risk on long sessions, so turning a bezel on shows a warning." },
+          { label: "Console bezels", text: "Games have bezels too, set per save profile on a console’s profile page. When CRT TV Bezels is on, the console’s own bezel is not drawn, so the two frames never stack." },
+        ],
+        image: { src: "/images/Bezel.png", alt: "TV stations playing inside the TV bezel styles", alts: ["A retro TV bezel with a blue glow and the channel number in its window, shown in a room scene", "A close-up of the retro TV bezel with the channel number window", "The wood-cabinet TV bezel style with static on its screen"] },
+      },
+      {
+        title: "Holiday Bezels - Halloween",
+        image: { src: "/images/HalloweenBezel.png", alt: "The TV bezels in their Halloween versions", alts: ["The blue-glow TV bezel in its Halloween version, shown in a room scene", "A close-up of the blue-glow TV bezel in its Halloween version", "The wood-cabinet TV bezel in its Halloween version"] },
+      },
+      {
+        title: "Holiday Bezels - Thanksgiving",
+        image: { src: "/images/ThanksgivingBezel.png", alt: "The TV bezels in their Thanksgiving versions", alts: ["The blue-glow TV bezel in its Thanksgiving version, shown in a room scene", "A close-up of the blue-glow TV bezel in its Thanksgiving version", "The wood-cabinet TV bezel in its Thanksgiving version"] },
+      },
+      {
+        title: "Holiday Bezels - Christmas",
+        image: { src: "/images/ChristmasBezel.png", alt: "The TV bezels in their Christmas versions", alts: ["The blue-glow TV bezel in its Christmas version, shown in a room scene", "A close-up of the blue-glow TV bezel in its Christmas version", "The wood-cabinet TV bezel in its Christmas version"] },
+      },
+      {
+        title: "Holiday Bezels",
+        noPlaceholder: true,
+        intro: "Each bezel style can have Halloween, Christmas and Thanksgiving versions. During a holiday the app swaps the bezel for that style’s holiday version by itself, and puts the normal one back when the holiday is over.",
+        points: [
+          { label: "When they show", text: "The same three days up to and including the holiday that the holiday schedules use. Force on a channel’s Holiday Schedule page shows the holiday bezel now." },
+          { label: "Styles without one", text: "A style that has no holiday version keeps its normal bezel during the holiday." },
+          { label: "Your own bezels", text: "Bezel pictures are kept in main/images/bezel. A holiday version goes next to the style it replaces and is named with the holiday: bezelHalloween, bezelChristmas or bezelThanksgiving for the first style, and bezelChristmas1 or bezelChristmas2 for numbered styles." },
+        ],
+      },
+      {
         title: "Captions",
-        intro: "Captions use subtitles inside the video or a caption file beside it. When a video has neither, live speech captions are made with the model in _internal/main/models/whisper/ and saved in main/captions/ so they are made once. Captions (TV and DVD) are not available in Lite mode.",
+        image: { src: "/images/Captions.png", alt: "A TV station showing captions along the bottom of the picture" },
+        intro: "Captions use subtitles inside the video or a caption file beside it. When a video has neither, live speech captions are made as the video plays with the model in _internal/main/models/whisper/. Captions (TV and DVD) are not available in Lite mode.",
+      },
+      {
+        title: "When a Channel Can’t Play",
+        image: { src: "/images/CantPlay.png", alt: "Static with a red banner at the bottom explaining why the channel cannot play" },
+        intro: "A channel with no media shows moving static. If a station’s media cannot load, a drive is missing or stalls, or a file is broken, the station shows the same static with a short red banner explaining why. The banner goes away after a while to protect the screen, and the app keeps retrying in the background. Check that the files still exist and external drives are connected and awake.",
+      },
+      {
+        title: "Updates",
+        image: { src: "/images/UpdatePopup.png", alt: "The update pop-up asking Update and Restart with Yes and No buttons" },
+        intro: "The app checks for a new version at start and asks before installing; Advanced Settings > Look for Updates checks now. Don’t show this again stops the start-up question; checking by hand still asks. A progress bar shows the install and the app restarts by itself when it is done. Updates keep your settings and data and remove files the new version no longer uses, but back up your settings and game saves first.",
       },
       {
         title: "Burn-In Safeguards",
+        noPlaceholder: true,
         intro: "Menus close after 60 seconds idle, the Pixel Orbiter moves on-screen elements, the game menu screen saver starts when idle, and song titles disappear after 60 seconds.",
         points: [
           { label: "Warnings", text: "Turning off the Pixel Orbiter or the screen saver, keeping a bezel on, or locking a music station to one visualizer shows a warning with a Don’t show this again box. Dismissing it does not remove the risk." },
@@ -499,19 +543,13 @@ const sections: TutorialSection[] = [
         ],
       },
       {
-        title: "When a Channel Can’t Play",
-        intro: "If a station’s media cannot load, a drive is missing or stalls, or a file is broken, the station shows moving static with a short banner explaining why, and keeps retrying in the background. Check that the files still exist and external drives are connected and awake.",
-      },
-      {
         title: "Kiosk Mode",
-        intro: "Once everything is set up, turn on Kiosk (Hide Scheduling) in the System tab. Scheduling and setup are hidden while the picture, theme and game choices stay available. In Kiosk Mode the System tab shows only the Kiosk switch and Exit Program; turn Kiosk off there to make changes again.",
-      },
-      {
-        title: "Updates",
-        intro: "The app checks for a new version at start and asks before installing; Advanced Settings > Look for Updates checks now. Don’t show this again stops the start-up question; checking by hand still asks. Updates keep your settings and data and restart the app, but back up your settings and game saves first.",
+        noPlaceholder: true,
+        intro: "Once everything is set up, turn on Kiosk (Hide Scheduling) in the System tab. Scheduling and setup are hidden while the picture, theme and game choices stay available, and the C key no longer opens the Controls Menu. In Kiosk Mode the System tab shows only the Kiosk switch and Exit Program; turn Kiosk off there to make changes again.",
       },
       {
         title: "Files, Backups & Problem Reports",
+        noPlaceholder: true,
         points: [
           { label: "Settings", text: "retro_config.json in the app folder holds your settings, channels and schedule positions; back it up before big changes. Leave .retro_tv_device_id alone." },
           { label: "Media library", text: "main/media_library/library.sqlite3 holds the scan results. Files are recognised by their content, so moved or renamed files keep their results." },
@@ -560,6 +598,61 @@ function TutorialComingSoon() {
   );
 }
 
+function TopicBody({ topic, noPlaceholder }: { topic: TutorialTopic; noPlaceholder?: boolean }) {
+  const label = topic.title ?? "Tutorial";
+  return (
+    <>
+      {topic.video ? (
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200">
+          <img src="/images/default.png" alt="Retro TV Emulator Video Tutorial" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
+          <div className="relative z-10 size-16 rounded-full bg-red-600 flex items-center justify-center shadow-xl group-hover:bg-red-700 transition-colors duration-200">
+            <svg className="size-8 text-white fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+          </div>
+          <div className="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">
+            <img src="/images/youtube-logo.png" alt="YouTube Logo" className="h-3.5 w-auto object-contain" />
+          </div>
+        </a>
+      ) : topic.image ? (
+        <TutorialImages spot={topic.image} title={label} stretch={topic.stretchImages} />
+      ) : noPlaceholder || topic.noPlaceholder ? null : (
+        <div className="scanlines mx-auto flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground sm:w-[calc(50%-0.5rem)]">
+          <ImageIcon className="size-8 shrink-0" aria-hidden="true" />
+          <span>Tutorial image placeholder</span>
+        </div>
+      )}
+      {topic.intro && <p className="leading-7 text-muted-foreground">{topic.intro}</p>}
+      {topic.steps && (
+        <ol className="flex list-decimal flex-col gap-3 pl-5 text-muted-foreground">
+          {topic.steps.map((step) => <li key={step} className="pl-1 leading-7">{step}</li>)}
+        </ol>
+      )}
+      {topic.example && (
+        <div className="mx-auto w-fit max-w-full overflow-x-auto rounded-lg border bg-card font-mono text-sm leading-6 text-muted-foreground" style={{ padding: "1rem 2rem" }}>
+          {topic.example.split("\n").map((line, i) => {
+            const indent = line.length - line.trimStart().length;
+            const isFolder = line.trim().endsWith("/");
+            return (
+              <div key={i} className="flex items-center gap-2 whitespace-pre" style={{ paddingLeft: `${indent / 2 * 1.5}rem` }}>
+                {topic.exampleIcon && isFolder ? <img src={topic.exampleIcon} alt="" aria-hidden="true" className="size-5 shrink-0 object-contain" /> : topic.exampleIcon ? <span className="size-5 shrink-0" aria-hidden="true" /> : null}
+                <span>{line.trim().replace(/\/$/, "")}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      {topic.points && (
+        <ul className="flex list-disc flex-col gap-3 pl-5 text-muted-foreground">
+          {topic.points.map((point) => (
+            <li key={point.label} className="pl-1 leading-7">
+              <strong className="font-medium text-foreground">{point.label}: </strong>{point.text}
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
+}
+
 function TutorialContent() {
   return (
     <div className="tutorial-page scanlines flex-1">
@@ -568,50 +661,20 @@ function TutorialContent() {
         <div className="mt-8 flex flex-col gap-10">
           {allSections.map((section) => (
             <section key={section.title} className="flex flex-col gap-8 border-b border-border/60 pb-10 last:border-0">
-              {!section.standalone && <h2 className="text-center font-display text-3xl text-primary">{section.title}</h2>}
+              {!section.standalone && <h2 className="text-center font-display text-3xl text-primary" style={{ textDecoration: "underline", textUnderlineOffset: "0.3em", textDecorationThickness: "2px" }}>{section.title}</h2>}
+              {section.lead && (
+                <div className="flex min-w-0 flex-col gap-3">
+                  <TopicBody topic={section.lead} noPlaceholder={section.noPlaceholder} />
+                </div>
+              )}
               {section.topics.map((topic) => (
                 <div key={topic.title} className="flex min-w-0 flex-col gap-3">
                   {section.standalone ? (
-                    <h2 className="text-center font-display text-3xl text-primary">{topic.title}</h2>
+                    <h2 className="text-center font-display text-3xl text-primary" style={{ textDecoration: "underline", textUnderlineOffset: "0.3em", textDecorationThickness: "2px" }}>{topic.title}</h2>
                   ) : (
                     <h3 className="text-center font-display text-2xl text-primary">{topic.title}</h3>
                   )}
-                  {topic.video ? (
-                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200">
-                      <img src="/images/default.png" alt="Retro TV Emulator Video Tutorial" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
-                      <div className="relative z-10 size-16 rounded-full bg-red-600 flex items-center justify-center shadow-xl group-hover:bg-red-700 transition-colors duration-200">
-                        <svg className="size-8 text-white fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                      </div>
-                      <div className="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">
-                        <img src="/images/youtube-logo.png" alt="YouTube Logo" className="h-3.5 w-auto object-contain" />
-                      </div>
-                    </a>
-                  ) : topic.image ? (
-                    <TutorialImages spot={topic.image} title={topic.title} stretch={topic.stretchImages} />
-                  ) : section.noPlaceholder || topic.noPlaceholder ? null : (
-                    <div className={`scanlines mx-auto flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground ${topic.video ? "" : "sm:w-[calc(50%-0.5rem)]"}`}>
-                      <ImageIcon className="size-8 shrink-0" aria-hidden="true" />
-                      <span>{topic.video ? "Video placeholder" : "Tutorial image placeholder"}</span>
-                    </div>
-                  )}
-                  {topic.intro && <p className="leading-7 text-muted-foreground">{topic.intro}</p>}
-                  {topic.steps && (
-                    <ol className="flex list-decimal flex-col gap-3 pl-5 text-muted-foreground">
-                      {topic.steps.map((step) => <li key={step} className="pl-1 leading-7">{step}</li>)}
-                    </ol>
-                  )}
-                  {topic.example && (
-                    <pre className="overflow-x-auto rounded-lg border bg-card p-4 text-sm leading-6 text-muted-foreground"><code>{topic.example}</code></pre>
-                  )}
-                  {topic.points && (
-                    <ul className="flex list-disc flex-col gap-3 pl-5 text-muted-foreground">
-                      {topic.points.map((point) => (
-                        <li key={point.label} className="pl-1 leading-7">
-                          <strong className="font-medium text-foreground">{point.label}: </strong>{point.text}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                  <TopicBody topic={topic} noPlaceholder={section.noPlaceholder} />
                 </div>
               ))}
             </section>
