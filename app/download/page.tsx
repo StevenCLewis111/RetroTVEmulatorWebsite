@@ -5,8 +5,8 @@ import { getLatestRelease } from '@/lib/releases'
 import { site } from '@/lib/site'
 
 // Your icon files in public/images/. Change these two names if yours differ.
-const DISCORD_ICON = '/images/discord.png'
-const GITHUB_ICON = '/images/github.png'
+const DISCORD_ICON = '/images/DiscordLogo.png'
+const GITHUB_ICON = '/images/GitHubLogo.png'
 
 export const dynamic = 'force-static'
 
