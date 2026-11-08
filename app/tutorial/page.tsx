@@ -319,9 +319,8 @@ const sections: TutorialSection[] = [
     ],
   },
   {
-    title: "Channel 04",
+    title: "TV Guide",
     lead: {
-        title: "TV Guide",
         intro: "The TV Guide looks at the HUB and keeps the saved scheduled media up to date for you to see what comes on and when.",
         points: [
           { label: "Moving around", text: "W and S move between channels, A and D move through the time slots, and Enter tunes to the highlighted station." },
@@ -336,35 +335,23 @@ const sections: TutorialSection[] = [
     ],
   },
   {
-    title: "Channel 03",
+    title: "Games Tab",
     lead: {
-        title: "Game Channel",
-        noPlaceholder: true,
-        intro: "Setting up in short: turn on Games (Channel 03) in the System tab, open the Games tab, scan for your cores and ROMs, turn on the consoles you want, then tune to Channel 03 and pick a game.",
-        steps: [
-          "System tab: turn on Games (Channel 03). Channel 03 then appears on the dial and the Games tab appears.",
-          "Games tab > Menu Options: use Scan for Cores and Scan for ROMs and point them at your RetroArch folder or your retro collection. The app finds and sorts the emulator cores, ROMs and BIOS files. ZIP, 7Z and RAR archives work.",
-          "Turn on the consoles you want (green dot) and open each one to check its core, controller mapping and save profile.",
-          "PlayStation games need a BIOS. If the scan did not find one, use Add BIOS inside the PlayStation settings.",
-          "Tune to Channel 03, pick a console with the arrows and Enter, pick a game, and play with a controller.",
+        title: "Games Settings",
+        intro: "Each Logo is a button to a game console and its options:",
+        points: [
+          { label: "All Consoles", text: "Turns every console on or off at once except the DVD Player." },
+          { label: "All Settings", text: "If you want to turn on settings across all consoles all at once like auto save and auto load or splash screens, turn this setting on." },
+          { label: "Screen Saver", text: "This will start a moving screen saver when channel 03 sits idle longer than the decided time. It is burn in protection for channel 03." },
+          { label: "Screen Saver Timer", text: "How long the menus wait before the screen saver starts." },
+          { label: "Game Music", text: "Plays music while you browse the game menus." },
+          { label: "Set Music", text: "Picks your own tracks for the game menus." },
         ],
+        image: { src: "/images/GamesTab.png", alt: "Retro TV Emulator Games tab showing the console tiles" },
     },
     topics: [
       {
-        title: "Games Tab",
-        intro: "The tiles are Menu Options, DVD Video Interactive and every console; a green dot means on, red off. The arrow turns the page. Below the tiles:",
-        points: [
-          { label: "All Consoles", text: "Turns every console on or off at once. The DVD player is not changed." },
-          { label: "All Settings", text: "A setting you change on one console (controller mapping, screen size, splash screen) is copied to every console, for the save profile shown beside it." },
-          { label: "Screen Saver", text: "Starts a moving screen saver when the game menus sit idle, so nothing stays fixed on the screen. Keep it on; turning it off shows a burn-in warning. A key press, controller button or stick move dismisses it." },
-          { label: "Screen Saver Timer", text: "How long the menus wait before the screen saver starts (5 minutes by default)." },
-          { label: "Game Music", text: "Plays music while you browse the game menus (not while a game or disc is playing)." },
-          { label: "Set Music", text: "Picks your own tracks for the game menus; Add opens the file explorer. Without your own music the app plays its built-in track." },
-        ],
-        image: { src: "/images/GamesTab.png", alt: "Retro TV Emulator Games tab showing the console tiles" },
-      },
-      {
-        title: "Menu Options",
+        title: "Games Settings - Games Menu",
         intro: "Menu Options holds the settings shared by every console:",
         points: [
           { label: "Controller Mapping", text: "Assigns your controller’s buttons for each player. XInput and DirectInput controllers both work." },
@@ -379,7 +366,7 @@ const sections: TutorialSection[] = [
         image: { src: "/images/GameChannelMenu.png", alt: "Games Menu Options page" },
       },
       {
-        title: "Menu Options - Controller Mapping",
+        title: "Games Menu - Controller Mapping",
         intro: "Menu Options > Controller Mapping shows your controller’s buttons, with the name each console uses on one side and the controller button on the other, so you can see what every button does in the game menus.",
         points: [
           { label: "Map Controller", text: "Goes through the buttons one by one: press the button you want for each one." },
