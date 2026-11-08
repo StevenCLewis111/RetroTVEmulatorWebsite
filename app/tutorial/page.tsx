@@ -62,7 +62,7 @@ const sections: TutorialSection[] = [
         intro: "Download the app from the Download page, unzip the app folder somewhere such as your Desktop, Program Files or portable storage drive for a portable build, and run \"Retro TV Emulator.exe\". Create a shortcut for desktop or pin it to your taskbar or start if you would like. Do not move, rename, or delete anything inside _internal.",
         points: [
           { label: "Your settings live beside the exe", text: "The app saves your channels, settings and schedule positions in retro_config.json next to the exe. Keep that file with the app; if it is missing, the app starts as if it had never been used." },
-          { label: "Your media stays put", text: "Shows, movies, music and commercials can stay where they are on your computer. You will point the app at their location. Nothing is copied into the install folder. (For portable builds, make sure all media and files are on the same external drive)" },
+          { label: "Your media stays put", text: "Shows, movies, music and commercials can stay where they are on your computer. You will point the app at their location. Nothing is copied into the install folder. (For portable builds, make sure all media and files are on the same external drive. The project has folders for you to use but you dont have to)" },
         ],
         image: { src: "/images/Download.png", alt: "Downloading Retro TV Emulator and unzipping the app folder", alts: ["Downloading Retro TV Emulator and unzipping the app folder", "A computer screen showing a folder icon and the file explorer open to its contents"] },
       },
