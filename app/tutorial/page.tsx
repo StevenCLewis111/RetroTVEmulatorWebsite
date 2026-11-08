@@ -525,26 +525,26 @@ const sections: TutorialSection[] = [
       {
         title: "When a Channel Can’t Play",
         image: { src: "/images/CantPlay.png", alt: "Static with a red banner at the bottom explaining why the channel cannot play" },
-        intro: "A channel with no media shows moving static. If a station’s media cannot load, a drive is missing or stalls, or a file is broken, the station shows the same static with a short red banner explaining why. The banner goes away after a while to protect the screen, and the app keeps retrying in the background. Check that the files still exist and external drives are connected and awake.",
+        intro: "A channel with no media shows moving static. When the program boots for the first time with no media it starts with a static screen. If a station’s media cannot load, a drive is missing or stalls, or a file is broken, the station shows the same static with a short red banner explaining why. The banner goes away after a while to protect the screen, and the app keeps retrying in the background. Check that the files still exist and external drives are connected and awake.",
       },
       {
         title: "Updates",
         image: { src: "/images/UpdatePopup.png", alt: "The update pop-up asking Update and Restart with Yes and No buttons" },
-        intro: "The app checks for a new version at start and asks before installing; Advanced Settings > Look for Updates checks now. Don’t show this again stops the start-up question; checking by hand still asks. A progress bar shows the install and the app restarts by itself when it is done. Updates keep your settings and data and remove files the new version no longer uses, but back up your settings and game saves first.",
+        intro: "The app checks for a new version when it boots and asks before installing. You can check a box that will stop these notifications on boot. There is a manual Update button in Advanced Settings that you can use to check if you have notifications off. If you manually check Updates, you can uncheck the box at any time and get notifications again. If you accept the update, a load bar will start and when done, it will restart the app with updates installed.",
       },
       {
         title: "Burn-In Safeguards",
         noPlaceholder: true,
-        intro: "Menus close after 60 seconds idle, the Pixel Orbiter moves on-screen elements, the game menu screen saver starts when idle, and song titles disappear after 60 seconds.",
+        intro: "Every menu, pop up, or channel has some kind of burn in protection. Menus close after 60 seconds idle, the Pixel Orbiter moves on-screen elements, the game menu screen saver starts when idle for the set time in menu, the TV Guide will take you to the previewed station when idle, all channels fall back to static, the app reboots if it crashes (only helps burn in, if Kiosk mode is on and it launches full screen), and song titles disappear after 60 seconds.",
         points: [
-          { label: "Warnings", text: "Turning off the Pixel Orbiter or the screen saver, keeping a bezel on, or locking a music station to one visualizer shows a warning with a Don’t show this again box. Dismissing it does not remove the risk." },
-          { label: "Display care", text: "These help reduce the risk; they cannot remove it. Follow your display maker’s advice, especially for OLED, plasma and CRT screens." },
+          { label: "Warnings", text: "Turning off the Pixel Orbiter or the screen saver, turning on a bezel, or locking a music station to one visualizer shows a warning about burn in. There is a do not show this again box you can check for each one if you don't want to be reminded later." },
+          { label: "Display care", text: "These help reduce the risk; they cannot remove it. Follow your display maker’s advice, especially for OLED, plasma and CRT screens. All burn in is on by default, with warnings when turned off or using features that increase the risk of burn in. I am not responsible for burn in." },
         ],
       },
       {
         title: "Kiosk Mode",
         noPlaceholder: true,
-        intro: "Once everything is set up, turn on Kiosk (Hide Scheduling) in the System tab. Scheduling and setup are hidden while the picture, theme and game choices stay available, and the C key no longer opens the Controls Menu. In Kiosk Mode the System tab shows only the Kiosk switch and Exit Program; turn Kiosk off there to make changes again.",
+        intro: "Once everything is set up, you can turn on Kiosk Mode. Scheduling and setup are hidden while the picture, theme and game choices stay available, and the C key no longer opens the Controls Menu and it launches in full screen. In Kiosk Mode the System tab shows only the Kiosk switch and Exit Program. It hides the Channels Tab. Turn Kiosk off to make changes again.",
       },
       {
         title: "Files, Backups & Problem Reports",
