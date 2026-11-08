@@ -145,10 +145,6 @@ const sections: TutorialSection[] = [
       {
         title: "Advanced Settings - Remote Remapping",
         intro: "The Remote Remapping will show every action and the key it uses now. Remap Remote goes through the actions one by one. Press the key or PC remote button you want for each. Remap Numbers does the same for the number keys 0 to 9, these are here for any keyboard or remote not registering the number keys.",
-        points: [
-          { label: "Actions you can remap", text: "Nav Up, Nav Down, Nav Left, Nav Right, Select, Channel Up, Channel Down, Volume Up, Volume Down, Mute, Menu, Controls Menu and Back/Minimize." },
-          { label: "Defaults", text: "W, S, A, D, Enter, Up, Down, Right, Left, N, M, C and Escape. The controls in this tutorial are the default keys." },
-        ],
         image: { src: "/images/Remapping.png", alt: "Remote Remapping and Number Remapping page" },
       },
     ],
@@ -682,17 +678,17 @@ function TutorialContent() {
     <div className="tutorial-page scanlines flex-1">
       <div className="mx-auto w-full max-w-3xl px-4 py-12">
         <h1 className="text-center font-display text-5xl text-primary">Tutorial</h1>
-        <div className="mt-8 flex flex-col gap-10">
+        <div className="mt-8 flex flex-col gap-5">
           {allSections.map((section) => (
-            <section key={section.title} className="flex flex-col gap-8 border-b border-border/60 pb-10 last:border-0">
+            <section key={section.title} className={`flex flex-col ${section.standalone ? "gap-10" : "gap-8"} border-b border-border/60 pb-10 last:border-0`}>
               {!section.standalone && <h2 className="text-center font-display text-3xl text-primary" style={{ textDecoration: "underline", textUnderlineOffset: "0.3em", textDecorationThickness: "2px" }}>{section.title}</h2>}
               {section.lead && (
                 <div className="flex min-w-0 flex-col gap-3">
                   <TopicBody topic={section.lead} noPlaceholder={section.noPlaceholder} />
                 </div>
               )}
-              {section.topics.map((topic) => (
-                <div key={topic.title} className="flex min-w-0 flex-col gap-3">
+              {section.topics.map((topic, topicIndex) => (
+                <div key={topic.title} className={`flex min-w-0 flex-col gap-3 ${section.standalone && topicIndex > 0 ? "border-t border-border/60 pt-5" : ""}`}>
                   {section.standalone ? (
                     <h2 className="text-center font-display text-3xl text-primary" style={{ textDecoration: "underline", textUnderlineOffset: "0.3em", textDecorationThickness: "2px" }}>{topic.title}</h2>
                   ) : (

@@ -153,7 +153,7 @@ export default async function DownloadPage() {
 
         <section className="mt-[1.125rem] flex flex-col gap-3 sm:mt-6 sm:gap-3.5">
           <h2 className="font-display mb-1.5 text-2xl text-primary sm:mb-2.5 sm:text-3xl text-center underline decoration-2 underline-offset-[0.3em]">Links</h2>
-          <div className="flex flex-wrap items-center justify-center gap-3.5">
+          <div className="flex flex-wrap items-center gap-3.5">
             <a
               href={site.discordUrl}
               target="_blank"
@@ -164,7 +164,7 @@ export default async function DownloadPage() {
             </a>
             <span className="text-xs text-muted-foreground sm:text-sm">(For More Information)</span>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-3.5">
+          <div className="flex flex-wrap items-center gap-3.5">
             <a href={site.sourceZipGithubUrl} className={outlineButton}>
               <Code className="mr-2 size-4" aria-hidden="true" />
               Download Source Code : GitHub
