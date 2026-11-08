@@ -336,8 +336,9 @@ const sections: TutorialSection[] = [
     ],
   },
   {
-    title: "Game Channel (Channel 03)",
+    title: "Channel 03",
     lead: {
+        title: "Game Channel",
         noPlaceholder: true,
         intro: "Setting up in short: turn on Games (Channel 03) in the System tab, open the Games tab, scan for your cores and ROMs, turn on the consoles you want, then tune to Channel 03 and pick a game.",
         steps: [
