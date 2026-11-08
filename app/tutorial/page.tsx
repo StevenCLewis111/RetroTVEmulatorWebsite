@@ -171,12 +171,10 @@ const sections: TutorialSection[] = [
     topics: [
       {
         title: "Channels Menu",
-        intro: "Set up your stations here. Open the Channels tab to see Channels 05–44 over two pages. Setting up a station in short: pick a channel, turn it on, give it a name, choose how long its schedule blocks are, then add folders to each block. The sub-menus below follow that order.",
+        intro: "Set up your stations here. You have 40 channels over two pages to choose from and schedule.",
         points: [
-          { label: "Channel buttons", text: "Channels 05–44, twenty to a page. A green dot means the channel is on, red means off. Select a channel to open its settings (Setup Channel below)." },
-          { label: "Arrow (bottom right)", text: "Turns to the other page of channels." },
-          { label: "Settings (bottom left)", text: "The effects shared by every station: bezels, warp, static and scan lines (see Settings below)." },
-          { label: "Close", text: "Closes the menu." },
+          { label: "Channel buttons", text: "Channels 05–44, twenty per page. A green dot means the channel is on and a red dot means it is off. Select a channel to open its settings. Once media is added each one of these channel buttons has its own loading bar to show the progress of media scans." },
+          { label: "1/2 Arrow button", text: "This button reveals the other page of channels." },
         ],
         image: { src: "/images/ChannelsTab.png", alt: "Retro TV Emulator Channels tab showing Channels 05 to 24" },
       },
@@ -195,7 +193,7 @@ const sections: TutorialSection[] = [
         image: { src: "/images/ChannelsTabSettings.png", alt: "Channels Settings page with the CRT effect switches" },
       },
       {
-        title: "Channel Menu - Setup Channel - TV Station",
+        title: "Channel Menu - Scheduling Settings",
         intro: "Select a channel in the Channels tab. Changes affect what is coming up; what already aired stays as it was. The options, top to bottom:",
         points: [
           { label: "On/Off", text: "Turns the channel on or off. The last channel left on cannot be turned off, and turning off the channel you are watching tunes to the next one." },
@@ -214,7 +212,7 @@ const sections: TutorialSection[] = [
         image: { src: "/images/Scheduling.png", alt: "Channel scheduling settings with a 24-hour schedule", alts: ["Channel scheduling settings with a 24-hour schedule", "Channel scheduling settings with 8-hour blocks", "Channel scheduling settings with 4-hour blocks", "File explorer choosing video folders for a schedule block"] },
       },
       {
-        title: "Channel Menu - Setup Channel - Commercials",
+        title: "Scheduling Settings - Commercials",
         intro: "Turn Commercials on, then open Commercials (Add). Each button opens the file explorer for its clips.",
         points: [
           { label: "Commercials", text: "The commercial clips played in each break. A file longer than five minutes is not used as a commercial." },
@@ -226,7 +224,7 @@ const sections: TutorialSection[] = [
         image: { src: "/images/Commercials.png", alt: "Channel commercials page with Commercials, Fade-In and Fade-Out buttons" },
       },
       {
-        title: "Channel Menu - Setup Channel - Audio Track & Loudness Gain",
+        title: "Scheduling Settings - Audio Settings",
         intro: "Current Playing Audio Settings works on the channel you are watching (tune to it first). It lists the show’s audio tracks, such as languages or a commentary, and its loudness gain.",
         points: [
           { label: "Audio track", text: "Pick a track with Enter; the channel remembers it for that show." },
@@ -235,7 +233,7 @@ const sections: TutorialSection[] = [
         image: { src: "/images/GainAdjustment.png", alt: "Gain button and Audio Track Button" },
       },
       {
-        title: "Channel Menu - Setup Channel - Holiday Schedule",
+        title: "Scheduling Settings - Holiday Schedule",
         intro: "Each channel can have its own Halloween, Christmas and Thanksgiving media. In the channel’s settings open Holiday Schedule; each holiday button opens the file explorer for that holiday’s shows.",
         points: [
           { label: "When they play", text: "A holiday schedule takes over for the three days up to and including the holiday; Thanksgiving is the fourth Thursday of November. Holiday media always plays in random order." },
@@ -245,12 +243,12 @@ const sections: TutorialSection[] = [
         image: { src: "/images/Holidays.png", alt: "Channel holiday schedule page with Force switches" },
       },
       {
-        title: "Channel Menu - Setup Channel - Watermark",
+        title: "Scheduling Settings - Watermark",
         intro: "In a channel’s settings, turn Watermark on and use Add to pick an image with the mouse; it shows in the corner of that station, like a TV network logo. The app keeps its own copy of the image in the channel’s folder. Keep it subtle: a logo that never moves adds burn-in risk.",
         image: { src: "/images/Watermark.png", alt: "Watermark on screen" },
       },
       {
-        title: "Channel Menu - Setup Channel - Visualizer",
+        title: "Scheduling Settings - Visualizer",
         intro: "Turn Music on in a channel’s settings to make it a music station. Music plays on the clock like a TV station, with a visualizer on screen. The options, top to bottom:",
         points: [
           { label: "On/Off, Music and Name", text: "The same as for a TV channel." },
@@ -265,7 +263,7 @@ const sections: TutorialSection[] = [
         image: { src: "/images/VisualizerSchedulingmenu.png", alt: "Music station settings with visualizer style and reactive strength" },
       },
       {
-        title: "Channel Menu - Setup Channel - Visualizer Choices",
+        title: "Visualizer Choices",
         intro: "In a music station’s settings, A and D pick the visualizer design. Choose Random for a new design with each song, or lock one design.",
         image: { src: "/images/visualizer.png", alt: "The visualizer designs you can choose for a music station", alts: ["The Prism Shards visualizer", "The Liquid Chrome visualizer", "The Pulse Rings visualizer", "The Warp Tunnel visualizer", "The Glow Braid visualizer", "The Equalizer Grid visualizer", "The Particle Flow visualizer", "The Neon Starfield visualizer", "The Lightning visualizer"] },
       },
@@ -285,6 +283,7 @@ const sections: TutorialSection[] = [
   {
     title: "Video Tab",
     lead: {
+        title: "Video Settings",
         intro: "The Video tab sets the TV stations’ picture. Each slider runs from 0 to 100 with 50 as normal; A and D move it, and holding the key slides it all the way across.",
         points: [
           { label: "Brightness", text: "Lifts or darkens the whole picture." },
@@ -313,6 +312,7 @@ const sections: TutorialSection[] = [
   {
     title: "Theme Tab",
     lead: {
+        title: "Theme Settings",
         intro: "The Theme tab sets the look of the menus and the screens between channels. The options, top to bottom:",
         points: [
           { label: "Volume Bar", text: "Volume 1 or Volume 2: the style of the volume and mute display that appears when you press Left, Right or N." },
@@ -330,8 +330,9 @@ const sections: TutorialSection[] = [
     ],
   },
   {
-    title: "TV Guide (Channel 04)",
+    title: "Channel 04",
     lead: {
+        title: "TV Guide",
         intro: "Turn on TV Guide (Channel 04) in the System tab, then tune to Channel 04 to see every station’s schedule, with a live preview of the highlighted channel. The grid, the preview and the station all read the same saved information, so what the guide shows is what plays.",
         points: [
           { label: "Moving around", text: "W and S move between channels, A and D move through the time slots, and Enter tunes to the highlighted station." },
