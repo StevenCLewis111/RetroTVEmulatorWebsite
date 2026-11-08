@@ -46,15 +46,15 @@ const sections: TutorialSection[] = [
       { title: "Start Here - Watch or Read Below", video: true },
       {
         title: "What You Need",
-        intro: "Retro TV Emulator turns your own video and music library into scheduled television and music Visualizer stations on a Windows PC. Channel 03 adds retro games and a DVD/media player, Channel 04 is a TV Guide, and there are plenty of theme and static options to make it look like the real thing.",
+        intro: "Retro TV Emulator will turn your own downloaded video and music library into scheduled TV Stations and Music Visualizer Stations on a Windows PC. Channel 03 adds retro games front end and a DVD/media player (need optical drive for DVDs), Channel 04 is a TV Guide, and there are plenty of theme and static options to have fun with.",
         points: [
-          { label: "Computer", text: "A 64-bit Windows 10 or 11 PC. The app checks your hardware at every start and adjusts itself to run its best on each PC. Linux and Mac can run Windows programs through compatibility tools; how well depends on the tool and your setup." },
-          { label: "Keyboard, mouse and controller", text: "A keyboard for the TV and menus, a mouse for the file explorer, and a compatible controller for playing games. A PC remote can be mapped to the TV controls." },
-          { label: "Your media", text: "Your own videos, music and commercials. They can stay on any drive, internal or external; you choose their folders inside the app and nothing is copied into the install folder." },
-          { label: "For games (optional)", text: "Your own ROMs, BIOS files and libretro emulator cores. DVDs work from an optical drive or as .iso backups. Point the Games tab at your RetroArch folder and it finds and sorts the ROMs, BIOS and cores for you." },
-          { label: "Included tools", text: "VLC, ffmpeg and 7-Zip come with the app; nothing else needs installing." },
+          { label: "Computer", text: "A 64-bit Windows 10 or 11 PC. The app checks your hardware at every start and adjusts itself to run its best on any PC that can run windows 10 or 11. Linux and Mac can run Windows programs through compatibility tools; how well depends on the tool and your setup but you can run this on Linux and Mac with those tools." },
+          { label: "Keyboard, mouse and controller", text: "A keyboard for the TV and menus controls, a mouse for the file explorer controls, and a compatible controller for playing games (launched games only use a controller). You can also remap a PC remote to control channel changing and menu navigation." },
+          { label: "Your media", text: "You will need your own videos, music and commercials (including commercial bumpers). They can stay on any drive, internal or external (for app portability put the app on an external drive with the files you want to travel with it); the app will open a file explorer and you will point to the location of your media. The app will remember and pull from those locations. You can also create shortcuts to media so you can organize media per channel without duplicate files." },
+          { label: "For games", text: "You will need your own ROMs, BIOS files and libretro emulator Cores. For now i just point my app at the System, Core, and Roms folders in my Retroarch folder. DVDs work from an optical drive or as .iso backups. You can use the same DVD player as a media player for any video file." },
+          { label: "Included tools", text: "Everything you need to run this app is here. No side downloads, installs, or coding needed." },
         ],
-        image: { src: "/images/whatyouneed.png", alt: "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller", alts: ["A desk setup with a Windows computer, monitor, keyboard, mouse and game controller", "A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller"] },
+        image: { src: "/images/whatyouneed.png", alt: "A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller", alts: ["A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller", "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller"] },
       },
       {
         title: "Download & Install",
@@ -603,7 +603,7 @@ function TopicBody({ topic, noPlaceholder }: { topic: TutorialTopic; noPlacehold
   return (
     <>
       {topic.video ? (
-        <a href="https://youtu.be/EW4z56b0Lag?si=CEUCkNJK0nOpB6SG" target="_blank" rel="noopener noreferrer" className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200">
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200">
           <img src="/images/default.png" alt="Retro TV Emulator Video Tutorial" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
           <div className="relative z-10 size-16 rounded-full bg-red-600 flex items-center justify-center shadow-xl group-hover:bg-red-700 transition-colors duration-200">
             <svg className="size-8 text-white fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
