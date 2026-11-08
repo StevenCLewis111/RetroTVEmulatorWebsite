@@ -485,13 +485,12 @@ const sections: TutorialSection[] = [
     topics: [
       {
         title: "TV and Game Bezels",
-        intro: "A bezel is the frame of a vintage TV set drawn around the picture. Turn on CRT TV Bezels in Channels > Settings and the stations play inside the screen of the set, with the channel number shown in the set’s own number window on the styles that have one.",
+        intro: "A bezel for TV stations and game consoles is the frame of vintage TV sets and handheld consoles drawn around the picture. Turn on CRT TV Bezels in Channels > Settings and the stations play inside the screen of the TV set. This bezel is for the whole program. There are matching bezels you can turn on for each game console in each console’s sub menu, but it’s only for Channel 03 when that console launches. Game handheld consoles each have their own custom bezels that match their handheld’s screen.",
         points: [
-          { label: "Bezel Style", text: "When more than one style is installed, a Bezel Style number appears under the CRT TV Bezels switch. Press A or D to step through the styles and see each one change on screen." },
-          { label: "Screen shape", text: "The wood-cabinet style is drawn for a true 16:9 screen, so it is only offered on one. On other screen shapes it is hidden and the other styles stay." },
-          { label: "Menus", text: "While a bezel style is on, the menus shrink slightly so they fit inside the frame." },
+          { label: "Bezel Style", text: "There are 3 CRT TV bezels. The first one matches the boot loading image. The second style is a zoomed in version of the first one for better viewing. The third one is an older TV set." },
+          { label: "Warp Screen", text: "Warping the screen makes the bezels take on a real CRT TV feel, warping the image, menus, and other on screen UI. This option only works if the bezels are on." },
           { label: "Burn-in", text: "A fixed frame that never moves adds burn-in risk on long sessions, so turning a bezel on shows a warning." },
-          { label: "Console bezels", text: "Games have bezels too, set per save profile on a console’s profile page. When CRT TV Bezels is on, the console’s own bezel is not drawn, so the two frames never stack." },
+          { label: "Console bezels", text: "Each console sub menu has a bezel it can use while that console is launched. All game consoles use the CRT TV bezels but each handheld console has a bezel that matches the screen of that handheld." },
         ],
         image: { src: "/images/Bezel.png", alt: "TV stations playing inside the TV bezel styles", alts: ["A retro TV bezel with a blue glow and the channel number in its window, shown in a room scene", "A close-up of the retro TV bezel with the channel number window", "The wood-cabinet TV bezel style with static on its screen"] },
       },
