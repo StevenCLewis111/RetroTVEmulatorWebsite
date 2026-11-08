@@ -55,7 +55,7 @@ export default function HomePage() {
                 height={homeImage.height}
                 priority
                 sizes="(min-width: 1024px) 992px, 100vw"
-                className="h-full w-full bg-black object-contain"
+                className="h-full w-full object-fill"
               />
             </div>
             {/* The words sit on the picture only when the picture is wide enough for them to stay inside its bottom 25%, and they shrink with the picture; narrower than that they go in the black box under it. */}

@@ -144,7 +144,7 @@ const sections: TutorialSection[] = [
       },
       {
         title: "Advanced Settings - Remote Remapping",
-        intro: "Open Advanced Settings > Remote Remapping to see every action and the key it uses now. Remap Remote goes through the actions one by one: press the key or PC remote button you want for each, or Backspace to skip one. Remap Numbers does the same for the number keys 0 to 9, so a remote’s number buttons can tune channels.",
+        intro: "The Remote Remapping will show every action and the key it uses now. Remap Remote goes through the actions one by one. Press the key or PC remote button you want for each. Remap Numbers does the same for the number keys 0 to 9, these are here for any keyboard or remote not registering the number keys.",
         points: [
           { label: "Actions you can remap", text: "Nav Up, Nav Down, Nav Left, Nav Right, Select, Channel Up, Channel Down, Volume Up, Volume Down, Mute, Menu, Controls Menu and Back/Minimize." },
           { label: "Defaults", text: "W, S, A, D, Enter, Up, Down, Right, Left, N, M, C and Escape. The controls in this tutorial are the default keys." },
