@@ -130,7 +130,7 @@ const sections: TutorialSection[] = [
     },
     topics: [
       {
-        title: "Advanced Settings",
+        title: "System Tab - Advanced Settings",
         intro: "Advanced Settings from the System:",
         points: [
           { label: "Look for Updates", text: "Every time you boot it will show you if there are updates. If you keep it running or turned off update notifications you can check for a newer version here." },
