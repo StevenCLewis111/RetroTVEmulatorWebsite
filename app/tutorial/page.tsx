@@ -68,13 +68,13 @@ const sections: TutorialSection[] = [
       },
       {
         title: "Booting Up",
-        intro: "Each start shows a loading screen while the app gets everything ready, so the first channel plays straight away. The first start has no channels yet, so every station shows static until you add media.",
+        intro: "Each start shows a loading screen while the app gets everything ready. It will build the proper cache files so the first channel plays straight away. It will find your computers hardware specs to adapt to your computer. The first time you boot the program has no channels yet, so every station shows static until you add media.",
         points: [
           { label: "Drives", text: "Internal and external media drives are woken up so a sleeping drive does not delay the first show." },
-          { label: "Hardware check", text: "The app counts your CPU cores and threads, finds your graphics cards and picks Lite, Standard or Performance mode. It keeps back only what Windows needs and turns the background work up and down while you watch, so playback always comes first." },
-          { label: "Saved information", text: "Show lengths, loudness, picture framing and the TV Guide schedule are loaded from the app’s media library, so channels open without waiting for scans." },
-          { label: "Screen layout", text: "Screens shaped 4:3, 5:4 or 16:10 use the 4:3 layout; 16:9, 21:9 and 32:9 screens use the 16:9 layout." },
-          { label: "Boot Anim", text: "If Boot Anim is on (Channels > Settings), the old-TV power-on animation plays as the app starts." },
+          { label: "Hardware check", text: "The app counts your CPU cores, threads, and memory. It finds your graphics cards and picks the best one. With this information it will pick your performance mode (Lite, Standard or Performance). It will throttle and adapt as needed to keep things running smoothly." },
+          { label: "Saved information", text: "Show lengths, loudness, picture framing and the TV Guide schedule are loaded from the app’s media library, so channels open without waiting for scans or starts scans during boot for shows that may not have been scanned for a clean boot." },
+          { label: "Windows Screen Resolution", text: "It scans windows screen resolution for a canvas size for proper letter-boxing across devices." },
+          { label: "Boot Animation option", text: "If Boot Anim is turned on, the old-TV power-on animation plays as the app starts." },
         ],
         image: { src: "/images/tutorial-boot.png", alt: "Retro TV Emulator boot screen with loading progress" },
       },
