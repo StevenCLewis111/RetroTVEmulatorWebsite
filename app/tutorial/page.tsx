@@ -21,12 +21,14 @@ export const metadata: Metadata = {
 // (visualizer.png may be left out; upper and lower case do not matter) and lays out what it finds:
 // none: a placeholder, one: one picture, two: side by side, three or more: one picture with arrows.
 // alt is the description of the spot; alts (optional) describes each picture in order.
+type CompareTable = { columns: string[]; rows: { label: string; values: string[] }[] };
+
 type TutorialImage = { src: string; alt: string; alts?: string[] };
 
 type TutorialTopic = {
   title?: string;
   intro?: string;
-  points?: { label: string; text: string }[];
+  points?: { label: string; text: string; compare?: CompareTable }[];
   image?: TutorialImage;
   stretchImages?: boolean;
   noPlaceholder?: boolean;
@@ -71,7 +73,17 @@ const sections: TutorialSection[] = [
         intro: "Each start shows a loading screen while the app gets everything ready. It will build the proper cache files so the first channel plays straight away. It will find your computers hardware specs to adapt to your computer. The first time you boot the program has no channels yet, so every station shows static until you add media.",
         points: [
           { label: "Drives", text: "Internal and external media drives are woken up so a sleeping drive does not delay the first show." },
-          { label: "Hardware check", text: "The app counts your CPU cores, threads, and memory. It finds your graphics cards and picks the best one. With this information it will pick your performance mode (Lite, Standard or Performance). It will throttle and adapt as needed to keep things running smoothly." },
+          { label: "Hardware check", text: "The app counts your CPU cores, threads, and memory. It finds your graphics cards and picks the best one. With this information it will pick your performance mode (Lite, Standard or Performance). It will throttle and adapt as needed to keep things running smoothly.", compare: {
+          columns: ["Lite", "Standard", "Performance"],
+          rows: [
+            { label: "Menu and list speed", values: ["30 FPS", "60 FPS", "60 FPS"] },
+            { label: "Warp Screen and Scan Lines", values: ["Greyed out", "Available", "Available"] },
+            { label: "Background scans", values: ["Slower", "Normal", "Faster"] },
+            { label: "Live captions", values: ["Slower", "Normal", "Faster"] },
+            { label: "Music visualizer", values: ["Moves, does not follow the beat", "Follows the music", "Follows the music with full effects"] },
+            { label: "Graphics card", values: ["Not needed", "Not needed", "Required"] },
+          ],
+        } },
           { label: "Saved information", text: "Show lengths, loudness, picture framing and the TV Guide schedule are loaded from the app’s media library, so channels open without waiting for scans or starts scans during boot for shows that may not have been scanned for a clean boot." },
           { label: "Windows Screen Resolution", text: "It scans windows screen resolution for a canvas size for proper letter-boxing across devices." },
           { label: "Real-TV clock", text: "Stations run on the clock like real TV. The program will find your computers clock on boot." },
@@ -119,14 +131,14 @@ const sections: TutorialSection[] = [
     topics: [
       {
         title: "Advanced Settings",
-        intro: "Open Advanced Settings from the System tab for the hardware choices and a dedicated TV setup. The options, top to bottom:",
+        intro: "Advanced Settings from the System:",
         points: [
-          { label: "Look for Updates", text: "Checks for a newer version now and offers to install it; see Updates at the end." },
-          { label: "Remote Remapping", text: "Changes which key or remote button does each action; explained next." },
-          { label: "Performance Mode", text: "Enter steps through Lite, Standard and Performance. Lite keeps background work light, moves the music visualizer without following the beat, and turns off Warp Screen, Scan Lines and captions. Standard is the normal mode. Performance allows more background work, faster scans and the full reactive visualizer. A PC rated as weak at start cannot pick Performance. In every mode the background work slows down by itself when playback needs the PC." },
-          { label: "GPU/CPU", text: "Enter steps through your graphics cards (largest memory first) and CPU Only. The chosen card draws the picture; pick a laptop’s dedicated graphics card here. If the card has problems, the app switches to the CPU by itself." },
-          { label: "Custom Shell Launcher", text: "Starts the emulator in place of the Windows desktop when the PC turns on, for a PC used only as a TV. With it on, the System tab also shows Turn Off Computer, which shuts Windows down." },
-          { label: "Server Mode", text: "Greyed out; not available in this version." },
+          { label: "Look for Updates", text: "Every time you boot it will show you if there are updates. If you keep it running or turned off update notifications you can check for a newer version here." },
+          { label: "Remote Remapping", text: "Changes which key controls what. This is where you would change controls to work on a PC remote." },
+          { label: "Performance Mode", text: "On boot a performance mode is chosen for you but you can change it. Lite has menus at 30 fps, greyed out options that wont work, and slower scans. Standard is all normal scans and access to anything that is not performance. Performance unlocks faster scanning, more games, and higher fps. You can change this manually but if you are booted as a Lite computer, you will not have a performance mode." },
+          { label: "GPU/CPU", text: "The best options is chosen on boot but you can change the GPU at any time, even change to CPU only. Performance mode has to use a GPU though so any CPU only computer also will not have a performance mode." },
+          { label: "Custom Shell Launcher", text: "This option will start the emulator in place of the Windows desktop so Windows can no longer be accessed. This option combined with Kiosk mode turns the computer into a cable box instead of a computer." },
+          { label: "Server Mode", text: "Server Mode allows you to schedule the program and share that scheduling over your wifi with any other computer in the house that has this program on it." },
         ],
         image: { src: "/images/AdvancedSettings.png", alt: "Advanced Settings page" },
       },
@@ -631,6 +643,32 @@ function TopicBody({ topic, noPlaceholder }: { topic: TutorialTopic; noPlacehold
           {topic.points.map((point) => (
             <li key={point.label} className="pl-1 leading-7">
               <strong className="font-medium text-foreground">{point.label}: </strong>{point.text}
+              {point.compare && (
+                <div className="mt-3 overflow-hidden rounded-lg border bg-card text-sm">
+                  <div className="hidden grid-cols-[8.5rem_1fr_1fr_1fr] gap-x-5 border-b bg-muted/40 px-4 py-2.5 text-xs font-medium uppercase tracking-wider text-muted-foreground sm:grid">
+                    <span />
+                    {point.compare.columns.map((column) => (
+                      <span key={column}>{column}</span>
+                    ))}
+                  </div>
+                  {point.compare.rows.map((row) => (
+                    <div
+                      key={row.label}
+                      className="grid gap-x-5 gap-y-1 border-b px-4 py-3 last:border-b-0 sm:grid-cols-[8.5rem_1fr_1fr_1fr]"
+                    >
+                      <span className="font-medium text-foreground">{row.label}</span>
+                      {row.values.map((value, i) => (
+                        <span key={point.compare!.columns[i]} className="text-muted-foreground">
+                          <span className="mr-1 text-xs uppercase tracking-wider text-foreground/70 sm:hidden">
+                            {point.compare!.columns[i]}:
+                          </span>
+                          {value}
+                        </span>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
             </li>
           ))}
         </ul>
