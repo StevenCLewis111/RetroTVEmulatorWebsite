@@ -72,15 +72,16 @@ const sections: TutorialSection[] = [
       {
         title: "Organize Your Media & Supported Files",
         noPlaceholder: true,
-        intro: "Before adding media, keep each show in its own folder with season folders inside it. Clear folder and file names help the app recognise shows and fill in the guide.",
+        intro: "Before adding media, keep each show in its own folder with season folders inside it. Clear folder and file names help the app recognize shows and fill in the guide. There are things in place that hide (dvdrip) type tags, but the clearer your naming and sorting, the better it will run.",
         example: "TV Shows/\n  Show Name/\n    Season 1/\n      Show Name S01E01.mkv\n      Show Name S01E02.mkv\n    Season 2/\n      Show Name S02E01.mkv",
         example2: "Movies/\n  Comedy/\n    Movie Name.mp4\n    Movie Name.mp4\n    Movie Name/\n      1. Movie Name The Rising.mp4\n      2. Movie Name The Falling.mp4",
         exampleIcon: "/images/folder.png",
         points: [
-          { label: "Shows and movies", text: "Season 1 and Season 01 folders, and S01E01 or Season 1 Episode 1 file names, are recognised. Videos over 80 minutes are treated as movies. Movie parts stay together, and duplicate copies of an episode are scheduled once." },
+          { label: "Shows and movies", text: "Season 1 and Season 01 folders, and S01E01 or Season 1 Episode 1 file names, are recognized. Videos in folders tagged with \"Movies\" will be treated like movies. Movie parts stay together but need part 1/part 2 tags, and it will reject duplicate names with different file types. The names displayed in the TV Guide will drop season number and other extra text that is not a part of the title." },
+          { label: "Caption files", text: "Place your captions file beside the video with the same name, such as Show S01E01.srt or Show S01E01.en.srt. The name must match or it will not grab it. (If you do not have caption files, Live Captions is available for computers with enough memory to run it)." },
           { label: "Video formats", text: "MP4, MKV, AVI, MOV, WEBM, M4V, WMV, FLV, MPG, MPEG, TS and M2TS." },
           { label: "Music formats", text: "MP3, WAV, OGG, FLAC, M4A, AAC and WMA." },
-          { label: "Caption files", text: "SRT, VTT, ASS, SSA, SUB and SMI files beside the video with the same name, such as Show S01E01.srt or Show S01E01.en.srt." },
+          { label: "Caption formats", text: "SRT, VTT, ASS, SSA, SUB and SMI files." },
         ],
       },
       {
