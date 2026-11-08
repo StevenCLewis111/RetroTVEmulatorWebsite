@@ -85,6 +85,16 @@ const sections: TutorialSection[] = [
         ],
       },
       {
+        title: "Media Scans and The HUB",
+        noPlaceholder: true,
+        intro: "When you add media, the app scans each file once and saves the results in the HUB, so the TV Guide, the TV Stations and all cached information all get the same answer and know how to play each file.",
+        points: [
+          { label: "What is scanned", text: "Each file’s length is scanned first for scheduling times, it then gets a picture box result for aspect ratio. Next it will get a loudness scan for a gain number for equalizing volume across media. The scan order prioritizes shows in the order they play with the station you’re on first." },
+          { label: "Tuning to a channel", text: "The channel you tune to jumps the queue: its show is scanned first so it plays at the right size and volume. (this only matters if the show is unscanned)" },
+          { label: "Saved results", text: "The scan results are saved and stored for the next time the video plays. If you clear a station, you can add the media back and it will not need rescanned. If you Clear All Settings in System menu, it does clear the saved scan data." },
+        ],
+      },
+      {
         title: "Booting Up",
         intro: "Each start shows a loading screen while the app gets everything ready. It will build the proper cache files so the first channel plays straight away. It will find your computers hardware specs to adapt to your computer. The first time you boot the program has no channels yet, so every station shows static until you add media.",
         points: [
@@ -258,30 +268,19 @@ const sections: TutorialSection[] = [
         ],
         image: { src: "/images/VisualizerSchedulingmenu.png", alt: "Music station settings with visualizer style and reactive strength" },
       },
-      {
-        title: "Media Scans",
-        noPlaceholder: true,
-        intro: "When you add media, the app scans each file once and saves the results in its media library, so the TV Guide, the station and a restart all use the same answers.",
-        points: [
-          { label: "What is scanned", text: "Each file’s length, its picture box (the real picture inside any black bars) and its loudness, in that order. Shows airing now come first, then upcoming commercials, then the next few shows, then everything further out." },
-          { label: "Tuning to a channel", text: "The channel you tune to jumps the queue: its show is scanned first so it plays at the right size and volume." },
-          { label: "Loudness", text: "With Loudness Scan on, every file is measured against the broadcast target of −24 LUFS so volume stays even between shows and commercials." },
-          { label: "Saved results", text: "Unchanged files are never scanned again, even when moved or renamed. Files confirmed broken are taken out of the schedule; a short episode that loses its partner gets a new one." },
-        ],
-      },
     ],
   },
   {
     title: "Video Tab",
     lead: {
         title: "Video Settings",
-        intro: "The Video tab sets the TV stations’ picture. Each slider runs from 0 to 100 with 50 as normal; A and D move it, and holding the key slides it all the way across.",
+        intro: "The Video Settings allow you to adjust how your video looks. Each slider runs from 0 to 100 with 50 as normal.",
         points: [
           { label: "Brightness", text: "Lifts or darkens the whole picture." },
           { label: "Contrast", text: "Widens or narrows the gap between dark and bright." },
-          { label: "Color", text: "How strong the colours are; all the way down gives a black-and-white broadcast." },
+          { label: "Color", text: "How strong the colors are; all the way down gives a black-and-white broadcast." },
           { label: "Sharpness", text: "Sharpens or softens edges." },
-          { label: "Tint", text: "Shifts the colours toward green or purple, like the tint knob on an old set." },
+          { label: "Tint", text: "Shifts the colors toward green or purple, like the tint knob on an old set." },
         ],
         image: { src: "/images/VideoTab.png", alt: "Retro TV Emulator Video tab with screen modes and picture sliders" },
     },
@@ -289,13 +288,12 @@ const sections: TutorialSection[] = [
       {
         title: "Screen Modes",
         noPlaceholder: true,
-        intro: "The buttons along the top of the Video tab decide how each show fills your screen. They apply to Channels 05–44; games and the DVD player have their own.",
+        intro: "The Screen Modes decide how each show fills your screen. They apply to Channels 05–44. The games and the DVD player both have their own.",
         points: [
-          { label: "Normal Mode", text: "Keeps the picture’s shape, with bars where it does not fill the screen (black or grey, set in the Theme tab)." },
-          { label: "Stretch Fit", text: "Stretches the picture to fill the screen, even if that changes its shape." },
-          { label: "Crop Fit", text: "Zooms in to fill the screen and trims the edges, without stretching." },
-          { label: "Pan & Scan", text: "Fills the screen like Crop Fit, but the crop moves to follow the action instead of always keeping the middle." },
-          { label: "Picture box (Normal Mode)", text: "Many files have black bars recorded into the video itself. Each file is scanned once to find the real picture inside them, and in Normal Mode the app cuts the recorded bars away and fits the real picture to your screen, so an old 4:3 show stored in a widescreen file does not end up as a small box in the middle. Until its scan lands, a file plays with its full frame." },
+          { label: "Normal Aspect Ratio Mode", text: "Keeps the picture’s shape, adding black bars to the top and bottom or both sides to fit the video properly to your screen size (if the video size fits the screen size no black bars will be present)." },
+          { label: "Stretch to Fit", text: "This option removes the black bars and stretches the picture to fill the screen." },
+          { label: "Crop to Fit", text: "This option zooms in the video, cutting off part of the picture to get it to fill the screen without stretching the image." },
+          { label: "Pan & Scan", text: "This option is the same as Crop to Fit but it pans to the cut off sections to keep action on the screen." },
         ],
       },
     ],
@@ -304,15 +302,15 @@ const sections: TutorialSection[] = [
     title: "Theme Tab",
     lead: {
         title: "Theme Settings",
-        intro: "The Theme tab sets the look of the menus and the screens between channels. The options, top to bottom:",
+        intro: "The Theme Settings let you customize how things look.",
         points: [
-          { label: "Volume Bar", text: "Volume 1 or Volume 2: the style of the volume and mute display that appears when you press Left, Right or N." },
-          { label: "Channel Static", text: "The colour of the static: White, Grey, Rainbow, or Theme (your background colour). It changes the static between channels and tints the Static Noise and Reception Lines effects." },
-          { label: "Channel Transition", text: "What shows when you change channel: Static (a short burst of static) or Black (a quick grey TV screen). Either one falls back to the grey screen if the next show is not ready yet." },
-          { label: "Letterboxing", text: "The colour of the bars beside a picture that does not fill the screen: Black or Grey." },
-          { label: "Menu Opacity", text: "How see-through the menus are, so the show behind stays visible." },
-          { label: "Background Color", text: "The colour of the menu backgrounds; slide along the rainbow." },
-          { label: "Border/Text Color", text: "The colour of the borders, highlights and titles." },
+          { label: "Volume Bar", text: "You can choose between two different volume bar styles." },
+          { label: "Channel Static", text: "This changes the color of the static. White (standard), Grey (shows up lighter), Rainbow (colored static shows up heavier), or Theme that matches your theme color choice (colored static shows up heavier). It changes the color of all static from channel static to static filters." },
+          { label: "Channel Transition", text: "This option is a choice between static between channels or a quick black screen." },
+          { label: "Letterboxing", text: "The color of the bars on the sides or top and bottom of videos can either be black or TV grey." },
+          { label: "Menu Opacity", text: "This option decides how see-through the menus are, so the show behind stays visible if you need it to." },
+          { label: "Background Color", text: "This option changes the color of the menu backgrounds." },
+          { label: "Border/Text Color", text: "This option changes the color of the borders, highlights and titles." },
         ],
         image: { src: "/images/ThemeTab.png", alt: "Retro TV Emulator Theme tab with colour and opacity sliders" },
     },
@@ -324,11 +322,12 @@ const sections: TutorialSection[] = [
     title: "Channel 04",
     lead: {
         title: "TV Guide",
-        intro: "Turn on TV Guide (Channel 04) in the System tab, then tune to Channel 04 to see every station’s schedule, with a live preview of the highlighted channel. The grid, the preview and the station all read the same saved information, so what the guide shows is what plays.",
+        intro: "The TV Guide looks at the HUB and keeps the saved scheduled media up to date for you to see what comes on and when.",
         points: [
           { label: "Moving around", text: "W and S move between channels, A and D move through the time slots, and Enter tunes to the highlighted station." },
           { label: "Checking your schedule", text: "After building a station, look here to see what aired, what is on and what comes next." },
-          { label: "Preview", text: "The preview shows what is playing on the highlighted station. If that station’s media cannot load, the preview shows static." },
+          { label: "Preview", text: "The preview shows what is playing on the highlighted station." },
+          { label: "Time-out", text: "If you stay idle on the TV Guide, after 60 seconds it will take you to the station you were previewing to prevent burn-in." },
         ],
         image: { src: "/images/TVGuide.png", alt: "Retro TV Emulator TV Guide showing the channel grid and live preview" },
     },
@@ -634,8 +633,10 @@ function TopicBody({ topic, noPlaceholder }: { topic: TutorialTopic; noPlacehold
             <li key={point.label} className="pl-1 leading-7">
               <strong className="font-medium text-foreground">{point.label}: </strong>{point.text}
               {point.image && (
-                <div className="mt-3 max-w-sm">
-                  <TutorialImages spot={point.image} title={point.label} />
+                <div className="-ml-5 mt-3 flex justify-center">
+                  <div className="w-full max-w-sm">
+                    <TutorialImages spot={point.image} title={point.label} />
+                  </div>
                 </div>
               )}
               {point.compare && (
