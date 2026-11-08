@@ -58,7 +58,7 @@ const sections: TutorialSection[] = [
           { label: "For games", text: "You will need your own ROMs, BIOS files and libretro emulator Cores. For now i just point my app at the System, Core, and Roms folders in my Retroarch folder. DVDs work from an optical drive or as .iso backups. You can use the same DVD player as a media player for any video file." },
           { label: "Included tools", text: "Everything you need to run this app is here. No side downloads, installs, or coding needed." },
         ],
-        image: { src: "/images/whatyouneed.png", alt: "A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller", alts: ["A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller", "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller"] },
+        image: { src: "/images/whatyouneed1.png", alt: "A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller", alts: ["A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller", "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller"] },
       },
       {
         title: "Download & Install",
