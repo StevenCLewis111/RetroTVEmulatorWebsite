@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { Code, Download, FolderOpen } from 'lucide-react'
+import { Download, FolderOpen } from 'lucide-react'
 import { getLatestRelease } from '@/lib/releases'
 import { site } from '@/lib/site'
 
@@ -160,13 +160,26 @@ export default async function DownloadPage() {
               rel="noopener noreferrer"
               className={outlineButton}
             >
+              <Image
+                src="/images/discord.png"
+                alt=""
+                width={443}
+                height={341}
+                className="mr-2 size-5 object-contain"
+              />
               Discord Link
             </a>
-            <span className="text-xs text-muted-foreground sm:text-sm">(For More Information)</span>
+            <span className="text-xs text-muted-foreground sm:text-sm">(For More Info)</span>
           </div>
           <div className="flex flex-wrap items-center gap-3.5">
             <a href={site.sourceZipGithubUrl} className={outlineButton}>
-              <Code className="mr-2 size-4" aria-hidden="true" />
+              <Image
+                src="/images/github.png"
+                alt=""
+                width={128}
+                height={128}
+                className="mr-2 size-5 object-contain"
+              />
               Download Source Code : GitHub
             </a>
           </div>
