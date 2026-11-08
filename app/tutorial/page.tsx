@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 // (visualizer.png may be left out; upper and lower case do not matter) and lays out what it finds:
 // none: a placeholder, one: one picture, two: side by side, three or more: one picture with arrows.
 // alt is the description of the spot; alts (optional) describes each picture in order.
-type TutorialImage = { src: string; srcs?: string[]; alt: string; alts?: string[] };
+type TutorialImage = { src: string; alt: string; alts?: string[] };
 
 type TutorialTopic = {
   title?: string;
@@ -54,7 +54,7 @@ const sections: TutorialSection[] = [
           { label: "For games", text: "You will need your own ROMs, BIOS files and libretro emulator Cores. For now i just point my app at the System, Core, and Roms folders in my Retroarch folder. DVDs work from an optical drive or as .iso backups. You can use the same DVD player as a media player for any video file." },
           { label: "Included tools", text: "Everything you need to run this app is here. No side downloads, installs, or coding needed." },
         ],
-        image: { src: "/images/whatyouneed-monitor.png", srcs: ["/images/whatyouneed-monitor.png", "/images/whatyouneed-crt.png"], alt: "A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller", alts: ["A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller", "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller"] },
+        image: { src: "/images/whatyouneed.png", alt: "A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller", alts: ["A desk setup showing the Retro TV Emulator screen with keyboard, mouse and controller", "A desk setup with a Windows computer, monitor, keyboard, mouse and game controller"] },
       },
       {
         title: "Download & Install",
@@ -550,7 +550,7 @@ const sections: TutorialSection[] = [
 const allSections = sections;
 
 function TutorialImages({ spot, title, stretch }: { spot: TutorialImage; title: string; stretch?: boolean }) {
-  const files = spot.srcs ?? findNumberedImages(spot.src);
+  const files = findNumberedImages(spot.src);
   const alts = files.map((_, i) => spot.alts?.[i] ?? (files.length > 1 ? `${spot.alt} (${i + 1} of ${files.length})` : spot.alt));
 
   if (files.length === 0) {
