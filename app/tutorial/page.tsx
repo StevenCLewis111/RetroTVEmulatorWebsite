@@ -484,7 +484,7 @@ const sections: TutorialSection[] = [
     title: "Extras",
     topics: [
       {
-        title: "TV Bezels",
+        title: "TV and Game Bezels",
         intro: "A bezel is the frame of a vintage TV set drawn around the picture. Turn on CRT TV Bezels in Channels > Settings and the stations play inside the screen of the set, with the channel number shown in the set’s own number window on the styles that have one.",
         points: [
           { label: "Bezel Style", text: "When more than one style is installed, a Bezel Style number appears under the CRT TV Bezels switch. Press A or D to step through the styles and see each one change on screen." },
@@ -510,17 +510,12 @@ const sections: TutorialSection[] = [
       {
         title: "Holiday Bezels",
         noPlaceholder: true,
-        intro: "Each bezel style can have Halloween, Christmas and Thanksgiving versions. During a holiday the app swaps the bezel for that style’s holiday version by itself, and puts the normal one back when the holiday is over.",
-        points: [
-          { label: "When they show", text: "The same three days up to and including the holiday that the holiday schedules use. Force on a channel’s Holiday Schedule page shows the holiday bezel now." },
-          { label: "Styles without one", text: "A style that has no holiday version keeps its normal bezel during the holiday." },
-          { label: "Your own bezels", text: "Bezel pictures are kept in main/images/bezel. A holiday version goes next to the style it replaces and is named with the holiday: bezelHalloween, bezelChristmas or bezelThanksgiving for the first style, and bezelChristmas1 or bezelChristmas2 for numbered styles." },
-        ],
+        intro: "Each bezel style can have a Halloween, Christmas and Thanksgiving version. During a holiday the app swaps the bezel for that style’s holiday 3 days in advance of the holiday, and puts the normal one back when the holiday is over. You can also force on a channel’s Holiday Scheduling either for testing or for longer holiday runs (more than 3 days).",
       },
       {
         title: "Captions",
         image: { src: "/images/Captions.png", alt: "A TV station showing captions along the bottom of the picture" },
-        intro: "Captions use subtitles inside the video or a caption file beside it. When a video has neither, live speech captions are made as the video plays with the model in _internal/main/models/whisper/. Captions (TV and DVD) are not available in Lite mode.",
+        intro: "Captions use subtitles inside the video or a caption file beside it. When a video has neither, live speech captions will produce text for you instead. This option is limited to your memory, if you do not have enough memory to use it, the program will grey out that option.",
       },
       {
         title: "When a Channel Can’t Play",
