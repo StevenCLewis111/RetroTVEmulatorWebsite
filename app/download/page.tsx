@@ -4,6 +4,10 @@ import { Download, FolderOpen } from 'lucide-react'
 import { getLatestRelease } from '@/lib/releases'
 import { site } from '@/lib/site'
 
+// Your icon files in public/images/. Change these two names if yours differ.
+const DISCORD_ICON = '/images/discord.png'
+const GITHUB_ICON = '/images/github.png'
+
 export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
@@ -161,11 +165,11 @@ export default async function DownloadPage() {
               className={outlineButton}
             >
               <Image
-                src="/images/discord.png"
+                src={DISCORD_ICON}
                 alt=""
-                width={443}
-                height={341}
-                className="mr-2 size-5 object-contain"
+                width={28}
+                height={28}
+                className="mr-1 object-contain"
               />
               Discord Link
             </a>
@@ -174,11 +178,11 @@ export default async function DownloadPage() {
           <div className="flex flex-wrap items-center gap-3.5">
             <a href={site.sourceZipGithubUrl} className={outlineButton}>
               <Image
-                src="/images/github.png"
+                src={GITHUB_ICON}
                 alt=""
-                width={128}
-                height={128}
-                className="mr-2 size-5 object-contain"
+                width={20}
+                height={20}
+                className="mr-2 invert object-contain"
               />
               Download Source Code : GitHub
             </a>
