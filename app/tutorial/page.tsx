@@ -35,6 +35,7 @@ type TutorialTopic = {
   video?: boolean;
   steps?: string[];
   example?: string;
+  example2?: string;
   exampleIcon?: string;
 };
 
@@ -69,6 +70,20 @@ const sections: TutorialSection[] = [
         image: { src: "/images/Download.png", alt: "Downloading Retro TV Emulator and unzipping the app folder", alts: ["Downloading Retro TV Emulator and unzipping the app folder", "A computer screen showing a folder icon and the file explorer open to its contents"] },
       },
       {
+        title: "Organize Your Media & Supported Files",
+        noPlaceholder: true,
+        intro: "Before adding media, keep each show in its own folder with season folders inside it. Clear folder and file names help the app recognise shows and fill in the guide.",
+        example: "TV Shows/\n  Show Name/\n    Season 1/\n      Show Name S01E01.mkv\n      Show Name S01E02.mkv\n    Season 2/\n      Show Name S02E01.mkv",
+        example2: "Movies/\n  Comedy/\n    Movie Name.mp4\n    Movie Name.mp4\n    Movie Name/\n      1. Movie Name The Rising.mp4\n      2. Movie Name The Falling.mp4",
+        exampleIcon: "/images/folder.png",
+        points: [
+          { label: "Shows and movies", text: "Season 1 and Season 01 folders, and S01E01 or Season 1 Episode 1 file names, are recognised. Videos over 80 minutes are treated as movies. Movie parts stay together, and duplicate copies of an episode are scheduled once." },
+          { label: "Video formats", text: "MP4, MKV, AVI, MOV, WEBM, M4V, WMV, FLV, MPG, MPEG, TS and M2TS." },
+          { label: "Music formats", text: "MP3, WAV, OGG, FLAC, M4A, AAC and WMA." },
+          { label: "Caption files", text: "SRT, VTT, ASS, SSA, SUB and SMI files beside the video with the same name, such as Show S01E01.srt or Show S01E01.en.srt." },
+        ],
+      },
+      {
         title: "Booting Up",
         intro: "Each start shows a loading screen while the app gets everything ready. It will build the proper cache files so the first channel plays straight away. It will find your computers hardware specs to adapt to your computer. The first time you boot the program has no channels yet, so every station shows static until you add media.",
         points: [
@@ -97,7 +112,7 @@ const sections: TutorialSection[] = [
     title: "The Controls",
     topics: [
       {
-        title: "The Controls Menu",
+        title: "Controls Menu",
         intro: "The Controls Menu shows all the controls across the project and what each one does. It is on by default and shows up when you boot the program so you are greeted with a way to understand how to use the program. This can be turned off in the menu and at any time you can use the C key to bring it back up or close it.",
         points: [
           { label: "TV Controls", text: "The Up/Down arrow keys will change channels. The Left/Right arrow keys will change the volume, N mutes/unmute, M opens/closes the Main Menu, C opens/closes the Controls Menu. To minimize or full screen the program, hit Escape then Enter. If you want to go straight to a channel you can use the number keys to type it in." },
@@ -113,6 +128,7 @@ const sections: TutorialSection[] = [
   {
     title: "System Tab",
     lead: {
+        title: "System Menu",
         intro: "The Main Menu opens on the System tab.",
         points: [
           { label: "Games (Channel 03)", text: "Turns the game and DVD channel on or off. When it is off, Channel 03 is skipped while channel surfing and the Games tab is hidden." },
@@ -130,7 +146,7 @@ const sections: TutorialSection[] = [
     },
     topics: [
       {
-        title: "System Tab - Advanced Settings",
+        title: "System Menu - Advanced Settings",
         intro: "Advanced Settings from the System:",
         points: [
           { label: "Look for Updates", text: "Every time you boot it will show you if there are updates. If you keep it running or turned off update notifications you can check for a newer version here." },
@@ -164,7 +180,7 @@ const sections: TutorialSection[] = [
         image: { src: "/images/ChannelsTab.png", alt: "Retro TV Emulator Channels tab showing Channels 05 to 24" },
       },
       {
-        title: "Settings",
+        title: "Channels Menu - Settings",
         intro: "Settings at the bottom left of the Channels tab sets the look of every station. Each switch turns its effect on or off. The Theme tab’s Channel Static colour tints the noise and lines.",
         points: [
           { label: "CRT TV Bezels", text: "Frames the picture inside a vintage TV set. When more than one style is installed, a Bezel Style number appears under it. See Bezels in Extras." },
@@ -176,19 +192,6 @@ const sections: TutorialSection[] = [
           { label: "Where they show", text: "Static Noise and Reception Lines play over the TV stations and the TV Guide preview, not over the guide grid or the changing-channel screen. Channel 03 never shows static, noise or lines." },
         ],
         image: { src: "/images/ChannelsTabSettings.png", alt: "Channels Settings page with the CRT effect switches" },
-      },
-      {
-        title: "Organize Your Media & Supported Files",
-        noPlaceholder: true,
-        intro: "Before adding media, keep each show in its own folder with season folders inside it. Clear folder and file names help the app recognise shows and fill in the guide.",
-        example: "TV Shows/\n  Show Name/\n    Season 1/\n      Show Name S01E01.mkv\n      Show Name S01E02.mkv\n    Season 2/\n      Show Name S02E01.mkv",
-        exampleIcon: "/images/folder.png",
-        points: [
-          { label: "Shows and movies", text: "Season 1 and Season 01 folders, and S01E01 or Season 1 Episode 1 file names, are recognised. Videos over 80 minutes are treated as movies. Movie parts stay together, and duplicate copies of an episode are scheduled once." },
-          { label: "Video formats", text: "MP4, MKV, AVI, MOV, WEBM, M4V, WMV, FLV, MPG, MPEG, TS and M2TS." },
-          { label: "Music formats", text: "MP3, WAV, OGG, FLAC, M4A, AAC and WMA." },
-          { label: "Caption files", text: "SRT, VTT, ASS, SSA, SUB and SMI files beside the video with the same name, such as Show S01E01.srt or Show S01E01.en.srt." },
-        ],
       },
       {
         title: "Channel Menu - Setup Channel - TV Station",
@@ -621,17 +624,21 @@ function TopicBody({ topic, noPlaceholder }: { topic: TutorialTopic; noPlacehold
         </ol>
       )}
       {topic.example && (
-        <div className="mx-auto w-fit max-w-full overflow-x-auto rounded-lg border bg-card font-mono text-sm leading-6 text-muted-foreground" style={{ padding: "1rem 2rem" }}>
-          {topic.example.split("\n").map((line, i) => {
-            const indent = line.length - line.trimStart().length;
-            const isFolder = line.trim().endsWith("/");
-            return (
-              <div key={i} className="flex items-center gap-2 whitespace-pre" style={{ paddingLeft: `${indent / 2 * 1.5}rem` }}>
-                {topic.exampleIcon && isFolder ? <img src={topic.exampleIcon} alt="" aria-hidden="true" className="size-5 shrink-0 object-contain" /> : topic.exampleIcon ? <span className="size-5 shrink-0" aria-hidden="true" /> : null}
-                <span>{line.trim().replace(/\/$/, "")}</span>
-              </div>
-            );
-          })}
+        <div className="flex flex-wrap justify-center gap-4">
+          {[topic.example, topic.example2].filter((box): box is string => Boolean(box)).map((box) => (
+            <div key={box} className="min-w-[21rem] max-w-full flex-1 overflow-x-auto rounded-lg border bg-card font-mono text-sm leading-6 text-muted-foreground" style={{ padding: "1rem 1.25rem" }}>
+              {box.split("\n").map((line, i) => {
+                const indent = line.length - line.trimStart().length;
+                const isFolder = line.trim().endsWith("/");
+                return (
+                  <div key={i} className="flex items-center gap-2 whitespace-pre" style={{ paddingLeft: `${indent / 2 * 1.25}rem` }}>
+                    {topic.exampleIcon && isFolder ? <img src={topic.exampleIcon} alt="" aria-hidden="true" className="size-5 shrink-0 object-contain" /> : topic.exampleIcon ? <span className="size-5 shrink-0" aria-hidden="true" /> : null}
+                    <span>{line.trim().replace(/\/$/, "")}</span>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
         </div>
       )}
       {topic.points && (
@@ -684,6 +691,7 @@ function TutorialContent() {
               {!section.standalone && <h2 className="text-center font-display text-3xl text-primary" style={{ textDecoration: "underline", textUnderlineOffset: "0.3em", textDecorationThickness: "2px" }}>{section.title}</h2>}
               {section.lead && (
                 <div className="flex min-w-0 flex-col gap-3">
+                  {section.lead.title && <h3 className="text-center font-display text-2xl text-primary">{section.lead.title}</h3>}
                   <TopicBody topic={section.lead} noPlaceholder={section.noPlaceholder} />
                 </div>
               )}
