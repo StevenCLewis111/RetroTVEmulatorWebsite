@@ -30,6 +30,7 @@ type TutorialTopic = {
   intro?: string;
   points?: { label: string; text: string; compare?: CompareTable; image?: TutorialImage }[];
   image?: TutorialImage;
+  imagePair?: [TutorialImage, TutorialImage];
   stretchImages?: boolean;
   noPlaceholder?: boolean;
   video?: boolean;
@@ -340,6 +341,7 @@ const sections: TutorialSection[] = [
         title: "Games Settings",
         intro: "Each Logo is a button to a game console and its options:",
         points: [
+          { label: "Arrow button", text: "Shows more game consoles." },
           { label: "All Consoles", text: "Turns every console on or off at once except the DVD Player." },
           { label: "All Settings", text: "If you want to turn on settings across all consoles all at once like auto save and auto load or splash screens, turn this setting on." },
           { label: "Screen Saver", text: "This will start a moving screen saver when channel 03 sits idle longer than the decided time. It is burn in protection for channel 03." },
@@ -351,10 +353,27 @@ const sections: TutorialSection[] = [
     },
     topics: [
       {
+        title: "Games Menu - DVD & Media Player",
+        intro: "Choose DVD on Channel 03 to play DVDs from your optical drive, DVD .iso backups, or plain video files. DVD menu is in the Games Tab.",
+        points: [
+          { label: "Button Mapping", text: "Changes which keys control the DVD/Media Player." },
+          { label: "Screen Mode", text: "Normal Aspect Ratio, Stretch to Fit, Crop to Fit or Pan & Scan." },
+          { label: "Change Audio Selection", text: "Picks the movie’s audio track while media is playing." },
+          { label: "Splash Screen", text: "Your own picture or video while a disc loads. If it is turned on but nothing added it uses the default splash screen." },
+          { label: "Captions", text: "Uses saved captions next to files with the same name. If files don’t exist it uses live captions. If your computer does not have enough memory to do this, captions are turned off." },
+          { label: "Resume", text: "Starts media again where you stopped it." },
+        ],
+        image: { src: "/images/DVDMenu.png", alt: "DVD Video Interactive settings" },
+      },
+      {
         title: "Games Settings - Games Menu",
         intro: "Menu Options holds the settings shared by every console:",
         points: [
-          { label: "Controller Mapping", text: "Assigns your controller’s buttons for each player. XInput and DirectInput controllers both work." },
+          { label: "Controller Mapping", text: "The Menu mapping is not for game play. It is for controlling channel 03 and the DVD player. Each console will have its own mapping option.", image: { src: "/images/ControllerMapping.png", alt: "Controller Mapping page showing the controller diagram and button names" } },
+          { label: "Map Controller", text: "Goes through the buttons one by one: press the button you want for each one." },
+          { label: "L-Stick as D-Pad", text: "Lets the left analogue stick move around the menus like the D-pad." },
+          { label: "Pick Controller", text: "Chooses which connected controller you are mapping; the number beside it is the player." },
+          { label: "Close", text: "Returns to the Games menu." },
           { label: "Stick Deadzone", text: "How far the analogue stick must move before it counts, so a worn stick does not drift." },
           { label: "Background Image", text: "A picture behind the game menus." },
           { label: "Multitap (All Consoles)", text: "Adds players three and four on consoles that support them." },
@@ -366,19 +385,12 @@ const sections: TutorialSection[] = [
         image: { src: "/images/GameChannelMenu.png", alt: "Games Menu Options page" },
       },
       {
-        title: "Games Menu - Controller Mapping",
-        intro: "Menu Options > Controller Mapping shows your controller’s buttons, with the name each console uses on one side and the controller button on the other, so you can see what every button does in the game menus.",
-        points: [
-          { label: "Map Controller", text: "Goes through the buttons one by one: press the button you want for each one." },
-          { label: "L-Stick as D-Pad", text: "Lets the left analogue stick move around the menus like the D-pad." },
-          { label: "Pick Controller", text: "Chooses which connected controller you are mapping; the number beside it is the player." },
-          { label: "Close", text: "Returns to the Games menu." },
+        title: "Console and Profile Settings",
+        imagePair: [
+          { src: "/images/ConsoleSettings.png", alt: "PlayStation console settings with BIOS, save profiles and Change Disc" },
+          { src: "/images/SaveProfile.png", alt: "Save profile page with Active Profile, Save Now, Load Now, Auto-Save, Auto-Load, Screen Size and TV Bezel" },
         ],
-        image: { src: "/images/ControllerMapping.png", alt: "Controller Mapping page showing the controller diagram and button names" },
-      },
-      {
-        title: "Console Settings",
-        intro: "Select a console and turn it On; its settings appear:",
+        intro: "Select a console and turn it On; its settings appear. Open a console’s profile page to manage saves. Everything except Active Profile works on the active profile only.",
         points: [
           { label: "Select Libretro Core (.dll)", text: "Picks the emulator core for this console when more than one was found. Cores are kept in _internal/main/cores/<CONSOLE>/." },
           { label: "Controller Mapping", text: "This console’s button layout." },
@@ -387,14 +399,6 @@ const sections: TutorialSection[] = [
           { label: "Add BIOS (PlayStation)", text: "Picks a PlayStation BIOS if the scan did not find one. It is kept in cores/PSX/system/; a USA BIOS is used when there are several." },
           { label: "Add/Remove ROMs and Clear ROMs", text: "Add or remove this console’s games with the file explorer, or clear its list." },
           { label: "Change Disc (PlayStation)", text: "Swaps to the next disc of a multi-disc game while it is loaded." },
-        ],
-        image: { src: "/images/ConsoleSettings.png", alt: "PlayStation console settings with BIOS, save profiles and Change Disc", alts: ["PlayStation console settings with BIOS, save profiles and Change Disc", "Game Boy Advance console settings with core, save profiles and ROMs"] },
-      },
-      {
-        title: "Save Profile Page",
-        image: { src: "/images/SaveProfile.png", alt: "Save profile page with Active Profile, Save Now, Load Now, Auto-Save, Auto-Load, Screen Size and TV Bezel" },
-        intro: "Open a console’s profile page to manage saves. Everything except Active Profile works on the active profile only.",
-        points: [
           { label: "Active Profile", text: "Shows which profile you are on (Profile 1, 2 or 3) and makes it the active one." },
           { label: "Save Now and Load Now", text: "Write or load a save state for the running game in the active profile. If it cannot, a banner says why (for example NO GAME IS RUNNING or NO SAVE FOUND)." },
           { label: "Auto-Save and Auto-Load", text: "Auto Save writes a save state when you quit the game, leave Channel 03 or the screen saver starts. Auto Load loads that state when the game starts." },
@@ -402,24 +406,17 @@ const sections: TutorialSection[] = [
         ],
       },
       {
-        title: "Console Picker",
-        intro: "Tune to Channel 03 to see the console picker. It shows the consoles you turned on, plus the DVD player, one at a time over your background picture, and the line at the bottom shows the keys and controller buttons.",
-        points: [
-          { label: "Navigate", text: "Move between consoles with the D-pad or W/A/S/D. How they move follows the Scroll Style you chose in Menu Options." },
-          { label: "Select", text: "A or Enter opens the console’s game list (or starts the DVD player)." },
-          { label: "Back", text: "B or Escape goes back." },
+        title: "Channel 03 Menus",
+        imagePair: [
+          { src: "/images/ConsolePicker.png", alt: "Channel 03 console picker showing the Super Nintendo logo with the other consoles around it" },
+          { src: "/images/GameList.png", alt: "Channel 03 game list for the Super Nintendo with one game highlighted" },
         ],
-        image: { src: "/images/ConsolePicker.png", alt: "Channel 03 console picker showing the Super Nintendo logo with the other consoles around it" },
-      },
-      {
-        title: "Game List",
-        intro: "Select a console to see its games. The highlighted game is shown in green with arrows beside it; the arrows at the right show that the list continues up or down.",
+        intro: "Tune to Channel 03 to see the console picker. It shows the consoles you turned on, plus the DVD player, one at a time over your background picture, and the line at the bottom shows the keys and controller buttons. Select a console to see its games. The highlighted game is shown in green with arrows beside it; the arrows at the right show that the list continues up or down.",
         points: [
-          { label: "Navigate", text: "Move up and down the list with the D-pad or W/A/S/D." },
-          { label: "Launch", text: "A or Enter starts the highlighted game." },
-          { label: "Back", text: "B or Escape returns to the console picker." },
+          { label: "Navigate", text: "Move between consoles with the D-pad or W/A/S/D. How they move follows the Scroll Style you chose in Menu Options. In the game list, move up and down the list with the same keys." },
+          { label: "Select", text: "A or Enter opens the console’s game list (or starts the DVD player). In the game list, A or Enter starts the highlighted game." },
+          { label: "Back", text: "B or Escape goes back. From the game list it returns to the console picker." },
         ],
-        image: { src: "/images/GameList.png", alt: "Channel 03 game list for the Super Nintendo with one game highlighted" },
       },
       {
         title: "Playing Games",
@@ -431,30 +428,6 @@ const sections: TutorialSection[] = [
           { label: "Save and load hotkeys", text: "During a game, Left Bumper + Right Bumper + Back saves a state, and Left Trigger + Right Trigger + Back loads it." },
           { label: "Quitting", text: "Press Escape, or hold Start and Select together, to open EXIT GAME? with No selected. The game pauses behind it. Choose Yes to quit (the state is saved first when Auto Save is on) and return to the game list; choose No or press Back to keep playing. It closes itself after 30 seconds." },
         ],
-      },
-      {
-        title: "Supported Consoles & Files",
-        noPlaceholder: true,
-        points: [
-          { label: "Consoles", text: "Game Boy, Game Boy Color, Game Boy Advance, NES, SNES, Genesis, 32X, Master System, Game Gear, Nintendo 64, PlayStation, Atari 2600, Neo Geo Pocket and Neo Geo Pocket Color. Each needs a libretro .dll core." },
-          { label: "Cartridge formats", text: "GB .gb; GBC .gbc/.gb; GBA .gba; NES .nes; SNES .smc/.sfc; Genesis .md/.gen/.bin/.smd; 32X .32x/.bin/.smd/.md; Master System .sms; Game Gear .gg." },
-          { label: "Other formats", text: "N64 .n64/.z64/.v64; PlayStation .cue/.bin/.iso/.chd/.pbp/.img; Atari 2600 .a26/.bin; Neo Geo Pocket .ngp; Neo Geo Pocket Color .ngc." },
-        ],
-      },
-      {
-        title: "DVD & Media Player",
-        intro: "Choose DVD on Channel 03 to play movie DVDs from your optical drive, DVD .iso backups, or plain video files. No core, BIOS or save profile is needed. Movie files and .iso files can go in main/roms/DVD/ inside _internal. Movie DVD menus work; interactive DVD games are not supported. Settings are in Games tab > DVD Video Interactive; the DVD player is always on.",
-        points: [
-          { label: "Button Mapping", text: "Changes which keys play, pause, skip and return to the disc menu." },
-          { label: "Screen Mode", text: "Normal Mode, Stretch Fit, Crop Fit or Pan & Scan for movies, separate from the TV stations." },
-          { label: "Change Audio Selection", text: "Picks the movie’s audio track (language or commentary) while a disc is playing; greyed otherwise." },
-          { label: "Splash Screen", text: "Your own picture or video while a disc loads; Video and Image pick the file." },
-          { label: "Captions", text: "Captions for movies, separate from the TV stations’ captions. Not available in Lite mode." },
-          { label: "Resume", text: "Starts a disc again where you stopped it." },
-          { label: "Keyboard", text: "Play pauses and plays. Tap Rewind or Fast Forward to skip, hold to seek. Backspace returns to the disc’s main menu. W/A/S/D navigate disc menus and Yes/No popups, Enter confirms. Escape asks Quit? with No selected." },
-          { label: "Controller", text: "Down pauses and plays. Tap Left or Right to skip, hold to seek. The D-pad navigates, A selects, B goes back, and Y returns to the disc’s main menu. Hold Start and Select to open Quit?." },
-        ],
-        image: { src: "/images/DVDMenu.png", alt: "DVD Video Interactive settings" },
       },
     ],
   },
@@ -473,20 +446,20 @@ const sections: TutorialSection[] = [
         image: { src: "/images/Bezel.png", alt: "TV stations playing inside the TV bezel styles", alts: ["A retro TV bezel with a blue glow and the channel number in its window, shown in a room scene", "A close-up of the retro TV bezel with the channel number window", "The wood-cabinet TV bezel style with static on its screen"] },
       },
       {
-        title: "Holiday Bezels - Halloween",
+        title: "Holiday Bezels",
+        noPlaceholder: true,
+      },
+      {
+        title: "Halloween",
         image: { src: "/images/HalloweenBezel.png", alt: "The TV bezels in their Halloween versions", alts: ["The blue-glow TV bezel in its Halloween version, shown in a room scene", "A close-up of the blue-glow TV bezel in its Halloween version", "The wood-cabinet TV bezel in its Halloween version"] },
       },
       {
-        title: "Holiday Bezels - Thanksgiving",
+        title: "Thanksgiving",
         image: { src: "/images/ThanksgivingBezel.png", alt: "The TV bezels in their Thanksgiving versions", alts: ["The blue-glow TV bezel in its Thanksgiving version, shown in a room scene", "A close-up of the blue-glow TV bezel in its Thanksgiving version", "The wood-cabinet TV bezel in its Thanksgiving version"] },
       },
       {
-        title: "Holiday Bezels - Christmas",
+        title: "Christmas",
         image: { src: "/images/ChristmasBezel.png", alt: "The TV bezels in their Christmas versions", alts: ["The blue-glow TV bezel in its Christmas version, shown in a room scene", "A close-up of the blue-glow TV bezel in its Christmas version", "The wood-cabinet TV bezel in its Christmas version"] },
-      },
-      {
-        title: "Holiday Bezels",
-        noPlaceholder: true,
         intro: "Each bezel style can have a Halloween, Christmas and Thanksgiving version. During a holiday the app swaps the bezel for that style’s holiday 3 days in advance of the holiday, and puts the normal one back when the holiday is over. You can also force on a channel’s Holiday Scheduling either for testing or for longer holiday runs (more than 3 days).",
       },
       {
@@ -583,6 +556,20 @@ function TopicBody({ topic, noPlaceholder }: { topic: TutorialTopic; noPlacehold
             <img src="/images/youtube-logo.png" alt="YouTube Logo" className="h-3.5 w-auto object-contain" />
           </div>
         </a>
+      ) : topic.imagePair ? (
+        <div className="flex flex-wrap justify-center gap-4 sm:-mx-10">
+          {topic.imagePair.map((spot) => {
+            const src = findNumberedImages(spot.src)[0];
+            return src ? (
+              <img key={spot.src} src={src} alt={spot.alt} loading="lazy" className="aspect-video w-full rounded-lg border object-fill shadow-lg sm:w-[calc(50%-0.5rem)]" />
+            ) : (
+              <div key={spot.src} className="scanlines flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground sm:w-[calc(50%-0.5rem)]">
+                <ImageIcon className="size-8 shrink-0" aria-hidden="true" />
+                <span>Tutorial image placeholder</span>
+              </div>
+            );
+          })}
+        </div>
       ) : topic.image ? (
         <TutorialImages spot={topic.image} title={label} stretch={topic.stretchImages} />
       ) : noPlaceholder || topic.noPlaceholder ? null : (
