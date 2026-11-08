@@ -59,11 +59,10 @@ const sections: TutorialSection[] = [
       {
         title: "Download & Install",
         stretchImages: true,
-        intro: "Download the app from the Download page, unzip the app folder somewhere such as your Desktop, keep everything in it together, and run Retro TV Emulator.exe. Do not move or rename anything inside _internal.",
+        intro: "Download the app from the Download page, unzip the app folder somewhere such as your Desktop, Program Files or portable storage drive for a portable build, and run \"Retro TV Emulator.exe\". Create a shortcut for desktop or pin it to your taskbar or start if you would like. Do not move, rename, or delete anything inside _internal.",
         points: [
           { label: "Your settings live beside the exe", text: "The app saves your channels, settings and schedule positions in retro_config.json next to the exe. Keep that file with the app; if it is missing, the app starts as if it had never been used." },
-          { label: "Your media stays put", text: "Shows, movies, music and commercials can stay where they are. Nothing is copied into the install folder." },
-          { label: "First setup order", text: "Press M for the Main Menu. Check the System tab and Advanced Settings first, then open Channels to build your first station. This tutorial follows that order." },
+          { label: "Your media stays put", text: "Shows, movies, music and commercials can stay where they are on your computer. You will point the app at their location. Nothing is copied into the install folder. (For portable builds, make sure all media and files are on the same external drive)" },
         ],
         image: { src: "/images/Download.png", alt: "Downloading Retro TV Emulator and unzipping the app folder", alts: ["Downloading Retro TV Emulator and unzipping the app folder", "A computer screen showing a folder icon and the file explorer open to its contents"] },
       },
@@ -603,7 +602,7 @@ function TopicBody({ topic, noPlaceholder }: { topic: TutorialTopic; noPlacehold
   return (
     <>
       {topic.video ? (
-        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200">
+        <a href="https://youtu.be/EW4z56b0Lag?si=cGGTjEIkHyKgvlcn" target="_blank" rel="noopener noreferrer" className="group mx-auto aspect-video w-full rounded-lg border bg-card shadow-lg overflow-hidden flex items-center justify-center relative hover:border-primary transition-colors duration-200">
           <img src="/images/default.png" alt="Retro TV Emulator Video Tutorial" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
           <div className="relative z-10 size-16 rounded-full bg-red-600 flex items-center justify-center shadow-xl group-hover:bg-red-700 transition-colors duration-200">
             <svg className="size-8 text-white fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
