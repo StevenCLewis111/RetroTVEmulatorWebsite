@@ -28,7 +28,7 @@ type TutorialImage = { src: string; alt: string; alts?: string[] };
 type TutorialTopic = {
   title?: string;
   intro?: string;
-  points?: { label: string; text: string; compare?: CompareTable }[];
+  points?: { label: string; text: string; compare?: CompareTable; image?: TutorialImage }[];
   image?: TutorialImage;
   stretchImages?: boolean;
   noPlaceholder?: boolean;
@@ -232,36 +232,31 @@ const sections: TutorialSection[] = [
         title: "Scheduling Settings - Holiday Schedule",
         intro: "Each channel can have its own Halloween, Christmas and Thanksgiving media. In the channel’s settings open Holiday Schedule; each holiday button opens the file explorer for that holiday’s shows.",
         points: [
-          { label: "When they play", text: "A holiday schedule takes over for the three days up to and including the holiday; Thanksgiving is the fourth Thursday of November. Holiday media always plays in random order." },
-          { label: "Force", text: "Plays that holiday’s schedule now, whatever the date, until you turn it off. It also shows that holiday’s bezel." },
+          { label: "When they play", text: "A holiday schedule takes over for the three days up to and including the holiday." },
+          { label: "Force", text: "Plays that holiday’s schedule now, whatever the date, until you turn it off. It also shows that holiday’s bezel. You can easily extend the 3 day holiday run by turning it on early." },
           { label: "Clear Media", text: "Removes this channel’s holiday media." },
         ],
         image: { src: "/images/Holidays.png", alt: "Channel holiday schedule page with Force switches" },
       },
       {
         title: "Scheduling Settings - Watermark",
-        intro: "In a channel’s settings, turn Watermark on and use Add to pick an image with the mouse; it shows in the corner of that station, like a TV network logo. The app keeps its own copy of the image in the channel’s folder. Keep it subtle: a logo that never moves adds burn-in risk.",
+        intro: "When you turn on the Watermark, the program has a default watermark. Click the add button to add your own. Each channel can have its own Watermark. You can find old TV logos or make your own. The image you choose will be added to the folder so you can switch between watermarks later.",
         image: { src: "/images/Watermark.png", alt: "Watermark on screen" },
       },
       {
         title: "Scheduling Settings - Visualizer",
-        intro: "Turn Music on in a channel’s settings to make it a music station. Music plays on the clock like a TV station, with a visualizer on screen. The options, top to bottom:",
+        intro: "If you turn on the Music toggle in a channel’s settings to make it a music station. Music plays on the clock like a TV station, with a visualizer on screen instead of video.",
         points: [
-          { label: "On/Off, Music and Name", text: "The same as for a TV channel." },
-          { label: "Visualizer Engine Style", text: "A and D pick the design: Random (a new one each song) or one of Prism Shards, Liquid Chrome, Pulse Rings, Warp Tunnel, Glow Braid, Equalizer Grid, Particle Flow, Neon Starfield and Lightning. Locking one design shows a burn-in warning." },
-          { label: "Audio Files", text: "Opens the file explorer to pick the station’s music; the number shows how many are added." },
-          { label: "Loudness Gain", text: "Makes the playing song louder or quieter. It works only while this station is on screen and a song is playing; otherwise the row is greyed and says why." },
-          { label: "Reactive Visualizer", text: "Makes the visualizer follow the beat, bass, mids and highs. Each song is analysed once and saved. In Lite mode the visualizer moves without following the music." },
-          { label: "Reactive Strength", text: "How strongly the visualizer reacts, from subtle to strong." },
-          { label: "Clear Media", text: "Removes the station’s music from its schedule." },
+          { label: "Name", text: "Name your channel. Up to 12 letters, numbers or spaces, shown on the TV Guide. After typing in your name, Enter will save it." },
+          { label: "Visualizer Engine Style", text: "Pick the Visualizer you would like or let it play Random Visualizers. Random is a new randomly selected Visualizer each song. This setting helps prevent burn in.", image: { src: "/images/visualizer.png", alt: "The visualizer designs you can choose for a music station", alts: ["The Prism Shards visualizer", "The Liquid Chrome visualizer", "The Pulse Rings visualizer", "The Warp Tunnel visualizer", "The Glow Braid visualizer", "The Equalizer Grid visualizer", "The Particle Flow visualizer", "The Neon Starfield visualizer", "The Lightning visualizer"] } },
+          { label: "Audio Files", text: "Add audio files to the file explorer to pick the station’s music." },
+          { label: "Loudness Gain", text: "Makes the playing song louder or quieter. It works only while this station is on screen and a song is playing; otherwise the row is greyed out." },
+          { label: "Reactive Visualizer", text: "Makes the visualizer follow the beat, bass, mids and highs. Each song is analyzed once and saved. In Lite mode the visualizer moves without following the music." },
+          { label: "Reactive Strength", text: "How strongly the visualizer reacts to the music, from subtle to strong." },
+          { label: "Clear Media", text: "Removes this station’s music from its schedule." },
           { label: "On screen", text: "The song’s title shows in the top-left corner and disappears after 60 seconds." },
         ],
         image: { src: "/images/VisualizerSchedulingmenu.png", alt: "Music station settings with visualizer style and reactive strength" },
-      },
-      {
-        title: "Visualizer Choices",
-        intro: "In a music station’s settings, A and D pick the visualizer design. Choose Random for a new design with each song, or lock one design.",
-        image: { src: "/images/visualizer.png", alt: "The visualizer designs you can choose for a music station", alts: ["The Prism Shards visualizer", "The Liquid Chrome visualizer", "The Pulse Rings visualizer", "The Warp Tunnel visualizer", "The Glow Braid visualizer", "The Equalizer Grid visualizer", "The Particle Flow visualizer", "The Neon Starfield visualizer", "The Lightning visualizer"] },
       },
       {
         title: "Media Scans",
@@ -638,6 +633,11 @@ function TopicBody({ topic, noPlaceholder }: { topic: TutorialTopic; noPlacehold
           {topic.points.map((point) => (
             <li key={point.label} className="pl-1 leading-7">
               <strong className="font-medium text-foreground">{point.label}: </strong>{point.text}
+              {point.image && (
+                <div className="mt-3 max-w-sm">
+                  <TutorialImages spot={point.image} title={point.label} />
+                </div>
+              )}
               {point.compare && (
                 <div className="mt-3 overflow-hidden rounded-lg border bg-card text-sm">
                   <div className="hidden grid-cols-[8.5rem_1fr_1fr_1fr] gap-x-5 border-b bg-muted/40 px-4 py-2.5 text-xs font-medium uppercase tracking-wider text-muted-foreground sm:grid">
