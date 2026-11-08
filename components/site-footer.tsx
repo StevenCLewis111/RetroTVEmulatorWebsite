@@ -12,7 +12,7 @@ export function SiteFooter() {
         >
           <Mail className="size-4" aria-hidden="true" />
           <span className="min-w-0 [overflow-wrap:anywhere]">
-            Contact / bug reports: <span className="text-foreground">{site.email}</span>
+            Contact / Bug Reports: <span className="text-foreground">{site.email}</span>
           </span>
         </a>
         <div className="justify-self-end whitespace-nowrap">

@@ -550,10 +550,10 @@ const sections: TutorialSection[] = [
         title: "Files, Backups & Problem Reports",
         noPlaceholder: true,
         points: [
-          { label: "Settings", text: "retro_config.json in the app folder holds your settings, channels and schedule positions; back it up before big changes. Leave .retro_tv_device_id alone." },
-          { label: "Media library", text: "main/media_library/library.sqlite3 holds the scan results. Files are recognised by their content, so moved or renamed files keep their results." },
+          { label: "Settings", text: "retro_config.json in the app folder holds your settings, channels and schedule positions; back it up before big changes or you can delete it to start fresh but there is a setting in the app that does the same thing." },
+          { label: "Media library", text: "main/media_library/library.sqlite3 holds the scan results. Files are recognized by their content, so moved or renamed files keep their results." },
           { label: "Other app data", text: "main/cores (cores and BIOS), main/roms (games, DVD files and saves), main/images (bezels, logos, backgrounds, watermarks, splash art and the key pictures), main/videos, main/audio, main/captions and main/models/whisper." },
-          { label: "Problem reports", text: "Close the app, then send the files from the logs\\temp folder: app_log.txt, crash_log.txt, crash_log_previous.txt, vlc-debug.log, vlc-debug_previous.log and tester_report.txt, plus retro_config.json for settings problems and logs\\update_helper.log for update problems. Say what you did and roughly when. Logs can contain folder names from your PC, so look them over before sharing." },
+          { label: "Problem reports", text: "Close the app, then send the files from the logs\\temp folder: app_log.txt, crash_log.txt, crash_log_previous.txt, vlc-debug.log, vlc-debug_previous.log and tester_report.txt, plus retro_config.json for settings problems and logs\\update_helper.log for update problems. Say what you did and roughly when. Send this to the Contact/Bug Reports button below." },
         ],
       },
     ],
