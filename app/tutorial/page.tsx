@@ -175,6 +175,15 @@ const sections: TutorialSection[] = [
         intro: "The Remote Remapping will show every action and the key it uses now. Remap Remote goes through the actions one by one. Press the key or PC remote button you want for each. Remap Numbers does the same for the number keys 0 to 9, these are here for any keyboard or remote not registering the number keys.",
         image: { src: "/images/Remapping.png", alt: "Remote Remapping and Number Remapping page" },
       },
+      {
+        title: "Advanced Settings - Server Menu",
+        intro: "Server Mode lets your computer share its channels schedule over your wifi with other computers on that network. All they need is a copy of the program on their device and to scan the network for servers. Turn on the Server option and open its menu.",
+        points: [
+          { label: "Server", text: "Click on Server to select/name/edit/reset a server profile. Your stations will be reset (this will not affect your current scheduling, just replace it while editing), and you can set up your server scheduling. When done you can scan for the server and stream those stations and their scheduled media." },
+          { label: "User", text: "Click on User to select a Server or leave server mode. Scan for servers and pick one, or leave the menu to go back to your regular scheduling. If you pick a server to stream, select Clear User Choice to remove that server choice. While using a server you can still use your own media on channels not set up on that server." },
+        ],
+        image: { src: "/images/server.png", alt: "Server Menu with the Server role active", alts: ["Server Menu with the Server role active, showing server boxes, Manage Server, Rename and Reset Server", "Server Menu with the User role active, showing Server Scan, Pick Server and Clear User Choice"] },
+      },
     ],
   },
   {
