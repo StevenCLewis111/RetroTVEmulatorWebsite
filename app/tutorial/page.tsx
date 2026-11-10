@@ -166,7 +166,6 @@ const sections: TutorialSection[] = [
           { label: "Performance Mode", text: "On boot a performance mode is chosen for you but you can change it. Lite has menus at 30 fps, greyed out options that wont work, and slower scans. Standard is all normal scans and access to anything that is not performance. Performance unlocks faster scanning, more games, and higher fps. You can change this manually but if you are booted as a Lite computer, you will not have a performance mode." },
           { label: "GPU/CPU", text: "The best options is chosen on boot but you can change the GPU at any time, even change to CPU only. Performance mode has to use a GPU though so any CPU only computer also will not have a performance mode." },
           { label: "Custom Shell Launcher", text: "This option will start the emulator in place of the Windows desktop so Windows can no longer be accessed. This option combined with Kiosk mode turns the computer into a cable box instead of a computer." },
-          { label: "Server Mode", text: "Server Mode allows you to schedule the program and share that scheduling over your wifi with any other computer in the house that has this program on it." },
         ],
         image: { src: "/images/AdvancedSettings.png", alt: "Advanced Settings page" },
       },
