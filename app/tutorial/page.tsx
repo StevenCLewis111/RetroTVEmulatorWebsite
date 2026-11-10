@@ -30,6 +30,7 @@ type TutorialTopic = {
   intro?: string;
   points?: { label: string; text: string; compare?: CompareTable; image?: TutorialImage }[];
   image?: TutorialImage;
+  imageAfter?: TutorialImage;
   imagePair?: [TutorialImage, TutorialImage];
   stretchImages?: boolean;
   noPlaceholder?: boolean;
@@ -178,10 +179,11 @@ const sections: TutorialSection[] = [
         title: "Advanced Settings - Server Menu",
         intro: "Server Mode lets your computer share its channels schedule over your wifi with other computers on that network. All they need is a copy of the program on their device and to scan the network for servers. Turn on the Server option and open its menu.",
         points: [
-          { label: "Server", text: "Click on Server to select/name/edit/reset a server profile. Your stations will be reset (this will not affect your current scheduling, just replace it while editing), and you can set up your server scheduling. When done you can scan for the server and stream those stations and their scheduled media.", image: { src: "/images/ServerIcon.png", alt: "The server icon's right-click menu by the clock with Open Retro TV Emulator and Stop Server" } },
+          { label: "Server", text: "Click on Server to select/name/edit/reset a server profile. Your stations will be reset (this will not affect your current scheduling, just replace it while editing), and you can set up your server scheduling. When done you can scan for the server and stream those stations and their scheduled media." },
           { label: "User", text: "Click on User to select a Server or leave server mode. Scan for servers and pick one, or leave the menu to go back to your regular scheduling. If you pick a server to stream, select Clear User Choice to remove that server choice. While using a server you can still use your own media on channels not set up on that server." },
         ],
         image: { src: "/images/server.png", alt: "Server Menu with the Server role active", alts: ["Server Menu with the Server role active, showing server boxes, Manage Server, Rename and Reset Server", "Server Menu with the User role active, showing Server Scan, Pick Server and Clear User Choice"] },
+        imageAfter: { src: "/images/ServerIcon.png", alt: "The server icon's right-click menu by the clock with Open Retro TV Emulator and Stop Server" },
       },
     ],
   },
@@ -573,6 +575,13 @@ function TopicBody({ topic, noPlaceholder }: { topic: TutorialTopic; noPlacehold
         <div className="scanlines mx-auto flex aspect-video w-full items-center justify-center gap-3 rounded-lg border bg-card px-4 text-muted-foreground sm:w-[calc(50%-0.5rem)]">
           <ImageIcon className="size-8 shrink-0" aria-hidden="true" />
           <span>Tutorial image placeholder</span>
+        </div>
+      )}
+      {topic.imageAfter && (
+        <div className="flex justify-center">
+          <div className="w-full max-w-sm">
+            <TutorialImages spot={topic.imageAfter} title={label} />
+          </div>
         </div>
       )}
       {topic.intro && <p className="leading-7 text-muted-foreground">{topic.intro}</p>}
